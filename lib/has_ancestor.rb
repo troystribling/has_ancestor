@@ -96,6 +96,11 @@ module PlanB
              end
           end
 
+          def update
+            super
+            ancestor.update unless ancestor.nil?
+          end
+
         end
         
         ####################################################
