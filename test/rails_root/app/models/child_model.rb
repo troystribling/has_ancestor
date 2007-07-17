@@ -45,7 +45,7 @@ class ChildModel < ActiveRecord::Base
    end
     
    ###############################################################
-   #### test implimentation of before_hierarchy_save
+   #### test implimentation of before_save
    ###############################################################
    attr_accessor :child_model_save
    def before_save

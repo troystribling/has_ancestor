@@ -128,7 +128,7 @@ end
 ################################################################################################
 describe "closing item purchases from an ancestor model" do
 
-  it "should close stock_item_purchase when called from item_purchase ancestor" do
+  it "should close stock_item_purchase when called from ancestor item_purchase" do
     stock_item = StockItemPurchase.new(model_data['STOCK_ITEM_PURCHASE'])
     stock_item.save
     
@@ -144,7 +144,7 @@ describe "closing item purchases from an ancestor model" do
     stock_item.destroy
   end
 
-  it "should close contract_item_purchase when called from item_purchase ancestor" do
+  it "should close contract_item_purchase when called from ancestor item_purchase" do
     contract_item = ContractItemPurchase.new(model_data['CONTRACT_ITEM_PURCHASE'])
     contract_item.save
 

@@ -3,6 +3,11 @@ GRANDCHILD_MODEL:
   child_model_attr: Annapolis
   grandchild_model_attr: black
 
+GRANDCHILD_MODEL_UPDATE:
+  parent_model_attr: Todd
+  child_model_attr: Atalanta
+  grandchild_model_attr: green
+
 GRANDCHILD_ANCESTOR_MODEL:
   parent_model_attr: Troy
   child_model_attr: Annapolis
@@ -29,6 +34,10 @@ CHILD_MODEL:
   parent_model_attr: Billy
   child_model_attr: Manchester
 
+CHILD_MODEL_UPDATE:
+  parent_model_attr: Charelene
+  child_model_attr: Hendersonville
+
 CHILD_MODEL_FIND_ALL_PARENT:
   parent_model_attr: Katie
   child_model_attr: Manchester
@@ -42,6 +51,9 @@ CHILD_ANCESTOR_MODEL:
     
 PARENT_MODEL:
   parent_model_attr: Guy
+
+PARENT_MODEL_UPDATE:
+  parent_model_attr: Winfred
 
 ITEM_PURCHASE:
   item: keyboard

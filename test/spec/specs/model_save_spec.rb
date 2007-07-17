@@ -12,8 +12,16 @@ describe "save model to database that has no descendants and has no ancestor" do
     @p.destroy
   end
 
-  it "model be able to save model" do
+  it "should create model when it does not exist" do
     ParentModel.should exist(@p.id)
+  end
+
+  it "should update model if it exists in database" do
+    ParentModel.should exist(@p.id)
+    up_model = ParentModel.find(@p.id)
+    up_model.attributes = model_data['PARENT_MODEL_UPDATE']
+    up_model.save
+    ParentModel.find(up_model.id).attributes.should eql_attributes(model_data['PARENT_MODEL_UPDATE'])
   end
 
 end
@@ -27,17 +35,25 @@ describe "save model to database that has no descendants but has ancestor" do
   end
 
   after(:all) do
-    @c.destroy
+   @c.destroy
   end
 
-  it "should be able to save model" do
+  it "should create model when it does not exist" do
     ChildModel.should exist(@c.id)
   end
   
-  it "ancestor model should be saved when model is saved" do
+  it "ancestor model should also be created when model is saved" do
     ParentModel.should exist(@c.parent_model_id)
   end
 
+  it "should update model attributes and ancestor attributes when it does exist" do
+    ChildModel.should exist(@c.id)
+    up_model = ChildModel.find(@c.id)
+    up_model.attributes = model_data['CHILD_MODEL_UPDATE']
+    up_model.save
+    ChildModel.find(up_model.id).attributes.should eql_attributes(model_data['CHILD_MODEL_UPDATE'])
+  end
+  
 end
 
 #########################################################################################################
@@ -52,16 +68,24 @@ describe "save model to database that has no descendants and has an ancestor tha
     @g.destroy
   end
 
-  it "should be able to save model" do
+  it "should create model if it does not exist" do
     GrandchildModel.should exist(@g.id)
   end
   
-  it "ancestor model should be saved when model is saved" do
+  it "ancestor model should be also be created when model is saved" do
     ChildModel.should exist(@g.child_model_id)
   end
 
-  it "ancestor's ancestor model should be saved when model is saved" do
+  it "ancestor's ancestor model should also be created when model is saved" do
     ParentModel.should exist(ChildModel.find(@g.child_model_id).parent_model_id)
+  end
+
+  it "should update model attributes, ancestor attributes, and ancestor's ancestor attributes when it does exist" do
+    GrandchildModel.should exist(@g.id)
+    up_model = GrandchildModel.find(@g.id)
+    up_model.attributes = model_data['GRANDCHILD_MODEL_UPDATE']
+    up_model.save
+    GrandchildModel.find(up_model.id).attributes.should eql_attributes(model_data['GRANDCHILD_MODEL_UPDATE'])
   end
 
 end
