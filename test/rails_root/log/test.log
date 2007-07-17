@@ -1,0 +1,1831 @@
+  [4;36;1mSQL (0.000111)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.000000)[0m   [0mMysql::Error: Table 'schema_info' already exists: CREATE TABLE schema_info (version int(11))[0m
+  [4;36;1mSQL (0.000000)[0m   [0;1mMysql::Error: Table 'schema_info' already exists: CREATE TABLE schema_info (version int(11))[0m
+  [4;35;1mSQL (0.000191)[0m   [0mSELECT version FROM schema_info[0m
+  [4;36;1mSQL (0.000086)[0m   [0;1mBEGIN[0m
+  [4;35;1mGrandchildModel Columns (0.000571)[0m   [0mSHOW FIELDS FROM grandchild_models[0m
+  [4;36;1mChildModel Columns (0.000633)[0m   [0;1mSHOW FIELDS FROM child_models[0m
+  [4;35;1mParentModel Columns (0.000694)[0m   [0mSHOW FIELDS FROM parent_models[0m
+  [4;36;1mSQL (0.000209)[0m   [0;1mINSERT INTO grandchild_models (`color`) VALUES('black')[0m
+  [4;35;1mSQL (0.000165)[0m   [0mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES('GrandchildModel', 34, 'Annapolis')[0m
+  [4;36;1mSQL (0.000166)[0m   [0;1mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Troy', 40, '2007-05-09 22:27:55', 'ChildModel', '2007-05-09 22:27:55')[0m
+  [4;35;1mChildModel Update (0.000154)[0m   [0mUPDATE child_models SET `location` = 'Annapolis', `child_model_descendant_id` = 34, `child_model_descendant_type` = 'GrandchildModel' WHERE `child_model_id` = 40[0m
+  [4;36;1mParentModel Update (0.000131)[0m   [0;1mUPDATE parent_models SET `created_at` = '2007-05-09 22:27:55', `parent_model_descendant_id` = 40, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-09 22:27:55', `name` = 'Troy' WHERE `parent_model_id` = 43[0m
+  [4;35;1mParentModel Load (0.000169)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 43) [0m
+  [4;36;1mChildModel Load (0.000120)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 40) [0m
+  [4;35;1mParentModel Load (0.000161)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 40 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;36;1mGrandchildModel Load (0.000144)[0m   [0;1mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 34) [0m
+  [4;35;1mChildModel Load (0.000147)[0m   [0mSELECT * FROM child_models WHERE (child_models.child_model_descendant_id = 34 AND child_models.child_model_descendant_type = 'GrandchildModel') LIMIT 1[0m
+  [4;36;1mParentModel Load (0.000139)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 40 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;35;1mChildModel Load (0.000150)[0m   [0mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 40) [0m
+  [4;36;1mGrandchildModel Load (0.000113)[0m   [0;1mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 34) [0m
+  [4;35;1mParentModel Load (0.000151)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 40 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;36;1mChildModel Load (0.000131)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.child_model_descendant_id = 34 AND child_models.child_model_descendant_type = 'GrandchildModel') LIMIT 1[0m
+  [4;35;1mParentModel Load (0.000141)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 40 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;36;1mGrandchildModel Load (0.000141)[0m   [0;1mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 34) [0m
+  [4;35;1mChildModel Load (0.000157)[0m   [0mSELECT * FROM child_models WHERE (child_models.child_model_descendant_id = 34 AND child_models.child_model_descendant_type = 'GrandchildModel') LIMIT 1[0m
+  [4;36;1mParentModel Load (0.000140)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 40 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;35;1mParentModel Destroy (0.000131)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 43
+[0m
+  [4;36;1mChildModel Destroy (0.000089)[0m   [0;1m DELETE FROM child_models
+ WHERE `child_model_id` = 40
+[0m
+  [4;35;1mGrandchildModel Destroy (0.000086)[0m   [0m DELETE FROM grandchild_models
+ WHERE `grandchild_model_id` = 34
+[0m
+  [4;36;1mGrandchildModel Load (0.000118)[0m   [0;1mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 34) LIMIT 1[0m
+  [4;35;1mSQL (0.006408)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.000050)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.000179)[0m   [0mINSERT INTO grandchild_models (`color`) VALUES('black')[0m
+  [4;36;1mSQL (0.000125)[0m   [0;1mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES('GrandchildModel', 35, 'Annapolis')[0m
+  [4;35;1mSQL (0.000129)[0m   [0mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Troy', 41, '2007-05-09 22:27:55', 'ChildModel', '2007-05-09 22:27:55')[0m
+  [4;36;1mChildModel Update (0.000150)[0m   [0;1mUPDATE child_models SET `location` = 'Annapolis', `child_model_descendant_id` = 35, `child_model_descendant_type` = 'GrandchildModel' WHERE `child_model_id` = 41[0m
+  [4;35;1mParentModel Update (0.000127)[0m   [0mUPDATE parent_models SET `created_at` = '2007-05-09 22:27:55', `parent_model_descendant_id` = 41, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-09 22:27:55', `name` = 'Troy' WHERE `parent_model_id` = 44[0m
+  [4;36;1mSQL (0.000135)[0m   [0;1mINSERT INTO grandchild_models (`color`) VALUES('black')[0m
+  [4;35;1mSQL (0.000120)[0m   [0mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES('GrandchildModel', 36, 'Annapolis')[0m
+  [4;36;1mSQL (0.000127)[0m   [0;1mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Vanessa', 42, '2007-05-09 22:27:55', 'ChildModel', '2007-05-09 22:27:55')[0m
+  [4;35;1mChildModel Update (0.000145)[0m   [0mUPDATE child_models SET `location` = 'Annapolis', `child_model_descendant_id` = 36, `child_model_descendant_type` = 'GrandchildModel' WHERE `child_model_id` = 42[0m
+  [4;36;1mParentModel Update (0.000123)[0m   [0;1mUPDATE parent_models SET `created_at` = '2007-05-09 22:27:55', `parent_model_descendant_id` = 42, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-09 22:27:55', `name` = 'Vanessa' WHERE `parent_model_id` = 45[0m
+  [4;35;1mChildModel Load (0.000167)[0m   [0mSELECT * FROM child_models WHERE (child_models.`location` = 'Annapolis') [0m
+  [4;36;1mGrandchildModel Load (0.000117)[0m   [0;1mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 35) [0m
+  [4;35;1mChildModel Load (0.000135)[0m   [0mSELECT * FROM child_models WHERE (child_models.child_model_descendant_id = 35 AND child_models.child_model_descendant_type = 'GrandchildModel') LIMIT 1[0m
+  [4;36;1mGrandchildModel Load (0.000111)[0m   [0;1mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 36) [0m
+  [4;35;1mChildModel Load (0.000138)[0m   [0mSELECT * FROM child_models WHERE (child_models.child_model_descendant_id = 36 AND child_models.child_model_descendant_type = 'GrandchildModel') LIMIT 1[0m
+  [4;36;1mGrandchildModel Load (0.000111)[0m   [0;1mSELECT * FROM grandchild_models WHERE (grandchild_models.`color` = 'black') [0m
+  [4;35;1mChildModel Load (0.000133)[0m   [0mSELECT * FROM child_models WHERE (child_models.child_model_descendant_id = 35 AND child_models.child_model_descendant_type = 'GrandchildModel') LIMIT 1[0m
+  [4;36;1mChildModel Load (0.000126)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.child_model_descendant_id = 36 AND child_models.child_model_descendant_type = 'GrandchildModel') LIMIT 1[0m
+  [4;35;1mGrandchildModel Load (0.000110)[0m   [0mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 35) [0m
+  [4;36;1mChildModel Load (0.000132)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.child_model_descendant_id = 35 AND child_models.child_model_descendant_type = 'GrandchildModel') LIMIT 1[0m
+  [4;35;1mParentModel Load (0.000139)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 41 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;36;1mParentModel Destroy (0.000142)[0m   [0;1m DELETE FROM parent_models
+ WHERE `parent_model_id` = 44
+[0m
+  [4;35;1mChildModel Destroy (0.000086)[0m   [0m DELETE FROM child_models
+ WHERE `child_model_id` = 41
+[0m
+  [4;36;1mGrandchildModel Destroy (0.000086)[0m   [0;1m DELETE FROM grandchild_models
+ WHERE `grandchild_model_id` = 35
+[0m
+  [4;35;1mGrandchildModel Load (0.000120)[0m   [0mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 36) [0m
+  [4;36;1mChildModel Load (0.000144)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.child_model_descendant_id = 36 AND child_models.child_model_descendant_type = 'GrandchildModel') LIMIT 1[0m
+  [4;35;1mParentModel Load (0.000137)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 42 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;36;1mParentModel Destroy (0.000106)[0m   [0;1m DELETE FROM parent_models
+ WHERE `parent_model_id` = 45
+[0m
+  [4;35;1mChildModel Destroy (0.000086)[0m   [0m DELETE FROM child_models
+ WHERE `child_model_id` = 42
+[0m
+  [4;36;1mGrandchildModel Destroy (0.000100)[0m   [0;1m DELETE FROM grandchild_models
+ WHERE `grandchild_model_id` = 36
+[0m
+  [4;35;1mGrandchildModel Load (0.000111)[0m   [0mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 35) LIMIT 1[0m
+  [4;36;1mGrandchildModel Load (0.000098)[0m   [0;1mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 36) LIMIT 1[0m
+  [4;35;1mSQL (0.031119)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.000047)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.000180)[0m   [0mINSERT INTO grandchild_models (`color`) VALUES('black')[0m
+  [4;36;1mSQL (0.000119)[0m   [0;1mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES('GrandchildModel', 37, 'Annapolis')[0m
+  [4;35;1mSQL (0.000118)[0m   [0mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Troy', 43, '2007-05-09 22:27:55', 'ChildModel', '2007-05-09 22:27:55')[0m
+  [4;36;1mChildModel Update (0.000153)[0m   [0;1mUPDATE child_models SET `location` = 'Annapolis', `child_model_descendant_id` = 37, `child_model_descendant_type` = 'GrandchildModel' WHERE `child_model_id` = 43[0m
+  [4;35;1mParentModel Update (0.000121)[0m   [0mUPDATE parent_models SET `created_at` = '2007-05-09 22:27:55', `parent_model_descendant_id` = 43, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-09 22:27:55', `name` = 'Troy' WHERE `parent_model_id` = 46[0m
+  [4;36;1mParentModel Load (0.000168)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.`name` = 'Troy') LIMIT 1[0m
+  [4;35;1mChildModel Load (0.000137)[0m   [0mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 43) [0m
+  [4;36;1mGrandchildModel Load (0.000107)[0m   [0;1mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 37) [0m
+  [4;35;1mChildModel Load (0.000138)[0m   [0mSELECT * FROM child_models WHERE (child_models.child_model_descendant_id = 37 AND child_models.child_model_descendant_type = 'GrandchildModel') LIMIT 1[0m
+  [4;36;1mParentModel Load (0.000141)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 43 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;35;1mChildModel Load (0.000123)[0m   [0mSELECT * FROM child_models WHERE (child_models.`location` = 'Annapolis') LIMIT 1[0m
+  [4;36;1mGrandchildModel Load (0.000113)[0m   [0;1mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 37) [0m
+  [4;35;1mChildModel Load (0.000138)[0m   [0mSELECT * FROM child_models WHERE (child_models.child_model_descendant_id = 37 AND child_models.child_model_descendant_type = 'GrandchildModel') LIMIT 1[0m
+  [4;36;1mParentModel Load (0.000134)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 43 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;35;1mGrandchildModel Load (0.000114)[0m   [0mSELECT * FROM grandchild_models WHERE (grandchild_models.`color` = 'black') LIMIT 1[0m
+  [4;36;1mChildModel Load (0.000125)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.child_model_descendant_id = 37 AND child_models.child_model_descendant_type = 'GrandchildModel') LIMIT 1[0m
+  [4;35;1mParentModel Load (0.000130)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 43 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;36;1mGrandchildModel Load (0.000120)[0m   [0;1mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 37) [0m
+  [4;35;1mChildModel Load (0.000132)[0m   [0mSELECT * FROM child_models WHERE (child_models.child_model_descendant_id = 37 AND child_models.child_model_descendant_type = 'GrandchildModel') LIMIT 1[0m
+  [4;36;1mParentModel Load (0.000139)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 43 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;35;1mParentModel Destroy (0.000122)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 46
+[0m
+  [4;36;1mChildModel Destroy (0.000087)[0m   [0;1m DELETE FROM child_models
+ WHERE `child_model_id` = 43
+[0m
+  [4;35;1mGrandchildModel Destroy (0.000093)[0m   [0m DELETE FROM grandchild_models
+ WHERE `grandchild_model_id` = 37
+[0m
+  [4;36;1mGrandchildModel Load (0.000113)[0m   [0;1mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 37) LIMIT 1[0m
+  [4;35;1mSQL (0.000391)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.000045)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.000173)[0m   [0mINSERT INTO grandchild_models (`color`) VALUES('black')[0m
+  [4;36;1mSQL (0.000117)[0m   [0;1mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES('GrandchildModel', 38, 'Annapolis')[0m
+  [4;35;1mSQL (0.000130)[0m   [0mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Troy', 44, '2007-05-09 22:27:55', 'ChildModel', '2007-05-09 22:27:55')[0m
+  [4;36;1mChildModel Update (0.000146)[0m   [0;1mUPDATE child_models SET `location` = 'Annapolis', `child_model_descendant_id` = 38, `child_model_descendant_type` = 'GrandchildModel' WHERE `child_model_id` = 44[0m
+  [4;35;1mParentModel Update (0.000123)[0m   [0mUPDATE parent_models SET `created_at` = '2007-05-09 22:27:55', `parent_model_descendant_id` = 44, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-09 22:27:55', `name` = 'Troy' WHERE `parent_model_id` = 47[0m
+  [4;36;1mParentModel Load (0.000173)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 47) [0m
+  [4;35;1mChildModel Load (0.000117)[0m   [0mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 44) [0m
+  [4;36;1mGrandchildModel Load (0.000114)[0m   [0;1mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 38) [0m
+  [4;35;1mChildModel Load (0.000152)[0m   [0mSELECT * FROM child_models WHERE (child_models.child_model_descendant_id = 38 AND child_models.child_model_descendant_type = 'GrandchildModel') LIMIT 1[0m
+  [4;36;1mParentModel Load (0.000143)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 44 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;35;1mParentModel Load (0.000167)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 44 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;36;1mChildModel Load (0.000125)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 44) [0m
+  [4;35;1mGrandchildModel Load (0.000108)[0m   [0mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 38) [0m
+  [4;36;1mGrandchildModel Load (0.000104)[0m   [0;1mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 38) [0m
+  [4;35;1mChildModel Load (0.000138)[0m   [0mSELECT * FROM child_models WHERE (child_models.child_model_descendant_id = 38 AND child_models.child_model_descendant_type = 'GrandchildModel') LIMIT 1[0m
+  [4;36;1mParentModel Load (0.000136)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 44 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;35;1mParentModel Destroy (0.000132)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 47
+[0m
+  [4;36;1mChildModel Destroy (0.000087)[0m   [0;1m DELETE FROM child_models
+ WHERE `child_model_id` = 44
+[0m
+  [4;35;1mGrandchildModel Destroy (0.000087)[0m   [0m DELETE FROM grandchild_models
+ WHERE `grandchild_model_id` = 38
+[0m
+  [4;36;1mGrandchildModel Load (0.000120)[0m   [0;1mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 38) LIMIT 1[0m
+  [4;35;1mSQL (0.001401)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.000053)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.000173)[0m   [0mINSERT INTO grandchild_models (`color`) VALUES('black')[0m
+  [4;36;1mSQL (0.000117)[0m   [0;1mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES('GrandchildModel', 39, 'Annapolis')[0m
+  [4;35;1mSQL (0.000116)[0m   [0mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Troy', 45, '2007-05-09 22:27:55', 'ChildModel', '2007-05-09 22:27:55')[0m
+  [4;36;1mChildModel Update (0.000152)[0m   [0;1mUPDATE child_models SET `location` = 'Annapolis', `child_model_descendant_id` = 39, `child_model_descendant_type` = 'GrandchildModel' WHERE `child_model_id` = 45[0m
+  [4;35;1mParentModel Update (0.000122)[0m   [0mUPDATE parent_models SET `created_at` = '2007-05-09 22:27:55', `parent_model_descendant_id` = 45, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-09 22:27:55', `name` = 'Troy' WHERE `parent_model_id` = 48[0m
+  [4;36;1mParentModel Load (0.000163)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 48) [0m
+  [4;35;1mChildModel Load (0.000116)[0m   [0mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 45) [0m
+  [4;36;1mGrandchildModel Load (0.000108)[0m   [0;1mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 39) [0m
+  [4;35;1mChildModel Load (0.000142)[0m   [0mSELECT * FROM child_models WHERE (child_models.child_model_descendant_id = 39 AND child_models.child_model_descendant_type = 'GrandchildModel') LIMIT 1[0m
+  [4;36;1mParentModel Load (0.000132)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 45 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;35;1mGrandchildModel Load (0.000110)[0m   [0mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 39) [0m
+  [4;36;1mChildModel Load (0.000129)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.child_model_descendant_id = 39 AND child_models.child_model_descendant_type = 'GrandchildModel') LIMIT 1[0m
+  [4;35;1mParentModel Load (0.000136)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 45 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;36;1mParentModel Destroy (0.000121)[0m   [0;1m DELETE FROM parent_models
+ WHERE `parent_model_id` = 48
+[0m
+  [4;35;1mChildModel Destroy (0.000102)[0m   [0m DELETE FROM child_models
+ WHERE `child_model_id` = 45
+[0m
+  [4;36;1mGrandchildModel Destroy (0.000086)[0m   [0;1m DELETE FROM grandchild_models
+ WHERE `grandchild_model_id` = 39
+[0m
+  [4;35;1mGrandchildModel Load (0.000114)[0m   [0mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 39) LIMIT 1[0m
+  [4;36;1mSQL (0.000369)[0m   [0;1mROLLBACK[0m
+  [4;35;1mSQL (0.000045)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000169)[0m   [0;1mINSERT INTO grandchild_models (`color`) VALUES('black')[0m
+  [4;35;1mSQL (0.000118)[0m   [0mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES('GrandchildModel', 40, 'Annapolis')[0m
+  [4;36;1mSQL (0.000130)[0m   [0;1mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Troy', 46, '2007-05-09 22:27:55', 'ChildModel', '2007-05-09 22:27:55')[0m
+  [4;35;1mChildModel Update (0.000145)[0m   [0mUPDATE child_models SET `location` = 'Annapolis', `child_model_descendant_id` = 40, `child_model_descendant_type` = 'GrandchildModel' WHERE `child_model_id` = 46[0m
+  [4;36;1mParentModel Update (0.000122)[0m   [0;1mUPDATE parent_models SET `created_at` = '2007-05-09 22:27:55', `parent_model_descendant_id` = 46, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-09 22:27:55', `name` = 'Troy' WHERE `parent_model_id` = 49[0m
+  [4;35;1mParentModel Load (0.000170)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 49) [0m
+  [4;36;1mChildModel Load (0.000120)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 46) [0m
+  [4;35;1mGrandchildModel Load (0.000116)[0m   [0mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 40) [0m
+  [4;36;1mGrandchildModel Load (0.000127)[0m   [0;1mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 40) [0m
+  [4;35;1mChildModel Load (0.000145)[0m   [0mSELECT * FROM child_models WHERE (child_models.child_model_descendant_id = 40 AND child_models.child_model_descendant_type = 'GrandchildModel') LIMIT 1[0m
+  [4;36;1mParentModel Load (0.000146)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 46 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;35;1mParentModel Destroy (0.000123)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 49
+[0m
+  [4;36;1mChildModel Destroy (0.000087)[0m   [0;1m DELETE FROM child_models
+ WHERE `child_model_id` = 46
+[0m
+  [4;35;1mGrandchildModel Destroy (0.000095)[0m   [0m DELETE FROM grandchild_models
+ WHERE `grandchild_model_id` = 40
+[0m
+  [4;36;1mGrandchildModel Load (0.000111)[0m   [0;1mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 40) LIMIT 1[0m
+  [4;35;1mSQL (0.000681)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.000039)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.000172)[0m   [0mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES(NULL, NULL, 'Manchester')[0m
+  [4;36;1mSQL (0.000114)[0m   [0;1mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Billy', 47, '2007-05-09 22:27:55', 'ChildModel', '2007-05-09 22:27:55')[0m
+  [4;35;1mParentModel Update (0.000147)[0m   [0mUPDATE parent_models SET `created_at` = '2007-05-09 22:27:55', `parent_model_descendant_id` = 47, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-09 22:27:55', `name` = 'Billy' WHERE `parent_model_id` = 50[0m
+  [4;36;1mParentModel Load (0.000164)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 50) [0m
+  [4;35;1mChildModel Load (0.000118)[0m   [0mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 47) [0m
+  [4;36;1mParentModel Load (0.000152)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 47 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;35;1mParentModel Destroy (0.000115)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 50
+[0m
+  [4;36;1mChildModel Destroy (0.000095)[0m   [0;1m DELETE FROM child_models
+ WHERE `child_model_id` = 47
+[0m
+  [4;35;1mChildModel Load (0.000117)[0m   [0mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 47) LIMIT 1[0m
+  [4;36;1mParentModel Load (0.000114)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 50) LIMIT 1[0m
+  [4;35;1mSQL (0.000450)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.000045)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.000176)[0m   [0mINSERT INTO grandchild_models (`color`) VALUES('black')[0m
+  [4;36;1mSQL (0.000117)[0m   [0;1mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES('GrandchildModel', 41, 'Annapolis')[0m
+  [4;35;1mSQL (0.000116)[0m   [0mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Troy', 48, '2007-05-09 22:27:55', 'ChildModel', '2007-05-09 22:27:55')[0m
+  [4;36;1mChildModel Update (0.000145)[0m   [0;1mUPDATE child_models SET `location` = 'Annapolis', `child_model_descendant_id` = 41, `child_model_descendant_type` = 'GrandchildModel' WHERE `child_model_id` = 48[0m
+  [4;35;1mParentModel Update (0.000121)[0m   [0mUPDATE parent_models SET `created_at` = '2007-05-09 22:27:55', `parent_model_descendant_id` = 48, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-09 22:27:55', `name` = 'Troy' WHERE `parent_model_id` = 51[0m
+  [4;36;1mParentModel Load (0.000162)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 51) [0m
+  [4;35;1mGrandchildModel Load (0.000109)[0m   [0mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 41) [0m
+  [4;36;1mChildModel Load (0.000142)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.child_model_descendant_id = 41 AND child_models.child_model_descendant_type = 'GrandchildModel') LIMIT 1[0m
+  [4;35;1mParentModel Load (0.000137)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 48 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;36;1mParentModel Destroy (0.000148)[0m   [0;1m DELETE FROM parent_models
+ WHERE `parent_model_id` = 51
+[0m
+  [4;35;1mChildModel Destroy (0.000087)[0m   [0m DELETE FROM child_models
+ WHERE `child_model_id` = 48
+[0m
+  [4;36;1mGrandchildModel Destroy (0.000085)[0m   [0;1m DELETE FROM grandchild_models
+ WHERE `grandchild_model_id` = 41
+[0m
+  [4;35;1mGrandchildModel Load (0.000115)[0m   [0mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 41) LIMIT 1[0m
+  [4;36;1mSQL (0.000379)[0m   [0;1mROLLBACK[0m
+  [4;35;1mSQL (0.000045)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000049)[0m   [0;1mROLLBACK[0m
+  [4;35;1mSQL (0.000045)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000179)[0m   [0;1mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES(NULL, NULL, 'Manchester')[0m
+  [4;35;1mSQL (0.000113)[0m   [0mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Billy', 49, '2007-05-09 22:27:55', 'ChildModel', '2007-05-09 22:27:55')[0m
+  [4;36;1mParentModel Update (0.000149)[0m   [0;1mUPDATE parent_models SET `created_at` = '2007-05-09 22:27:55', `parent_model_descendant_id` = 49, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-09 22:27:55', `name` = 'Billy' WHERE `parent_model_id` = 52[0m
+  [4;35;1mChildModel Load (0.000150)[0m   [0mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 49) [0m
+  [4;36;1mParentModel Load (0.000149)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 49 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;35;1mChildModel Load (0.000117)[0m   [0mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 49) [0m
+  [4;36;1mParentModel Load (0.000140)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 49 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;35;1mParentModel Destroy (0.000115)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 52
+[0m
+  [4;36;1mChildModel Destroy (0.000087)[0m   [0;1m DELETE FROM child_models
+ WHERE `child_model_id` = 49
+[0m
+  [4;35;1mChildModel Load (0.000116)[0m   [0mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 49) LIMIT 1[0m
+  [4;36;1mSQL (0.001804)[0m   [0;1mROLLBACK[0m
+  [4;35;1mSQL (0.000045)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000047)[0m   [0;1mROLLBACK[0m
+  [4;35;1mSQL (0.000043)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000167)[0m   [0;1mINSERT INTO grandchild_models (`color`) VALUES('black')[0m
+  [4;35;1mSQL (0.000118)[0m   [0mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES('GrandchildModel', 42, 'Annapolis')[0m
+  [4;36;1mSQL (0.000116)[0m   [0;1mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Troy', 50, '2007-05-09 22:27:55', 'ChildModel', '2007-05-09 22:27:55')[0m
+  [4;35;1mChildModel Update (0.000143)[0m   [0mUPDATE child_models SET `location` = 'Annapolis', `child_model_descendant_id` = 42, `child_model_descendant_type` = 'GrandchildModel' WHERE `child_model_id` = 50[0m
+  [4;36;1mParentModel Update (0.000121)[0m   [0;1mUPDATE parent_models SET `created_at` = '2007-05-09 22:27:55', `parent_model_descendant_id` = 50, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-09 22:27:55', `name` = 'Troy' WHERE `parent_model_id` = 53[0m
+  [4;35;1mChildModel Load (0.000156)[0m   [0mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 50) [0m
+  [4;36;1mGrandchildModel Load (0.000109)[0m   [0;1mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 42) [0m
+  [4;35;1mGrandchildModel Load (0.000100)[0m   [0mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 42) [0m
+  [4;36;1mChildModel Load (0.000141)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.child_model_descendant_id = 42 AND child_models.child_model_descendant_type = 'GrandchildModel') LIMIT 1[0m
+  [4;35;1mParentModel Load (0.000136)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 50 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;36;1mGrandchildModel Load (0.000110)[0m   [0;1mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 42) [0m
+  [4;35;1mChildModel Load (0.000132)[0m   [0mSELECT * FROM child_models WHERE (child_models.child_model_descendant_id = 42 AND child_models.child_model_descendant_type = 'GrandchildModel') LIMIT 1[0m
+  [4;36;1mParentModel Load (0.000135)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 50 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;35;1mParentModel Destroy (0.000121)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 53
+[0m
+  [4;36;1mChildModel Destroy (0.000086)[0m   [0;1m DELETE FROM child_models
+ WHERE `child_model_id` = 50
+[0m
+  [4;35;1mGrandchildModel Destroy (0.000085)[0m   [0m DELETE FROM grandchild_models
+ WHERE `grandchild_model_id` = 42
+[0m
+  [4;36;1mGrandchildModel Load (0.000129)[0m   [0;1mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 42) LIMIT 1[0m
+  [4;35;1mChildModel Load (0.000110)[0m   [0mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 50) LIMIT 1[0m
+  [4;36;1mGrandchildModel Load (0.000109)[0m   [0;1mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 42) LIMIT 1[0m
+  [4;35;1mSQL (0.000556)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.000046)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.000049)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.000043)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.000050)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.000046)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.000171)[0m   [0mINSERT INTO grandchild_models (`color`) VALUES('black')[0m
+  [4;36;1mSQL (0.000122)[0m   [0;1mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES('GrandchildModel', 43, 'Annapolis')[0m
+  [4;35;1mSQL (0.000143)[0m   [0mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Troy', 51, '2007-05-09 22:27:55', 'ChildModel', '2007-05-09 22:27:55')[0m
+  [4;36;1mChildModel Update (0.000148)[0m   [0;1mUPDATE child_models SET `location` = 'Annapolis', `child_model_descendant_id` = 43, `child_model_descendant_type` = 'GrandchildModel' WHERE `child_model_id` = 51[0m
+  [4;35;1mParentModel Update (0.000405)[0m   [0mUPDATE parent_models SET `created_at` = '2007-05-09 22:27:55', `parent_model_descendant_id` = 51, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-09 22:27:55', `name` = 'Troy' WHERE `parent_model_id` = 54[0m
+  [4;36;1mGrandchildModel Load (0.000170)[0m   [0;1mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 43) [0m
+  [4;35;1mChildModel Load (0.000150)[0m   [0mSELECT * FROM child_models WHERE (child_models.child_model_descendant_id = 43 AND child_models.child_model_descendant_type = 'GrandchildModel') LIMIT 1[0m
+  [4;36;1mParentModel Load (0.000146)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 51 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;35;1mGrandchildModel Load (0.000126)[0m   [0mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 43) [0m
+  [4;36;1mChildModel Load (0.000200)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.child_model_descendant_id = 43 AND child_models.child_model_descendant_type = 'GrandchildModel') LIMIT 1[0m
+  [4;35;1mParentModel Load (0.000154)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 51 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;36;1mParentModel Destroy (0.000124)[0m   [0;1m DELETE FROM parent_models
+ WHERE `parent_model_id` = 54
+[0m
+  [4;35;1mChildModel Destroy (0.000098)[0m   [0m DELETE FROM child_models
+ WHERE `child_model_id` = 51
+[0m
+  [4;36;1mGrandchildModel Destroy (0.000088)[0m   [0;1m DELETE FROM grandchild_models
+ WHERE `grandchild_model_id` = 43
+[0m
+  [4;35;1mGrandchildModel Load (0.000118)[0m   [0mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 43) LIMIT 1[0m
+  [4;36;1mSQL (0.000404)[0m   [0;1mROLLBACK[0m
+  [4;35;1mSQL (0.000044)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000051)[0m   [0;1mROLLBACK[0m
+  [4;35;1mSQL (0.000043)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000168)[0m   [0;1mINSERT INTO grandchild_models (`color`) VALUES('black')[0m
+  [4;35;1mSQL (0.000116)[0m   [0mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES('GrandchildModel', 44, 'Annapolis')[0m
+  [4;36;1mSQL (0.000117)[0m   [0;1mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Troy', 52, '2007-05-09 22:27:55', 'ChildModel', '2007-05-09 22:27:55')[0m
+  [4;35;1mChildModel Update (0.000147)[0m   [0mUPDATE child_models SET `location` = 'Annapolis', `child_model_descendant_id` = 44, `child_model_descendant_type` = 'GrandchildModel' WHERE `child_model_id` = 52[0m
+  [4;36;1mParentModel Update (0.000123)[0m   [0;1mUPDATE parent_models SET `created_at` = '2007-05-09 22:27:55', `parent_model_descendant_id` = 52, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-09 22:27:55', `name` = 'Troy' WHERE `parent_model_id` = 55[0m
+  [4;35;1mChildModel Load (0.000171)[0m   [0mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 52) [0m
+  [4;36;1mParentModel Load (0.000133)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 55) [0m
+  [4;35;1mParentModel Load (0.000156)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 52 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;36;1mGrandchildModel Load (0.000122)[0m   [0;1mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 44) [0m
+  [4;35;1mChildModel Load (0.000139)[0m   [0mSELECT * FROM child_models WHERE (child_models.child_model_descendant_id = 44 AND child_models.child_model_descendant_type = 'GrandchildModel') LIMIT 1[0m
+  [4;36;1mParentModel Load (0.000144)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 52 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;35;1mParentModel Destroy (0.000122)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 55
+[0m
+  [4;36;1mChildModel Destroy (0.000087)[0m   [0;1m DELETE FROM child_models
+ WHERE `child_model_id` = 52
+[0m
+  [4;35;1mGrandchildModel Destroy (0.000086)[0m   [0m DELETE FROM grandchild_models
+ WHERE `grandchild_model_id` = 44
+[0m
+  [4;36;1mGrandchildModel Load (0.000121)[0m   [0;1mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 44) LIMIT 1[0m
+  [4;35;1mChildModel Load (0.000110)[0m   [0mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 52) LIMIT 1[0m
+  [4;36;1mParentModel Load (0.000116)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 55) LIMIT 1[0m
+  [4;35;1mSQL (0.000393)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.000045)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.000046)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.000051)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.000203)[0m   [0mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Guy', NULL, '2007-05-09 22:27:55', NULL, '2007-05-09 22:27:55')[0m
+  [4;36;1mParentModel Load (0.000195)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 56) [0m
+  [4;35;1mParentModel Load (0.000133)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 56) [0m
+  [4;36;1mParentModel Destroy (0.000115)[0m   [0;1m DELETE FROM parent_models
+ WHERE `parent_model_id` = 56
+[0m
+  [4;35;1mParentModel Load (0.000128)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 56) LIMIT 1[0m
+  [4;36;1mSQL (0.008677)[0m   [0;1mROLLBACK[0m
+  [4;35;1mSQL (0.000045)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000044)[0m   [0;1mROLLBACK[0m
+ApplicationController: missing default helper path application_helper
+Spec::Rails::DSL::HelperEvalContextController: missing default helper path spec/rails/dsl/helper_eval_context_helper
+Spec::Rails::DSL::ViewExampleController: missing default helper path spec/rails/dsl/view_example_helper
+  [4;36;1mSQL (0.000104)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.000000)[0m   [0mMysql::Error: Table 'schema_info' already exists: CREATE TABLE schema_info (version int(11))[0m
+  [4;36;1mSQL (0.000000)[0m   [0;1mMysql::Error: Table 'schema_info' already exists: CREATE TABLE schema_info (version int(11))[0m
+  [4;35;1mSQL (0.000188)[0m   [0mSELECT version FROM schema_info[0m
+ApplicationController: missing default helper path application_helper
+Spec::Rails::DSL::HelperEvalContextController: missing default helper path spec/rails/dsl/helper_eval_context_helper
+Spec::Rails::DSL::ViewExampleController: missing default helper path spec/rails/dsl/view_example_helper
+  [4;36;1mSQL (0.000101)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.000000)[0m   [0mMysql::Error: Table 'schema_info' already exists: CREATE TABLE schema_info (version int(11))[0m
+  [4;36;1mSQL (0.000000)[0m   [0;1mMysql::Error: Table 'schema_info' already exists: CREATE TABLE schema_info (version int(11))[0m
+  [4;35;1mSQL (0.000189)[0m   [0mSELECT version FROM schema_info[0m
+ApplicationController: missing default helper path application_helper
+Spec::Rails::DSL::HelperEvalContextController: missing default helper path spec/rails/dsl/helper_eval_context_helper
+Spec::Rails::DSL::ViewExampleController: missing default helper path spec/rails/dsl/view_example_helper
+  [4;36;1mSQL (0.000102)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.000000)[0m   [0mMysql::Error: Table 'schema_info' already exists: CREATE TABLE schema_info (version int(11))[0m
+  [4;36;1mSQL (0.000000)[0m   [0;1mMysql::Error: Table 'schema_info' already exists: CREATE TABLE schema_info (version int(11))[0m
+  [4;35;1mSQL (0.000183)[0m   [0mSELECT version FROM schema_info[0m
+  [4;36;1mGrandchildModel Columns (0.000556)[0m   [0;1mSHOW FIELDS FROM grandchild_models[0m
+  [4;35;1mChildModel Columns (0.000613)[0m   [0mSHOW FIELDS FROM child_models[0m
+  [4;36;1mParentModel Columns (0.000643)[0m   [0;1mSHOW FIELDS FROM parent_models[0m
+  [4;35;1mSQL (0.000058)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000175)[0m   [0;1mINSERT INTO grandchild_models (`color`) VALUES('black')[0m
+  [4;35;1mSQL (0.000137)[0m   [0mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES('GrandchildModel', 349, 'Annapolis')[0m
+  [4;36;1mSQL (0.000143)[0m   [0;1mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Troy', 657, '2007-05-19 22:09:37', 'ChildModel', '2007-05-19 22:09:37')[0m
+  [4;35;1mChildModel Update (0.000144)[0m   [0mUPDATE child_models SET `location` = 'Annapolis', `child_model_descendant_id` = 349, `child_model_descendant_type` = 'GrandchildModel' WHERE `child_model_id` = 657[0m
+  [4;36;1mParentModel Update (0.000130)[0m   [0;1mUPDATE parent_models SET `created_at` = '2007-05-19 22:09:37', `parent_model_descendant_id` = 657, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:09:37', `name` = 'Troy' WHERE `parent_model_id` = 747[0m
+  [4;35;1mSQL (0.006585)[0m   [0mCOMMIT[0m
+  [4;36;1mChildModel Load (0.000211)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 657) [0m
+  [4;35;1mParentModel Load (0.000148)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 747) [0m
+  [4;36;1mChildModel Load (0.000137)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 657) [0m
+  [4;35;1mGrandchildModel Load (0.000119)[0m   [0mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 349) [0m
+  [4;36;1mChildModel Load (0.000158)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.child_model_descendant_id = 349 AND child_models.child_model_descendant_type = 'GrandchildModel') LIMIT 1[0m
+  [4;35;1mParentModel Load (0.000152)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 657 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;36;1mGrandchildModel Load (0.000197)[0m   [0;1mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 349) [0m
+  [4;35;1mChildModel Load (0.000155)[0m   [0mSELECT * FROM child_models WHERE (child_models.child_model_descendant_id = 349 AND child_models.child_model_descendant_type = 'GrandchildModel') LIMIT 1[0m
+  [4;36;1mParentModel Load (0.000148)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 657 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;35;1mSQL (0.000076)[0m   [0mBEGIN[0m
+  [4;36;1mParentModel Destroy (0.000167)[0m   [0;1m DELETE FROM parent_models
+ WHERE `parent_model_id` = 747
+[0m
+  [4;35;1mChildModel Destroy (0.000102)[0m   [0m DELETE FROM child_models
+ WHERE `child_model_id` = 657
+[0m
+  [4;36;1mGrandchildModel Destroy (0.000094)[0m   [0;1m DELETE FROM grandchild_models
+ WHERE `grandchild_model_id` = 349
+[0m
+  [4;35;1mSQL (0.000267)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.000085)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.000171)[0m   [0mINSERT INTO grandchild_models (`color`) VALUES('black')[0m
+  [4;36;1mSQL (0.000143)[0m   [0;1mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES('GrandchildModel', 350, 'Annapolis')[0m
+  [4;35;1mSQL (0.000134)[0m   [0mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Troy', 658, '2007-05-19 22:09:37', 'ChildModel', '2007-05-19 22:09:37')[0m
+  [4;36;1mChildModel Update (0.000161)[0m   [0;1mUPDATE child_models SET `location` = 'Annapolis', `child_model_descendant_id` = 350, `child_model_descendant_type` = 'GrandchildModel' WHERE `child_model_id` = 658[0m
+  [4;35;1mParentModel Update (0.000137)[0m   [0mUPDATE parent_models SET `created_at` = '2007-05-19 22:09:37', `parent_model_descendant_id` = 658, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:09:37', `name` = 'Troy' WHERE `parent_model_id` = 748[0m
+  [4;36;1mSQL (0.000285)[0m   [0;1mCOMMIT[0m
+  [4;35;1mChildModel Load (0.000175)[0m   [0mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 658) [0m
+  [4;36;1mGrandchildModel Load (0.000132)[0m   [0;1mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 350) [0m
+  [4;35;1mChildModel Load (0.000156)[0m   [0mSELECT * FROM child_models WHERE (child_models.child_model_descendant_id = 350 AND child_models.child_model_descendant_type = 'GrandchildModel') LIMIT 1[0m
+  [4;36;1mParentModel Load (0.000149)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 658 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;35;1mParentModel Load (0.000214)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 658 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;36;1mSQL (0.000065)[0m   [0;1mBEGIN[0m
+  [4;35;1mParentModel Destroy (0.000164)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 748
+[0m
+  [4;36;1mChildModel Destroy (0.000106)[0m   [0;1m DELETE FROM child_models
+ WHERE `child_model_id` = 658
+[0m
+  [4;35;1mGrandchildModel Destroy (0.000094)[0m   [0m DELETE FROM grandchild_models
+ WHERE `grandchild_model_id` = 350
+[0m
+  [4;36;1mSQL (0.029938)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000089)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000202)[0m   [0;1mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES(NULL, NULL, 'Manchester')[0m
+  [4;35;1mSQL (0.000137)[0m   [0mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Billy', 659, '2007-05-19 22:09:37', 'ChildModel', '2007-05-19 22:09:37')[0m
+  [4;36;1mParentModel Update (0.000161)[0m   [0;1mUPDATE parent_models SET `created_at` = '2007-05-19 22:09:37', `parent_model_descendant_id` = 659, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:09:37', `name` = 'Billy' WHERE `parent_model_id` = 749[0m
+  [4;35;1mSQL (0.010997)[0m   [0mCOMMIT[0m
+  [4;36;1mParentModel Load (0.000207)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 749) [0m
+  [4;35;1mChildModel Load (0.000154)[0m   [0mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 659) [0m
+  [4;36;1mParentModel Load (0.000181)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 659 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;35;1mSQL (0.000072)[0m   [0mBEGIN[0m
+  [4;36;1mParentModel Destroy (0.000166)[0m   [0;1m DELETE FROM parent_models
+ WHERE `parent_model_id` = 749
+[0m
+  [4;35;1mChildModel Destroy (0.000099)[0m   [0m DELETE FROM child_models
+ WHERE `child_model_id` = 659
+[0m
+  [4;36;1mSQL (0.000253)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000104)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000200)[0m   [0;1mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES(NULL, NULL, 'Manchester')[0m
+  [4;35;1mSQL (0.000150)[0m   [0mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Billy', 660, '2007-05-19 22:09:37', 'ChildModel', '2007-05-19 22:09:37')[0m
+  [4;36;1mParentModel Update (0.000168)[0m   [0;1mUPDATE parent_models SET `created_at` = '2007-05-19 22:09:37', `parent_model_descendant_id` = 660, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:09:37', `name` = 'Billy' WHERE `parent_model_id` = 750[0m
+  [4;35;1mSQL (0.000348)[0m   [0mCOMMIT[0m
+  [4;36;1mParentModel Load (0.000198)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 750) [0m
+  [4;35;1mParentModel Load (0.000183)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 750) [0m
+  [4;36;1mSQL (0.000059)[0m   [0;1mBEGIN[0m
+  [4;35;1mParentModel Destroy (0.000161)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 750
+[0m
+  [4;36;1mChildModel Destroy (0.000107)[0m   [0;1m DELETE FROM child_models
+ WHERE `child_model_id` = 660
+[0m
+  [4;35;1mSQL (0.000298)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.000094)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.000192)[0m   [0mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES(NULL, NULL, 'Manchester')[0m
+  [4;36;1mSQL (0.000151)[0m   [0;1mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Billy', 661, '2007-05-19 22:09:37', 'ChildModel', '2007-05-19 22:09:37')[0m
+  [4;35;1mParentModel Update (0.000166)[0m   [0mUPDATE parent_models SET `created_at` = '2007-05-19 22:09:37', `parent_model_descendant_id` = 661, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:09:37', `name` = 'Billy' WHERE `parent_model_id` = 751[0m
+  [4;36;1mSQL (0.000321)[0m   [0;1mCOMMIT[0m
+  [4;35;1mParentModel Load (0.000254)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 751) [0m
+  [4;36;1mChildModel Load (0.000135)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 661) [0m
+  [4;35;1mSQL (0.000062)[0m   [0mBEGIN[0m
+  [4;36;1mParentModel Destroy (0.000167)[0m   [0;1m DELETE FROM parent_models
+ WHERE `parent_model_id` = 751
+[0m
+  [4;35;1mChildModel Destroy (0.000097)[0m   [0m DELETE FROM child_models
+ WHERE `child_model_id` = 661
+[0m
+  [4;36;1mSQL (0.000289)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000103)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000177)[0m   [0;1mINSERT INTO grandchild_models (`color`) VALUES('black')[0m
+  [4;35;1mSQL (0.000156)[0m   [0mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES('GrandchildModel', 351, 'Annapolis')[0m
+  [4;36;1mSQL (0.000154)[0m   [0;1mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Troy', 662, '2007-05-19 22:09:37', 'ChildModel', '2007-05-19 22:09:37')[0m
+  [4;35;1mChildModel Update (0.000166)[0m   [0mUPDATE child_models SET `location` = 'Annapolis', `child_model_descendant_id` = 351, `child_model_descendant_type` = 'GrandchildModel' WHERE `child_model_id` = 662[0m
+  [4;36;1mParentModel Update (0.000143)[0m   [0;1mUPDATE parent_models SET `created_at` = '2007-05-19 22:09:37', `parent_model_descendant_id` = 662, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:09:37', `name` = 'Troy' WHERE `parent_model_id` = 752[0m
+  [4;35;1mSQL (0.000332)[0m   [0mCOMMIT[0m
+  [4;36;1mChildModel Load (0.000183)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 662) [0m
+  [4;35;1mParentModel Load (0.000168)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 662 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;36;1mParentModel Load (0.000139)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 752) [0m
+  [4;35;1mChildModel Load (0.000156)[0m   [0mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 662) [0m
+  [4;36;1mGrandchildModel Load (0.000128)[0m   [0;1mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 351) [0m
+  [4;35;1mSQL (0.000063)[0m   [0mBEGIN[0m
+  [4;36;1mParentModel Destroy (0.000173)[0m   [0;1m DELETE FROM parent_models
+ WHERE `parent_model_id` = 752
+[0m
+  [4;35;1mChildModel Destroy (0.000110)[0m   [0m DELETE FROM child_models
+ WHERE `child_model_id` = 662
+[0m
+  [4;36;1mGrandchildModel Destroy (0.000095)[0m   [0;1m DELETE FROM grandchild_models
+ WHERE `grandchild_model_id` = 351
+[0m
+  [4;35;1mSQL (0.005561)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.000090)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.000181)[0m   [0mINSERT INTO grandchild_models (`color`) VALUES('black')[0m
+  [4;36;1mSQL (0.000150)[0m   [0;1mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES('GrandchildModel', 352, 'Annapolis')[0m
+  [4;35;1mSQL (0.000139)[0m   [0mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Troy', 663, '2007-05-19 22:09:37', 'ChildModel', '2007-05-19 22:09:37')[0m
+  [4;36;1mChildModel Update (0.000162)[0m   [0;1mUPDATE child_models SET `location` = 'Annapolis', `child_model_descendant_id` = 352, `child_model_descendant_type` = 'GrandchildModel' WHERE `child_model_id` = 663[0m
+  [4;35;1mParentModel Update (0.000139)[0m   [0mUPDATE parent_models SET `created_at` = '2007-05-19 22:09:37', `parent_model_descendant_id` = 663, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:09:37', `name` = 'Troy' WHERE `parent_model_id` = 753[0m
+  [4;36;1mSQL (0.000316)[0m   [0;1mCOMMIT[0m
+  [4;35;1mChildModel Load (0.000177)[0m   [0mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 663) [0m
+  [4;36;1mParentModel Load (0.000168)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 663 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;35;1mParentModel Load (0.000136)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 753) [0m
+  [4;36;1mChildModel Load (0.000149)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 663) [0m
+  [4;35;1mGrandchildModel Load (0.000175)[0m   [0mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 352) [0m
+  [4;36;1mSQL (0.000066)[0m   [0;1mBEGIN[0m
+  [4;35;1mParentModel Destroy (0.000220)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 753
+[0m
+  [4;36;1mChildModel Destroy (0.000100)[0m   [0;1m DELETE FROM child_models
+ WHERE `child_model_id` = 663
+[0m
+  [4;35;1mGrandchildModel Destroy (0.000096)[0m   [0m DELETE FROM grandchild_models
+ WHERE `grandchild_model_id` = 352
+[0m
+  [4;36;1mSQL (0.000303)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000096)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000172)[0m   [0;1mINSERT INTO grandchild_models (`color`) VALUES('black')[0m
+  [4;35;1mSQL (0.000150)[0m   [0mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES('GrandchildModel', 353, 'Annapolis')[0m
+  [4;36;1mSQL (0.000138)[0m   [0;1mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Troy', 664, '2007-05-19 22:09:37', 'ChildModel', '2007-05-19 22:09:37')[0m
+  [4;35;1mChildModel Update (0.000170)[0m   [0mUPDATE child_models SET `location` = 'Annapolis', `child_model_descendant_id` = 353, `child_model_descendant_type` = 'GrandchildModel' WHERE `child_model_id` = 664[0m
+  [4;36;1mParentModel Update (0.000146)[0m   [0;1mUPDATE parent_models SET `created_at` = '2007-05-19 22:09:37', `parent_model_descendant_id` = 664, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:09:37', `name` = 'Troy' WHERE `parent_model_id` = 754[0m
+  [4;35;1mSQL (0.000302)[0m   [0mCOMMIT[0m
+  [4;36;1mChildModel Load (0.000185)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 664) [0m
+  [4;35;1mSQL (0.000063)[0m   [0mBEGIN[0m
+  [4;36;1mParentModel Destroy (0.000166)[0m   [0;1m DELETE FROM parent_models
+ WHERE `parent_model_id` = 754
+[0m
+  [4;35;1mChildModel Destroy (0.000107)[0m   [0m DELETE FROM child_models
+ WHERE `child_model_id` = 664
+[0m
+  [4;36;1mGrandchildModel Destroy (0.000102)[0m   [0;1m DELETE FROM grandchild_models
+ WHERE `grandchild_model_id` = 353
+[0m
+  [4;35;1mSQL (0.000272)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.000085)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.000176)[0m   [0mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES(NULL, NULL, 'Manchester')[0m
+  [4;36;1mSQL (0.000135)[0m   [0;1mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Billy', 665, '2007-05-19 22:09:38', 'ChildModel', '2007-05-19 22:09:38')[0m
+  [4;35;1mParentModel Update (0.000162)[0m   [0mUPDATE parent_models SET `created_at` = '2007-05-19 22:09:38', `parent_model_descendant_id` = 665, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:09:38', `name` = 'Billy' WHERE `parent_model_id` = 755[0m
+  [4;36;1mSQL (0.001614)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000067)[0m   [0mBEGIN[0m
+  [4;36;1mParentModel Destroy (0.000177)[0m   [0;1m DELETE FROM parent_models
+ WHERE `parent_model_id` = 755
+[0m
+  [4;35;1mChildModel Destroy (0.000100)[0m   [0m DELETE FROM child_models
+ WHERE `child_model_id` = 665
+[0m
+  [4;36;1mSQL (0.000268)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000080)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000180)[0m   [0;1mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Guy', NULL, '2007-05-19 22:09:38', NULL, '2007-05-19 22:09:38')[0m
+  [4;35;1mSQL (0.020617)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.000065)[0m   [0;1mBEGIN[0m
+  [4;35;1mParentModel Destroy (0.000163)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 756
+[0m
+  [4;36;1mSQL (0.000272)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000085)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000173)[0m   [0;1mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES(NULL, NULL, 'Manchester')[0m
+  [4;35;1mSQL (0.000134)[0m   [0mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Billy', 666, '2007-05-19 22:09:38', 'ChildModel', '2007-05-19 22:09:38')[0m
+  [4;36;1mParentModel Update (0.000158)[0m   [0;1mUPDATE parent_models SET `created_at` = '2007-05-19 22:09:38', `parent_model_descendant_id` = 666, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:09:38', `name` = 'Billy' WHERE `parent_model_id` = 757[0m
+  [4;35;1mSQL (0.000622)[0m   [0mCOMMIT[0m
+  [4;36;1mParentModel Load (0.000185)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 757) [0m
+  [4;35;1mChildModel Load (0.000154)[0m   [0mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 666) [0m
+  [4;36;1mSQL (0.000067)[0m   [0;1mBEGIN[0m
+  [4;35;1mParentModel Destroy (0.000167)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 757
+[0m
+  [4;36;1mChildModel Destroy (0.000099)[0m   [0;1m DELETE FROM child_models
+ WHERE `child_model_id` = 666
+[0m
+  [4;35;1mSQL (0.000302)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.000087)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.000173)[0m   [0mINSERT INTO grandchild_models (`color`) VALUES('black')[0m
+  [4;36;1mSQL (0.000138)[0m   [0;1mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES('GrandchildModel', 354, 'Annapolis')[0m
+  [4;35;1mSQL (0.000133)[0m   [0mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Troy', 667, '2007-05-19 22:09:38', 'ChildModel', '2007-05-19 22:09:38')[0m
+  [4;36;1mChildModel Update (0.000157)[0m   [0;1mUPDATE child_models SET `location` = 'Annapolis', `child_model_descendant_id` = 354, `child_model_descendant_type` = 'GrandchildModel' WHERE `child_model_id` = 667[0m
+  [4;35;1mParentModel Update (0.000136)[0m   [0mUPDATE parent_models SET `created_at` = '2007-05-19 22:09:38', `parent_model_descendant_id` = 667, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:09:38', `name` = 'Troy' WHERE `parent_model_id` = 758[0m
+  [4;36;1mSQL (0.020752)[0m   [0;1mCOMMIT[0m
+  [4;35;1mChildModel Load (0.000176)[0m   [0mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 667) [0m
+  [4;36;1mParentModel Load (0.000165)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 667 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;35;1mParentModel Load (0.000137)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 758) [0m
+  [4;36;1mSQL (0.000055)[0m   [0;1mBEGIN[0m
+  [4;35;1mParentModel Destroy (0.000159)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 758
+[0m
+  [4;36;1mChildModel Destroy (0.000098)[0m   [0;1m DELETE FROM child_models
+ WHERE `child_model_id` = 667
+[0m
+  [4;35;1mGrandchildModel Destroy (0.000098)[0m   [0m DELETE FROM grandchild_models
+ WHERE `grandchild_model_id` = 354
+[0m
+  [4;36;1mSQL (0.000262)[0m   [0;1mCOMMIT[0m
+  [4;35;1mParentModel Load (0.000170)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 758) LIMIT 1[0m
+  [4;36;1mChildModel Load (0.000145)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 667) LIMIT 1[0m
+  [4;35;1mGrandchildModel Load (0.000125)[0m   [0mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 667) LIMIT 1[0m
+  [4;36;1mSQL (0.000092)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.000170)[0m   [0mINSERT INTO grandchild_models (`color`) VALUES('black')[0m
+  [4;36;1mSQL (0.000163)[0m   [0;1mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES('GrandchildModel', 355, 'Annapolis')[0m
+  [4;35;1mSQL (0.000134)[0m   [0mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Troy', 668, '2007-05-19 22:09:38', 'ChildModel', '2007-05-19 22:09:38')[0m
+  [4;36;1mChildModel Update (0.000160)[0m   [0;1mUPDATE child_models SET `location` = 'Annapolis', `child_model_descendant_id` = 355, `child_model_descendant_type` = 'GrandchildModel' WHERE `child_model_id` = 668[0m
+  [4;35;1mParentModel Update (0.000139)[0m   [0mUPDATE parent_models SET `created_at` = '2007-05-19 22:09:38', `parent_model_descendant_id` = 668, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:09:38', `name` = 'Troy' WHERE `parent_model_id` = 759[0m
+  [4;36;1mSQL (0.000309)[0m   [0;1mCOMMIT[0m
+  [4;35;1mChildModel Load (0.000179)[0m   [0mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 668) [0m
+  [4;36;1mParentModel Load (0.000173)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 668 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;35;1mParentModel Load (0.000137)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 759) [0m
+  [4;36;1mSQL (0.000053)[0m   [0;1mBEGIN[0m
+  [4;35;1mParentModel Destroy (0.000138)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 759
+[0m
+  [4;36;1mChildModel Destroy (0.000097)[0m   [0;1m DELETE FROM child_models
+ WHERE `child_model_id` = 668
+[0m
+  [4;35;1mSQL (0.000254)[0m   [0mCOMMIT[0m
+  [4;36;1mParentModel Load (0.000163)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 759) LIMIT 1[0m
+  [4;35;1mGrandchildModel Load (0.000156)[0m   [0mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 355) LIMIT 1[0m
+  [4;36;1mChildModel Load (0.000139)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 668) LIMIT 1[0m
+  [4;35;1mSQL (0.000055)[0m   [0mBEGIN[0m
+  [4;36;1mParentModel Destroy (0.000131)[0m   [0;1m DELETE FROM parent_models
+ WHERE `parent_model_id` = 759
+[0m
+  [4;35;1mChildModel Destroy (0.000099)[0m   [0m DELETE FROM child_models
+ WHERE `child_model_id` = 668
+[0m
+  [4;36;1mGrandchildModel Destroy (0.000161)[0m   [0;1m DELETE FROM grandchild_models
+ WHERE `grandchild_model_id` = 355
+[0m
+  [4;35;1mSQL (0.002247)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.000086)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.000173)[0m   [0mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES(NULL, NULL, 'Manchester')[0m
+  [4;36;1mSQL (0.000134)[0m   [0;1mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Billy', 669, '2007-05-19 22:09:38', 'ChildModel', '2007-05-19 22:09:38')[0m
+  [4;35;1mParentModel Update (0.000158)[0m   [0mUPDATE parent_models SET `created_at` = '2007-05-19 22:09:38', `parent_model_descendant_id` = 669, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:09:38', `name` = 'Billy' WHERE `parent_model_id` = 760[0m
+  [4;36;1mSQL (0.002060)[0m   [0;1mCOMMIT[0m
+  [4;35;1mParentModel Load (0.000182)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 760) [0m
+  [4;36;1mSQL (0.000052)[0m   [0;1mBEGIN[0m
+  [4;35;1mParentModel Destroy (0.000128)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 760
+[0m
+  [4;36;1mChildModel Destroy (0.000100)[0m   [0;1m DELETE FROM child_models
+ WHERE `child_model_id` = 669
+[0m
+  [4;35;1mSQL (0.000246)[0m   [0mCOMMIT[0m
+  [4;36;1mChildModel Load (0.000153)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 669) LIMIT 1[0m
+  [4;35;1mParentModel Load (0.000151)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 760) LIMIT 1[0m
+  [4;36;1mSQL (0.000091)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.000175)[0m   [0mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES(NULL, NULL, 'Manchester')[0m
+  [4;36;1mSQL (0.000134)[0m   [0;1mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Billy', 670, '2007-05-19 22:09:38', 'ChildModel', '2007-05-19 22:09:38')[0m
+  [4;35;1mParentModel Update (0.000160)[0m   [0mUPDATE parent_models SET `created_at` = '2007-05-19 22:09:38', `parent_model_descendant_id` = 670, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:09:38', `name` = 'Billy' WHERE `parent_model_id` = 761[0m
+  [4;36;1mSQL (0.000330)[0m   [0;1mCOMMIT[0m
+  [4;35;1mParentModel Load (0.000182)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 761) [0m
+  [4;36;1mSQL (0.000054)[0m   [0;1mBEGIN[0m
+  [4;35;1mParentModel Destroy (0.000131)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 761
+[0m
+  [4;36;1mSQL (0.000243)[0m   [0;1mCOMMIT[0m
+  [4;35;1mChildModel Load (0.000170)[0m   [0mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 670) LIMIT 1[0m
+  [4;36;1mParentModel Load (0.000159)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 761) LIMIT 1[0m
+  [4;35;1mSQL (0.000055)[0m   [0mBEGIN[0m
+  [4;36;1mParentModel Destroy (0.000121)[0m   [0;1m DELETE FROM parent_models
+ WHERE `parent_model_id` = 761
+[0m
+  [4;35;1mChildModel Destroy (0.000120)[0m   [0m DELETE FROM child_models
+ WHERE `child_model_id` = 670
+[0m
+  [4;36;1mSQL (0.000297)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000077)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000184)[0m   [0;1mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Guy', NULL, '2007-05-19 22:09:38', NULL, '2007-05-19 22:09:38')[0m
+  [4;35;1mSQL (0.000300)[0m   [0mCOMMIT[0m
+  [4;36;1mParentModel Delete all (0.000348)[0m   [0;1mDELETE FROM parent_models WHERE (`parent_model_id` IN (762)) [0m
+  [4;35;1mParentModel Load (0.000166)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 762) LIMIT 1[0m
+  [4;36;1mSQL (0.000091)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.000169)[0m   [0mINSERT INTO grandchild_models (`color`) VALUES('black')[0m
+  [4;36;1mSQL (0.000136)[0m   [0;1mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES('GrandchildModel', 356, 'Annapolis')[0m
+  [4;35;1mSQL (0.000138)[0m   [0mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Troy', 671, '2007-05-19 22:09:38', 'ChildModel', '2007-05-19 22:09:38')[0m
+  [4;36;1mChildModel Update (0.000157)[0m   [0;1mUPDATE child_models SET `location` = 'Annapolis', `child_model_descendant_id` = 356, `child_model_descendant_type` = 'GrandchildModel' WHERE `child_model_id` = 671[0m
+  [4;35;1mParentModel Update (0.000137)[0m   [0mUPDATE parent_models SET `created_at` = '2007-05-19 22:09:38', `parent_model_descendant_id` = 671, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:09:38', `name` = 'Troy' WHERE `parent_model_id` = 763[0m
+  [4;36;1mSQL (0.000525)[0m   [0;1mCOMMIT[0m
+  [4;35;1mChildModel Load (0.000177)[0m   [0mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 671) [0m
+  [4;36;1mParentModel Load (0.000140)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 763) [0m
+  [4;35;1mChildModel Load (0.000141)[0m   [0mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 671) [0m
+  [4;36;1mGrandchildModel Load (0.000121)[0m   [0;1mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 356) [0m
+  [4;35;1mSQL (0.000064)[0m   [0mBEGIN[0m
+  [4;36;1mParentModel Destroy (0.000173)[0m   [0;1m DELETE FROM parent_models
+ WHERE `parent_model_id` = 763
+[0m
+  [4;35;1mChildModel Destroy (0.000099)[0m   [0m DELETE FROM child_models
+ WHERE `child_model_id` = 671
+[0m
+  [4;36;1mGrandchildModel Destroy (0.000093)[0m   [0;1m DELETE FROM grandchild_models
+ WHERE `grandchild_model_id` = 356
+[0m
+  [4;35;1mSQL (0.007117)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.000087)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.000168)[0m   [0mINSERT INTO grandchild_models (`color`) VALUES('black')[0m
+  [4;36;1mSQL (0.000143)[0m   [0;1mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES('GrandchildModel', 357, 'Annapolis')[0m
+  [4;35;1mSQL (0.000132)[0m   [0mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Troy', 672, '2007-05-19 22:09:38', 'ChildModel', '2007-05-19 22:09:38')[0m
+  [4;36;1mChildModel Update (0.000161)[0m   [0;1mUPDATE child_models SET `location` = 'Annapolis', `child_model_descendant_id` = 357, `child_model_descendant_type` = 'GrandchildModel' WHERE `child_model_id` = 672[0m
+  [4;35;1mParentModel Update (0.000138)[0m   [0mUPDATE parent_models SET `created_at` = '2007-05-19 22:09:38', `parent_model_descendant_id` = 672, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:09:38', `name` = 'Troy' WHERE `parent_model_id` = 764[0m
+  [4;36;1mSQL (0.000306)[0m   [0;1mCOMMIT[0m
+  [4;35;1mChildModel Load (0.000185)[0m   [0mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 672) [0m
+  [4;36;1mParentModel Load (0.000174)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 672 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;35;1mParentModel Load (0.000147)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 764) [0m
+  [4;36;1mChildModel Load (0.000150)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 672) [0m
+  [4;35;1mGrandchildModel Load (0.000133)[0m   [0mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 357) [0m
+  [4;36;1mChildModel Load (0.000155)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.child_model_descendant_id = 357 AND child_models.child_model_descendant_type = 'GrandchildModel') LIMIT 1[0m
+  [4;35;1mParentModel Load (0.000155)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 672 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;36;1mSQL (0.000068)[0m   [0;1mBEGIN[0m
+  [4;35;1mParentModel Destroy (0.000159)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 764
+[0m
+  [4;36;1mChildModel Destroy (0.000108)[0m   [0;1m DELETE FROM child_models
+ WHERE `child_model_id` = 672
+[0m
+  [4;35;1mGrandchildModel Destroy (0.000096)[0m   [0m DELETE FROM grandchild_models
+ WHERE `grandchild_model_id` = 357
+[0m
+  [4;36;1mSQL (0.000392)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000087)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000169)[0m   [0;1mINSERT INTO grandchild_models (`color`) VALUES('black')[0m
+  [4;35;1mSQL (0.000140)[0m   [0mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES('GrandchildModel', 358, 'Annapolis')[0m
+  [4;36;1mSQL (0.000133)[0m   [0;1mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Troy', 673, '2007-05-19 22:09:38', 'ChildModel', '2007-05-19 22:09:38')[0m
+  [4;35;1mChildModel Update (0.000162)[0m   [0mUPDATE child_models SET `location` = 'Annapolis', `child_model_descendant_id` = 358, `child_model_descendant_type` = 'GrandchildModel' WHERE `child_model_id` = 673[0m
+  [4;36;1mParentModel Update (0.000138)[0m   [0;1mUPDATE parent_models SET `created_at` = '2007-05-19 22:09:38', `parent_model_descendant_id` = 673, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:09:38', `name` = 'Troy' WHERE `parent_model_id` = 765[0m
+  [4;35;1mSQL (0.000330)[0m   [0mCOMMIT[0m
+  [4;36;1mChildModel Load (0.000183)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 673) [0m
+  [4;35;1mGrandchildModel Load (0.000144)[0m   [0mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 358) [0m
+  [4;36;1mChildModel Load (0.000208)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.child_model_descendant_id = 358 AND child_models.child_model_descendant_type = 'GrandchildModel') LIMIT 1[0m
+  [4;35;1mParentModel Load (0.000169)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 673 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;36;1mSQL (0.000070)[0m   [0;1mBEGIN[0m
+  [4;35;1mParentModel Destroy (0.000164)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 765
+[0m
+  [4;36;1mChildModel Destroy (0.000098)[0m   [0;1m DELETE FROM child_models
+ WHERE `child_model_id` = 673
+[0m
+  [4;35;1mGrandchildModel Destroy (0.000096)[0m   [0m DELETE FROM grandchild_models
+ WHERE `grandchild_model_id` = 358
+[0m
+  [4;36;1mSQL (0.000504)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000095)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000179)[0m   [0;1mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES(NULL, NULL, 'Manchester')[0m
+  [4;35;1mSQL (0.000136)[0m   [0mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Billy', 674, '2007-05-19 22:09:38', 'ChildModel', '2007-05-19 22:09:38')[0m
+  [4;36;1mParentModel Update (0.000162)[0m   [0;1mUPDATE parent_models SET `created_at` = '2007-05-19 22:09:38', `parent_model_descendant_id` = 674, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:09:38', `name` = 'Billy' WHERE `parent_model_id` = 766[0m
+  [4;35;1mSQL (0.000308)[0m   [0mCOMMIT[0m
+  [4;36;1mParentModel Load (0.000188)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 766) [0m
+  [4;35;1mChildModel Load (0.000155)[0m   [0mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 674) [0m
+  [4;36;1mParentModel Load (0.000219)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 674 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;35;1mSQL (0.000059)[0m   [0mBEGIN[0m
+  [4;36;1mParentModel Destroy (0.000153)[0m   [0;1m DELETE FROM parent_models
+ WHERE `parent_model_id` = 766
+[0m
+  [4;35;1mChildModel Destroy (0.000108)[0m   [0m DELETE FROM child_models
+ WHERE `child_model_id` = 674
+[0m
+  [4;36;1mSQL (0.000308)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000094)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000227)[0m   [0;1mINSERT INTO grandchild_models (`color`) VALUES('black')[0m
+  [4;35;1mSQL (0.000200)[0m   [0mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES('GrandchildModel', 359, 'Annapolis')[0m
+  [4;36;1mSQL (0.000246)[0m   [0;1mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Troy', 675, '2007-05-19 22:09:38', 'ChildModel', '2007-05-19 22:09:38')[0m
+  [4;35;1mChildModel Update (0.000174)[0m   [0mUPDATE child_models SET `location` = 'Annapolis', `child_model_descendant_id` = 359, `child_model_descendant_type` = 'GrandchildModel' WHERE `child_model_id` = 675[0m
+  [4;36;1mParentModel Update (0.000148)[0m   [0;1mUPDATE parent_models SET `created_at` = '2007-05-19 22:09:38', `parent_model_descendant_id` = 675, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:09:38', `name` = 'Troy' WHERE `parent_model_id` = 767[0m
+  [4;35;1mSQL (0.000311)[0m   [0mCOMMIT[0m
+  [4;36;1mChildModel Load (0.000180)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 675) [0m
+  [4;35;1mParentModel Load (0.000184)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 675 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;36;1mChildModel Load (0.000141)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 675) [0m
+  [4;35;1mSQL (0.000077)[0m   [0mBEGIN[0m
+  [4;36;1mParentModel Destroy (0.000185)[0m   [0;1m DELETE FROM parent_models
+ WHERE `parent_model_id` = 767
+[0m
+  [4;35;1mChildModel Destroy (0.000102)[0m   [0m DELETE FROM child_models
+ WHERE `child_model_id` = 675
+[0m
+  [4;36;1mGrandchildModel Destroy (0.000096)[0m   [0;1m DELETE FROM grandchild_models
+ WHERE `grandchild_model_id` = 359
+[0m
+  [4;35;1mSQL (0.007988)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.000096)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.000200)[0m   [0mINSERT INTO grandchild_models (`color`) VALUES('black')[0m
+  [4;36;1mSQL (0.000214)[0m   [0;1mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES('GrandchildModel', 360, 'Annapolis')[0m
+  [4;35;1mSQL (0.000166)[0m   [0mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Troy', 676, '2007-05-19 22:09:38', 'ChildModel', '2007-05-19 22:09:38')[0m
+  [4;36;1mChildModel Update (0.000171)[0m   [0;1mUPDATE child_models SET `location` = 'Annapolis', `child_model_descendant_id` = 360, `child_model_descendant_type` = 'GrandchildModel' WHERE `child_model_id` = 676[0m
+  [4;35;1mParentModel Update (0.000147)[0m   [0mUPDATE parent_models SET `created_at` = '2007-05-19 22:09:38', `parent_model_descendant_id` = 676, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:09:38', `name` = 'Troy' WHERE `parent_model_id` = 768[0m
+  [4;36;1mSQL (0.000318)[0m   [0;1mCOMMIT[0m
+  [4;35;1mChildModel Load (0.000183)[0m   [0mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 676) [0m
+  [4;36;1mParentModel Load (0.000170)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 676 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;35;1mParentModel Load (0.000141)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 768) [0m
+  [4;36;1mSQL (0.000069)[0m   [0;1mBEGIN[0m
+  [4;35;1mParentModel Destroy (0.000191)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 768
+[0m
+  [4;36;1mChildModel Destroy (0.000103)[0m   [0;1m DELETE FROM child_models
+ WHERE `child_model_id` = 676
+[0m
+  [4;35;1mGrandchildModel Destroy (0.000097)[0m   [0m DELETE FROM grandchild_models
+ WHERE `grandchild_model_id` = 360
+[0m
+  [4;36;1mSQL (0.000256)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000096)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000178)[0m   [0;1mINSERT INTO grandchild_models (`color`) VALUES('black')[0m
+  [4;35;1mSQL (0.000197)[0m   [0mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES('GrandchildModel', 361, 'Annapolis')[0m
+  [4;36;1mSQL (0.000147)[0m   [0;1mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Troy', 677, '2007-05-19 22:09:38', 'ChildModel', '2007-05-19 22:09:38')[0m
+  [4;35;1mChildModel Update (0.000172)[0m   [0mUPDATE child_models SET `location` = 'Annapolis', `child_model_descendant_id` = 361, `child_model_descendant_type` = 'GrandchildModel' WHERE `child_model_id` = 677[0m
+  [4;36;1mParentModel Update (0.000151)[0m   [0;1mUPDATE parent_models SET `created_at` = '2007-05-19 22:09:38', `parent_model_descendant_id` = 677, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:09:38', `name` = 'Troy' WHERE `parent_model_id` = 769[0m
+  [4;35;1mSQL (0.000303)[0m   [0mCOMMIT[0m
+  [4;36;1mChildModel Load (0.000188)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 677) [0m
+  [4;35;1mParentModel Load (0.000221)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 677 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;36;1mSQL (0.000062)[0m   [0;1mBEGIN[0m
+  [4;35;1mParentModel Destroy (0.000165)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 769
+[0m
+  [4;36;1mChildModel Destroy (0.000108)[0m   [0;1m DELETE FROM child_models
+ WHERE `child_model_id` = 677
+[0m
+  [4;35;1mGrandchildModel Destroy (0.000108)[0m   [0m DELETE FROM grandchild_models
+ WHERE `grandchild_model_id` = 361
+[0m
+  [4;36;1mSQL (0.000545)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000107)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000186)[0m   [0;1mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES(NULL, NULL, 'Manchester')[0m
+  [4;35;1mSQL (0.000143)[0m   [0mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Billy', 678, '2007-05-19 22:09:38', 'ChildModel', '2007-05-19 22:09:38')[0m
+  [4;36;1mParentModel Update (0.000164)[0m   [0;1mUPDATE parent_models SET `created_at` = '2007-05-19 22:09:38', `parent_model_descendant_id` = 678, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:09:38', `name` = 'Billy' WHERE `parent_model_id` = 770[0m
+  [4;35;1mSQL (0.001192)[0m   [0mCOMMIT[0m
+  [4;36;1mParentModel Load (0.000186)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 770) [0m
+  [4;35;1mSQL (0.000062)[0m   [0mBEGIN[0m
+  [4;36;1mParentModel Destroy (0.000157)[0m   [0;1m DELETE FROM parent_models
+ WHERE `parent_model_id` = 770
+[0m
+  [4;35;1mChildModel Destroy (0.000110)[0m   [0m DELETE FROM child_models
+ WHERE `child_model_id` = 678
+[0m
+  [4;36;1mSQL (0.000269)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000098)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000173)[0m   [0;1mINSERT INTO grandchild_models (`color`) VALUES('black')[0m
+  [4;35;1mSQL (0.000148)[0m   [0mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES('GrandchildModel', 362, 'Annapolis')[0m
+  [4;36;1mSQL (0.000142)[0m   [0;1mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Troy', 679, '2007-05-19 22:09:38', 'ChildModel', '2007-05-19 22:09:38')[0m
+  [4;35;1mChildModel Update (0.000162)[0m   [0mUPDATE child_models SET `location` = 'Annapolis', `child_model_descendant_id` = 362, `child_model_descendant_type` = 'GrandchildModel' WHERE `child_model_id` = 679[0m
+  [4;36;1mParentModel Update (0.000141)[0m   [0;1mUPDATE parent_models SET `created_at` = '2007-05-19 22:09:38', `parent_model_descendant_id` = 679, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:09:38', `name` = 'Troy' WHERE `parent_model_id` = 771[0m
+  [4;35;1mSQL (0.000312)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.000059)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.000162)[0m   [0mINSERT INTO grandchild_models (`color`) VALUES('black')[0m
+  [4;36;1mSQL (0.000144)[0m   [0;1mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES('GrandchildModel', 363, 'Annapolis')[0m
+  [4;35;1mSQL (0.000132)[0m   [0mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Vanessa', 680, '2007-05-19 22:09:38', 'ChildModel', '2007-05-19 22:09:38')[0m
+  [4;36;1mChildModel Update (0.000163)[0m   [0;1mUPDATE child_models SET `location` = 'Annapolis', `child_model_descendant_id` = 363, `child_model_descendant_type` = 'GrandchildModel' WHERE `child_model_id` = 680[0m
+  [4;35;1mParentModel Update (0.000139)[0m   [0mUPDATE parent_models SET `created_at` = '2007-05-19 22:09:38', `parent_model_descendant_id` = 680, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:09:38', `name` = 'Vanessa' WHERE `parent_model_id` = 772[0m
+  [4;36;1mSQL (0.000733)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000059)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000166)[0m   [0;1mINSERT INTO grandchild_models (`color`) VALUES('black')[0m
+  [4;35;1mSQL (0.000140)[0m   [0mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES('GrandchildModel', 364, 'Nashville')[0m
+  [4;36;1mSQL (0.000173)[0m   [0;1mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Troy', 681, '2007-05-19 22:09:38', 'ChildModel', '2007-05-19 22:09:38')[0m
+  [4;35;1mChildModel Update (0.000158)[0m   [0mUPDATE child_models SET `location` = 'Nashville', `child_model_descendant_id` = 364, `child_model_descendant_type` = 'GrandchildModel' WHERE `child_model_id` = 681[0m
+  [4;36;1mParentModel Update (0.000136)[0m   [0;1mUPDATE parent_models SET `created_at` = '2007-05-19 22:09:38', `parent_model_descendant_id` = 681, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:09:38', `name` = 'Troy' WHERE `parent_model_id` = 773[0m
+  [4;35;1mSQL (0.000317)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.000057)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.000156)[0m   [0mINSERT INTO grandchild_models (`color`) VALUES('grey')[0m
+  [4;36;1mSQL (0.000138)[0m   [0;1mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES('GrandchildModel', 365, 'Annapolis')[0m
+  [4;35;1mSQL (0.000131)[0m   [0mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Troy', 682, '2007-05-19 22:09:38', 'ChildModel', '2007-05-19 22:09:38')[0m
+  [4;36;1mChildModel Update (0.000159)[0m   [0;1mUPDATE child_models SET `location` = 'Annapolis', `child_model_descendant_id` = 365, `child_model_descendant_type` = 'GrandchildModel' WHERE `child_model_id` = 682[0m
+  [4;35;1mParentModel Update (0.000134)[0m   [0mUPDATE parent_models SET `created_at` = '2007-05-19 22:09:38', `parent_model_descendant_id` = 682, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:09:38', `name` = 'Troy' WHERE `parent_model_id` = 774[0m
+  [4;36;1mSQL (0.000304)[0m   [0;1mCOMMIT[0m
+  [4;35;1mParentModel Load (0.000212)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.`name` = 'Troy') [0m
+  [4;36;1mChildModel Load (0.000179)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.`location` = 'Annapolis') [0m
+  [4;35;1mGrandchildModel Load (0.000147)[0m   [0mSELECT * FROM grandchild_models WHERE (grandchild_models.`color` = 'black') [0m
+  [4;36;1mSQL (0.000055)[0m   [0;1mBEGIN[0m
+  [4;35;1mParentModel Destroy (0.000159)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 771
+[0m
+  [4;36;1mChildModel Destroy (0.000098)[0m   [0;1m DELETE FROM child_models
+ WHERE `child_model_id` = 679
+[0m
+  [4;35;1mGrandchildModel Destroy (0.000096)[0m   [0m DELETE FROM grandchild_models
+ WHERE `grandchild_model_id` = 362
+[0m
+  [4;36;1mSQL (0.000265)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000052)[0m   [0mBEGIN[0m
+  [4;36;1mParentModel Destroy (0.000121)[0m   [0;1m DELETE FROM parent_models
+ WHERE `parent_model_id` = 772
+[0m
+  [4;35;1mChildModel Destroy (0.000095)[0m   [0m DELETE FROM child_models
+ WHERE `child_model_id` = 680
+[0m
+  [4;36;1mGrandchildModel Destroy (0.000130)[0m   [0;1m DELETE FROM grandchild_models
+ WHERE `grandchild_model_id` = 363
+[0m
+  [4;35;1mSQL (0.000386)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.000051)[0m   [0;1mBEGIN[0m
+  [4;35;1mParentModel Destroy (0.000115)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 773
+[0m
+  [4;36;1mChildModel Destroy (0.000094)[0m   [0;1m DELETE FROM child_models
+ WHERE `child_model_id` = 681
+[0m
+  [4;35;1mGrandchildModel Destroy (0.000093)[0m   [0m DELETE FROM grandchild_models
+ WHERE `grandchild_model_id` = 364
+[0m
+  [4;36;1mSQL (0.000225)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000050)[0m   [0mBEGIN[0m
+  [4;36;1mParentModel Destroy (0.000120)[0m   [0;1m DELETE FROM parent_models
+ WHERE `parent_model_id` = 774
+[0m
+  [4;35;1mChildModel Destroy (0.000094)[0m   [0m DELETE FROM child_models
+ WHERE `child_model_id` = 682
+[0m
+  [4;36;1mGrandchildModel Destroy (0.000093)[0m   [0;1m DELETE FROM grandchild_models
+ WHERE `grandchild_model_id` = 365
+[0m
+  [4;35;1mSQL (0.000239)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.000083)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.000173)[0m   [0mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES(NULL, NULL, 'Manchester')[0m
+  [4;36;1mSQL (0.000135)[0m   [0;1mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Billy', 683, '2007-05-19 22:09:38', 'ChildModel', '2007-05-19 22:09:38')[0m
+  [4;35;1mParentModel Update (0.000166)[0m   [0mUPDATE parent_models SET `created_at` = '2007-05-19 22:09:38', `parent_model_descendant_id` = 683, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:09:38', `name` = 'Billy' WHERE `parent_model_id` = 775[0m
+  [4;36;1mSQL (0.000317)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000056)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000159)[0m   [0;1mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES(NULL, NULL, 'Manchester')[0m
+  [4;35;1mSQL (0.000135)[0m   [0mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Katie', 684, '2007-05-19 22:09:38', 'ChildModel', '2007-05-19 22:09:38')[0m
+  [4;36;1mParentModel Update (0.000159)[0m   [0;1mUPDATE parent_models SET `created_at` = '2007-05-19 22:09:38', `parent_model_descendant_id` = 684, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:09:38', `name` = 'Katie' WHERE `parent_model_id` = 776[0m
+  [4;35;1mSQL (0.001951)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.000057)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.000187)[0m   [0mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES(NULL, NULL, 'Nashville')[0m
+  [4;36;1mSQL (0.000133)[0m   [0;1mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Billy', 685, '2007-05-19 22:09:38', 'ChildModel', '2007-05-19 22:09:38')[0m
+  [4;35;1mParentModel Update (0.000180)[0m   [0mUPDATE parent_models SET `created_at` = '2007-05-19 22:09:38', `parent_model_descendant_id` = 685, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:09:38', `name` = 'Billy' WHERE `parent_model_id` = 777[0m
+  [4;36;1mSQL (0.002696)[0m   [0;1mCOMMIT[0m
+  [4;35;1mParentModel Load (0.000207)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.`name` = 'Billy') [0m
+  [4;36;1mChildModel Load (0.000166)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.`location` = 'Manchester') [0m
+  [4;35;1mSQL (0.000057)[0m   [0mBEGIN[0m
+  [4;36;1mParentModel Destroy (0.000151)[0m   [0;1m DELETE FROM parent_models
+ WHERE `parent_model_id` = 775
+[0m
+  [4;35;1mChildModel Destroy (0.000097)[0m   [0m DELETE FROM child_models
+ WHERE `child_model_id` = 683
+[0m
+  [4;36;1mSQL (0.000511)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000054)[0m   [0mBEGIN[0m
+  [4;36;1mParentModel Destroy (0.000116)[0m   [0;1m DELETE FROM parent_models
+ WHERE `parent_model_id` = 776
+[0m
+  [4;35;1mChildModel Destroy (0.000103)[0m   [0m DELETE FROM child_models
+ WHERE `child_model_id` = 684
+[0m
+  [4;36;1mSQL (0.000234)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000052)[0m   [0mBEGIN[0m
+  [4;36;1mParentModel Destroy (0.000106)[0m   [0;1m DELETE FROM parent_models
+ WHERE `parent_model_id` = 777
+[0m
+  [4;35;1mChildModel Destroy (0.000094)[0m   [0m DELETE FROM child_models
+ WHERE `child_model_id` = 685
+[0m
+  [4;36;1mSQL (0.000233)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000085)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000173)[0m   [0;1mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES(NULL, NULL, 'Manchester')[0m
+  [4;35;1mSQL (0.000136)[0m   [0mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Billy', 686, '2007-05-19 22:09:38', 'ChildModel', '2007-05-19 22:09:38')[0m
+  [4;36;1mParentModel Update (0.000160)[0m   [0;1mUPDATE parent_models SET `created_at` = '2007-05-19 22:09:38', `parent_model_descendant_id` = 686, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:09:38', `name` = 'Billy' WHERE `parent_model_id` = 778[0m
+  [4;35;1mSQL (0.000296)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.000056)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.000201)[0m   [0mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES(NULL, NULL, 'Nashville')[0m
+  [4;36;1mSQL (0.000139)[0m   [0;1mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Billy', 687, '2007-05-19 22:09:38', 'ChildModel', '2007-05-19 22:09:38')[0m
+  [4;35;1mParentModel Update (0.000154)[0m   [0mUPDATE parent_models SET `created_at` = '2007-05-19 22:09:38', `parent_model_descendant_id` = 687, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:09:38', `name` = 'Billy' WHERE `parent_model_id` = 779[0m
+  [4;36;1mSQL (0.007793)[0m   [0;1mCOMMIT[0m
+  [4;35;1mParentModel Load (0.000204)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.`name` = 'Billy') [0m
+  [4;36;1mSQL (0.000057)[0m   [0;1mBEGIN[0m
+  [4;35;1mParentModel Destroy (0.000153)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 778
+[0m
+  [4;36;1mChildModel Destroy (0.000100)[0m   [0;1m DELETE FROM child_models
+ WHERE `child_model_id` = 686
+[0m
+  [4;35;1mSQL (0.000250)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.000051)[0m   [0;1mBEGIN[0m
+  [4;35;1mParentModel Destroy (0.000112)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 779
+[0m
+  [4;36;1mChildModel Destroy (0.000095)[0m   [0;1m DELETE FROM child_models
+ WHERE `child_model_id` = 687
+[0m
+  [4;35;1mSQL (0.000242)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.000076)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.000175)[0m   [0mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Guy', NULL, '2007-05-19 22:09:38', NULL, '2007-05-19 22:09:38')[0m
+  [4;36;1mSQL (0.002118)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000053)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000134)[0m   [0;1mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Guy', NULL, '2007-05-19 22:09:38', NULL, '2007-05-19 22:09:38')[0m
+  [4;35;1mSQL (0.000245)[0m   [0mCOMMIT[0m
+  [4;36;1mParentModel Load (0.000208)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.`name` = 'Guy') [0m
+  [4;35;1mSQL (0.000058)[0m   [0mBEGIN[0m
+  [4;36;1mParentModel Destroy (0.000149)[0m   [0;1m DELETE FROM parent_models
+ WHERE `parent_model_id` = 780
+[0m
+  [4;35;1mSQL (0.000268)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.000051)[0m   [0;1mBEGIN[0m
+  [4;35;1mParentModel Destroy (0.000159)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 781
+[0m
+  [4;36;1mSQL (0.004041)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000085)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000172)[0m   [0;1mINSERT INTO grandchild_models (`color`) VALUES('black')[0m
+  [4;35;1mSQL (0.000139)[0m   [0mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES('GrandchildModel', 366, 'Annapolis')[0m
+  [4;36;1mSQL (0.000129)[0m   [0;1mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Troy', 688, '2007-05-19 22:09:38', 'ChildModel', '2007-05-19 22:09:38')[0m
+  [4;35;1mChildModel Update (0.000157)[0m   [0mUPDATE child_models SET `location` = 'Annapolis', `child_model_descendant_id` = 366, `child_model_descendant_type` = 'GrandchildModel' WHERE `child_model_id` = 688[0m
+  [4;36;1mParentModel Update (0.000137)[0m   [0;1mUPDATE parent_models SET `created_at` = '2007-05-19 22:09:38', `parent_model_descendant_id` = 688, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:09:38', `name` = 'Troy' WHERE `parent_model_id` = 782[0m
+  [4;35;1mSQL (0.000319)[0m   [0mCOMMIT[0m
+  [4;36;1mParentModel Load (0.000209)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.`name` = 'Troy') LIMIT 1[0m
+  [4;35;1mChildModel Load (0.000144)[0m   [0mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 688) [0m
+  [4;36;1mGrandchildModel Load (0.000130)[0m   [0;1mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 366) [0m
+  [4;35;1mChildModel Load (0.000153)[0m   [0mSELECT * FROM child_models WHERE (child_models.child_model_descendant_id = 366 AND child_models.child_model_descendant_type = 'GrandchildModel') LIMIT 1[0m
+  [4;36;1mParentModel Load (0.000153)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 688 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;35;1mChildModel Load (0.000181)[0m   [0mSELECT * FROM child_models WHERE (child_models.`location` = 'Annapolis') LIMIT 1[0m
+  [4;36;1mGrandchildModel Load (0.000131)[0m   [0;1mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 366) [0m
+  [4;35;1mChildModel Load (0.000152)[0m   [0mSELECT * FROM child_models WHERE (child_models.child_model_descendant_id = 366 AND child_models.child_model_descendant_type = 'GrandchildModel') LIMIT 1[0m
+  [4;36;1mParentModel Load (0.000154)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 688 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;35;1mGrandchildModel Load (0.000158)[0m   [0mSELECT * FROM grandchild_models WHERE (grandchild_models.`color` = 'black') LIMIT 1[0m
+  [4;36;1mChildModel Load (0.000155)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.child_model_descendant_id = 366 AND child_models.child_model_descendant_type = 'GrandchildModel') LIMIT 1[0m
+  [4;35;1mParentModel Load (0.000184)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 688 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;36;1mParentModel Load (0.000178)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 782) [0m
+  [4;35;1mChildModel Load (0.000148)[0m   [0mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 688) [0m
+  [4;36;1mParentModel Load (0.000174)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 688 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;35;1mGrandchildModel Load (0.000149)[0m   [0mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 366) [0m
+  [4;36;1mChildModel Load (0.000155)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.child_model_descendant_id = 366 AND child_models.child_model_descendant_type = 'GrandchildModel') LIMIT 1[0m
+  [4;35;1mParentModel Load (0.000152)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 688 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;36;1mSQL (0.000060)[0m   [0;1mBEGIN[0m
+  [4;35;1mParentModel Destroy (0.000165)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 782
+[0m
+  [4;36;1mChildModel Destroy (0.000099)[0m   [0;1m DELETE FROM child_models
+ WHERE `child_model_id` = 688
+[0m
+  [4;35;1mGrandchildModel Destroy (0.000096)[0m   [0m DELETE FROM grandchild_models
+ WHERE `grandchild_model_id` = 366
+[0m
+  [4;36;1mSQL (0.000327)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000088)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000163)[0m   [0;1mINSERT INTO grandchild_models (`color`) VALUES('black')[0m
+  [4;35;1mSQL (0.000136)[0m   [0mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES('GrandchildModel', 367, 'Annapolis')[0m
+  [4;36;1mSQL (0.000140)[0m   [0;1mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Troy', 689, '2007-05-19 22:09:38', 'ChildModel', '2007-05-19 22:09:38')[0m
+  [4;35;1mChildModel Update (0.000159)[0m   [0mUPDATE child_models SET `location` = 'Annapolis', `child_model_descendant_id` = 367, `child_model_descendant_type` = 'GrandchildModel' WHERE `child_model_id` = 689[0m
+  [4;36;1mParentModel Update (0.000136)[0m   [0;1mUPDATE parent_models SET `created_at` = '2007-05-19 22:09:38', `parent_model_descendant_id` = 689, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:09:38', `name` = 'Troy' WHERE `parent_model_id` = 783[0m
+  [4;35;1mSQL (0.000321)[0m   [0mCOMMIT[0m
+  [4;36;1mChildModel Load (0.000175)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 689) [0m
+  [4;35;1mParentModel Load (0.000166)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.`name` = 'Troy') LIMIT 1[0m
+  [4;36;1mChildModel Load (0.000145)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 689) [0m
+  [4;35;1mChildModel Load (0.000178)[0m   [0mSELECT * FROM child_models WHERE (child_models.`location` = 'Annapolis') LIMIT 1[0m
+  [4;36;1mGrandchildModel Load (0.000155)[0m   [0;1mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 367) [0m
+  [4;35;1mGrandchildModel Load (0.000114)[0m   [0mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 367) [0m
+  [4;36;1mParentModel Load (0.000196)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 689 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;35;1mParentModel Load (0.000140)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 783) [0m
+  [4;36;1mChildModel Load (0.000149)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 689) [0m
+  [4;35;1mParentModel Load (0.000169)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 689 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;36;1mSQL (0.000068)[0m   [0;1mBEGIN[0m
+  [4;35;1mParentModel Destroy (0.000154)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 783
+[0m
+  [4;36;1mChildModel Destroy (0.000099)[0m   [0;1m DELETE FROM child_models
+ WHERE `child_model_id` = 689
+[0m
+  [4;35;1mGrandchildModel Destroy (0.000105)[0m   [0m DELETE FROM grandchild_models
+ WHERE `grandchild_model_id` = 367
+[0m
+  [4;36;1mSQL (0.000310)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000089)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000176)[0m   [0;1mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES(NULL, NULL, 'Manchester')[0m
+  [4;35;1mSQL (0.000132)[0m   [0mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Billy', 690, '2007-05-19 22:09:38', 'ChildModel', '2007-05-19 22:09:38')[0m
+  [4;36;1mParentModel Update (0.000159)[0m   [0;1mUPDATE parent_models SET `created_at` = '2007-05-19 22:09:38', `parent_model_descendant_id` = 690, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:09:38', `name` = 'Billy' WHERE `parent_model_id` = 784[0m
+  [4;35;1mSQL (0.000301)[0m   [0mCOMMIT[0m
+  [4;36;1mParentModel Load (0.000197)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.`name` = 'Billy') LIMIT 1[0m
+  [4;35;1mChildModel Load (0.000148)[0m   [0mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 690) [0m
+  [4;36;1mChildModel Load (0.000185)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.`location` = 'Manchester') LIMIT 1[0m
+  [4;35;1mParentModel Load (0.000170)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 784) [0m
+  [4;36;1mChildModel Load (0.000173)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 690) [0m
+  [4;35;1mParentModel Load (0.000171)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 690 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;36;1mSQL (0.000067)[0m   [0;1mBEGIN[0m
+  [4;35;1mParentModel Destroy (0.000152)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 784
+[0m
+  [4;36;1mChildModel Destroy (0.000098)[0m   [0;1m DELETE FROM child_models
+ WHERE `child_model_id` = 690
+[0m
+  [4;35;1mSQL (0.002024)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.000084)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.000175)[0m   [0mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES(NULL, NULL, 'Manchester')[0m
+  [4;36;1mSQL (0.000143)[0m   [0;1mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Billy', 691, '2007-05-19 22:09:38', 'ChildModel', '2007-05-19 22:09:38')[0m
+  [4;35;1mParentModel Update (0.000171)[0m   [0mUPDATE parent_models SET `created_at` = '2007-05-19 22:09:38', `parent_model_descendant_id` = 691, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:09:38', `name` = 'Billy' WHERE `parent_model_id` = 785[0m
+  [4;36;1mSQL (0.010795)[0m   [0;1mCOMMIT[0m
+  [4;35;1mParentModel Load (0.000197)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 785) [0m
+  [4;36;1mParentModel Load (0.000178)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.`name` = 'Billy') LIMIT 1[0m
+  [4;35;1mChildModel Load (0.000182)[0m   [0mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 691) [0m
+  [4;36;1mChildModel Load (0.000136)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 691) [0m
+  [4;35;1mParentModel Load (0.000293)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 785) [0m
+  [4;36;1mSQL (0.000059)[0m   [0;1mBEGIN[0m
+  [4;35;1mParentModel Destroy (0.000160)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 785
+[0m
+  [4;36;1mChildModel Destroy (0.000109)[0m   [0;1m DELETE FROM child_models
+ WHERE `child_model_id` = 691
+[0m
+  [4;35;1mSQL (0.000302)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.000086)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.000218)[0m   [0mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Guy', NULL, '2007-05-19 22:09:38', NULL, '2007-05-19 22:09:38')[0m
+  [4;36;1mSQL (0.000281)[0m   [0;1mCOMMIT[0m
+  [4;35;1mParentModel Load (0.000214)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.`name` = 'Guy') LIMIT 1[0m
+  [4;36;1mParentModel Load (0.000181)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 786) [0m
+  [4;35;1mSQL (0.000057)[0m   [0mBEGIN[0m
+  [4;36;1mParentModel Destroy (0.000146)[0m   [0;1m DELETE FROM parent_models
+ WHERE `parent_model_id` = 786
+[0m
+  [4;35;1mSQL (0.001208)[0m   [0mCOMMIT[0m
+ApplicationController: missing default helper path application_helper
+Spec::Rails::DSL::HelperEvalContextController: missing default helper path spec/rails/dsl/helper_eval_context_helper
+Spec::Rails::DSL::ViewExampleController: missing default helper path spec/rails/dsl/view_example_helper
+  [4;36;1mSQL (0.000116)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.000000)[0m   [0mMysql::Error: Table 'schema_info' already exists: CREATE TABLE schema_info (version int(11))[0m
+  [4;36;1mSQL (0.000000)[0m   [0;1mMysql::Error: Table 'schema_info' already exists: CREATE TABLE schema_info (version int(11))[0m
+  [4;35;1mSQL (0.000205)[0m   [0mSELECT version FROM schema_info[0m
+  [4;36;1mGrandchildModel Columns (0.000570)[0m   [0;1mSHOW FIELDS FROM grandchild_models[0m
+  [4;35;1mChildModel Columns (0.000644)[0m   [0mSHOW FIELDS FROM child_models[0m
+  [4;36;1mParentModel Columns (0.000681)[0m   [0;1mSHOW FIELDS FROM parent_models[0m
+  [4;35;1mSQL (0.000076)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000189)[0m   [0;1mINSERT INTO grandchild_models (`color`) VALUES('black')[0m
+  [4;35;1mSQL (0.000157)[0m   [0mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES('GrandchildModel', 368, 'Annapolis')[0m
+  [4;36;1mSQL (0.000164)[0m   [0;1mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Troy', 692, '2007-05-19 22:11:11', 'ChildModel', '2007-05-19 22:11:11')[0m
+  [4;35;1mChildModel Update (0.000169)[0m   [0mUPDATE child_models SET `location` = 'Annapolis', `child_model_descendant_id` = 368, `child_model_descendant_type` = 'GrandchildModel' WHERE `child_model_id` = 692[0m
+  [4;36;1mParentModel Update (0.000153)[0m   [0;1mUPDATE parent_models SET `created_at` = '2007-05-19 22:11:11', `parent_model_descendant_id` = 692, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:11:11', `name` = 'Troy' WHERE `parent_model_id` = 787[0m
+  [4;35;1mSQL (0.026173)[0m   [0mCOMMIT[0m
+  [4;36;1mChildModel Load (0.000217)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 692) [0m
+  [4;35;1mParentModel Load (0.000153)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 787) [0m
+  [4;36;1mChildModel Load (0.000148)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 692) [0m
+  [4;35;1mGrandchildModel Load (0.000130)[0m   [0mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 368) [0m
+  [4;36;1mChildModel Load (0.000169)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.child_model_descendant_id = 368 AND child_models.child_model_descendant_type = 'GrandchildModel') LIMIT 1[0m
+  [4;35;1mParentModel Load (0.000156)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 692 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;36;1mGrandchildModel Load (0.000210)[0m   [0;1mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 368) [0m
+  [4;35;1mChildModel Load (0.000167)[0m   [0mSELECT * FROM child_models WHERE (child_models.child_model_descendant_id = 368 AND child_models.child_model_descendant_type = 'GrandchildModel') LIMIT 1[0m
+  [4;36;1mParentModel Load (0.000157)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 692 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;35;1mSQL (0.000079)[0m   [0mBEGIN[0m
+  [4;36;1mParentModel Destroy (0.000175)[0m   [0;1m DELETE FROM parent_models
+ WHERE `parent_model_id` = 787
+[0m
+  [4;35;1mChildModel Destroy (0.000104)[0m   [0m DELETE FROM child_models
+ WHERE `child_model_id` = 692
+[0m
+  [4;36;1mGrandchildModel Destroy (0.000100)[0m   [0;1m DELETE FROM grandchild_models
+ WHERE `grandchild_model_id` = 368
+[0m
+  [4;35;1mSQL (0.000281)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.000095)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.000183)[0m   [0mINSERT INTO grandchild_models (`color`) VALUES('black')[0m
+  [4;36;1mSQL (0.000134)[0m   [0;1mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES('GrandchildModel', 369, 'Annapolis')[0m
+  [4;35;1mSQL (0.000139)[0m   [0mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Troy', 693, '2007-05-19 22:11:11', 'ChildModel', '2007-05-19 22:11:11')[0m
+  [4;36;1mChildModel Update (0.000163)[0m   [0;1mUPDATE child_models SET `location` = 'Annapolis', `child_model_descendant_id` = 369, `child_model_descendant_type` = 'GrandchildModel' WHERE `child_model_id` = 693[0m
+  [4;35;1mParentModel Update (0.000143)[0m   [0mUPDATE parent_models SET `created_at` = '2007-05-19 22:11:11', `parent_model_descendant_id` = 693, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:11:11', `name` = 'Troy' WHERE `parent_model_id` = 788[0m
+  [4;36;1mSQL (0.022822)[0m   [0;1mCOMMIT[0m
+  [4;35;1mChildModel Load (0.000182)[0m   [0mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 693) [0m
+  [4;36;1mGrandchildModel Load (0.000150)[0m   [0;1mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 369) [0m
+  [4;35;1mChildModel Load (0.000163)[0m   [0mSELECT * FROM child_models WHERE (child_models.child_model_descendant_id = 369 AND child_models.child_model_descendant_type = 'GrandchildModel') LIMIT 1[0m
+  [4;36;1mParentModel Load (0.000155)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 693 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;35;1mParentModel Load (0.000218)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 693 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;36;1mSQL (0.000075)[0m   [0;1mBEGIN[0m
+  [4;35;1mParentModel Destroy (0.000170)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 788
+[0m
+  [4;36;1mChildModel Destroy (0.000112)[0m   [0;1m DELETE FROM child_models
+ WHERE `child_model_id` = 693
+[0m
+  [4;35;1mGrandchildModel Destroy (0.000108)[0m   [0m DELETE FROM grandchild_models
+ WHERE `grandchild_model_id` = 369
+[0m
+  [4;36;1mSQL (0.001924)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000096)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000184)[0m   [0;1mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES(NULL, NULL, 'Manchester')[0m
+  [4;35;1mSQL (0.000140)[0m   [0mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Billy', 694, '2007-05-19 22:11:11', 'ChildModel', '2007-05-19 22:11:11')[0m
+  [4;36;1mParentModel Update (0.000164)[0m   [0;1mUPDATE parent_models SET `created_at` = '2007-05-19 22:11:11', `parent_model_descendant_id` = 694, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:11:11', `name` = 'Billy' WHERE `parent_model_id` = 789[0m
+  [4;35;1mSQL (0.001978)[0m   [0mCOMMIT[0m
+  [4;36;1mParentModel Load (0.000199)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 789) [0m
+  [4;35;1mChildModel Load (0.000172)[0m   [0mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 694) [0m
+  [4;36;1mParentModel Load (0.000186)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 694 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;35;1mSQL (0.000079)[0m   [0mBEGIN[0m
+  [4;36;1mParentModel Destroy (0.000170)[0m   [0;1m DELETE FROM parent_models
+ WHERE `parent_model_id` = 789
+[0m
+  [4;35;1mChildModel Destroy (0.000104)[0m   [0m DELETE FROM child_models
+ WHERE `child_model_id` = 694
+[0m
+  [4;36;1mSQL (0.003564)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000113)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000206)[0m   [0;1mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES(NULL, NULL, 'Manchester')[0m
+  [4;35;1mSQL (0.000157)[0m   [0mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Billy', 695, '2007-05-19 22:11:12', 'ChildModel', '2007-05-19 22:11:12')[0m
+  [4;36;1mParentModel Update (0.000169)[0m   [0;1mUPDATE parent_models SET `created_at` = '2007-05-19 22:11:12', `parent_model_descendant_id` = 695, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:11:12', `name` = 'Billy' WHERE `parent_model_id` = 790[0m
+  [4;35;1mSQL (0.001132)[0m   [0mCOMMIT[0m
+  [4;36;1mParentModel Load (0.000217)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 790) [0m
+  [4;35;1mParentModel Load (0.000194)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 790) [0m
+  [4;36;1mSQL (0.000066)[0m   [0;1mBEGIN[0m
+  [4;35;1mParentModel Destroy (0.000165)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 790
+[0m
+  [4;36;1mChildModel Destroy (0.000105)[0m   [0;1m DELETE FROM child_models
+ WHERE `child_model_id` = 695
+[0m
+  [4;35;1mSQL (0.000283)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.000101)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.000225)[0m   [0mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES(NULL, NULL, 'Manchester')[0m
+  [4;36;1mSQL (0.000162)[0m   [0;1mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Billy', 696, '2007-05-19 22:11:12', 'ChildModel', '2007-05-19 22:11:12')[0m
+  [4;35;1mParentModel Update (0.000173)[0m   [0mUPDATE parent_models SET `created_at` = '2007-05-19 22:11:12', `parent_model_descendant_id` = 696, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:11:12', `name` = 'Billy' WHERE `parent_model_id` = 791[0m
+  [4;36;1mSQL (0.000354)[0m   [0;1mCOMMIT[0m
+  [4;35;1mParentModel Load (0.000272)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 791) [0m
+  [4;36;1mChildModel Load (0.000144)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 696) [0m
+  [4;35;1mSQL (0.000068)[0m   [0mBEGIN[0m
+  [4;36;1mParentModel Destroy (0.000187)[0m   [0;1m DELETE FROM parent_models
+ WHERE `parent_model_id` = 791
+[0m
+  [4;35;1mChildModel Destroy (0.000112)[0m   [0m DELETE FROM child_models
+ WHERE `child_model_id` = 696
+[0m
+  [4;36;1mSQL (0.000308)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000110)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000196)[0m   [0;1mINSERT INTO grandchild_models (`color`) VALUES('black')[0m
+  [4;35;1mSQL (0.000157)[0m   [0mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES('GrandchildModel', 370, 'Annapolis')[0m
+  [4;36;1mSQL (0.000151)[0m   [0;1mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Troy', 697, '2007-05-19 22:11:12', 'ChildModel', '2007-05-19 22:11:12')[0m
+  [4;35;1mChildModel Update (0.000178)[0m   [0mUPDATE child_models SET `location` = 'Annapolis', `child_model_descendant_id` = 370, `child_model_descendant_type` = 'GrandchildModel' WHERE `child_model_id` = 697[0m
+  [4;36;1mParentModel Update (0.000157)[0m   [0;1mUPDATE parent_models SET `created_at` = '2007-05-19 22:11:12', `parent_model_descendant_id` = 697, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:11:12', `name` = 'Troy' WHERE `parent_model_id` = 792[0m
+  [4;35;1mSQL (0.025061)[0m   [0mCOMMIT[0m
+  [4;36;1mChildModel Load (0.000188)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 697) [0m
+  [4;35;1mParentModel Load (0.000174)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 697 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;36;1mParentModel Load (0.000161)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 792) [0m
+  [4;35;1mChildModel Load (0.000170)[0m   [0mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 697) [0m
+  [4;36;1mGrandchildModel Load (0.000136)[0m   [0;1mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 370) [0m
+  [4;35;1mSQL (0.000071)[0m   [0mBEGIN[0m
+  [4;36;1mParentModel Destroy (0.000173)[0m   [0;1m DELETE FROM parent_models
+ WHERE `parent_model_id` = 792
+[0m
+  [4;35;1mChildModel Destroy (0.000122)[0m   [0m DELETE FROM child_models
+ WHERE `child_model_id` = 697
+[0m
+  [4;36;1mGrandchildModel Destroy (0.000101)[0m   [0;1m DELETE FROM grandchild_models
+ WHERE `grandchild_model_id` = 370
+[0m
+  [4;35;1mSQL (0.003237)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.000109)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.000181)[0m   [0mINSERT INTO grandchild_models (`color`) VALUES('black')[0m
+  [4;36;1mSQL (0.000155)[0m   [0;1mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES('GrandchildModel', 371, 'Annapolis')[0m
+  [4;35;1mSQL (0.000155)[0m   [0mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Troy', 698, '2007-05-19 22:11:12', 'ChildModel', '2007-05-19 22:11:12')[0m
+  [4;36;1mChildModel Update (0.000167)[0m   [0;1mUPDATE child_models SET `location` = 'Annapolis', `child_model_descendant_id` = 371, `child_model_descendant_type` = 'GrandchildModel' WHERE `child_model_id` = 698[0m
+  [4;35;1mParentModel Update (0.000148)[0m   [0mUPDATE parent_models SET `created_at` = '2007-05-19 22:11:12', `parent_model_descendant_id` = 698, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:11:12', `name` = 'Troy' WHERE `parent_model_id` = 793[0m
+  [4;36;1mSQL (0.000308)[0m   [0;1mCOMMIT[0m
+  [4;35;1mChildModel Load (0.000188)[0m   [0mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 698) [0m
+  [4;36;1mParentModel Load (0.000175)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 698 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;35;1mParentModel Load (0.000144)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 793) [0m
+  [4;36;1mChildModel Load (0.000171)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 698) [0m
+  [4;35;1mGrandchildModel Load (0.000183)[0m   [0mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 371) [0m
+  [4;36;1mSQL (0.000072)[0m   [0;1mBEGIN[0m
+  [4;35;1mParentModel Destroy (0.000188)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 793
+[0m
+  [4;36;1mChildModel Destroy (0.000106)[0m   [0;1m DELETE FROM child_models
+ WHERE `child_model_id` = 698
+[0m
+  [4;35;1mGrandchildModel Destroy (0.000102)[0m   [0m DELETE FROM grandchild_models
+ WHERE `grandchild_model_id` = 371
+[0m
+  [4;36;1mSQL (0.000328)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000097)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000179)[0m   [0;1mINSERT INTO grandchild_models (`color`) VALUES('black')[0m
+  [4;35;1mSQL (0.000162)[0m   [0mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES('GrandchildModel', 372, 'Annapolis')[0m
+  [4;36;1mSQL (0.000142)[0m   [0;1mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Troy', 699, '2007-05-19 22:11:12', 'ChildModel', '2007-05-19 22:11:12')[0m
+  [4;35;1mChildModel Update (0.000165)[0m   [0mUPDATE child_models SET `location` = 'Annapolis', `child_model_descendant_id` = 372, `child_model_descendant_type` = 'GrandchildModel' WHERE `child_model_id` = 699[0m
+  [4;36;1mParentModel Update (0.000142)[0m   [0;1mUPDATE parent_models SET `created_at` = '2007-05-19 22:11:12', `parent_model_descendant_id` = 699, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:11:12', `name` = 'Troy' WHERE `parent_model_id` = 794[0m
+  [4;35;1mSQL (0.000307)[0m   [0mCOMMIT[0m
+  [4;36;1mChildModel Load (0.000184)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 699) [0m
+  [4;35;1mSQL (0.000071)[0m   [0mBEGIN[0m
+  [4;36;1mParentModel Destroy (0.000177)[0m   [0;1m DELETE FROM parent_models
+ WHERE `parent_model_id` = 794
+[0m
+  [4;35;1mChildModel Destroy (0.000113)[0m   [0m DELETE FROM child_models
+ WHERE `child_model_id` = 699
+[0m
+  [4;36;1mGrandchildModel Destroy (0.000101)[0m   [0;1m DELETE FROM grandchild_models
+ WHERE `grandchild_model_id` = 372
+[0m
+  [4;35;1mSQL (0.000282)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.000096)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.000182)[0m   [0mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES(NULL, NULL, 'Manchester')[0m
+  [4;36;1mSQL (0.000141)[0m   [0;1mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Billy', 700, '2007-05-19 22:11:12', 'ChildModel', '2007-05-19 22:11:12')[0m
+  [4;35;1mParentModel Update (0.000161)[0m   [0mUPDATE parent_models SET `created_at` = '2007-05-19 22:11:12', `parent_model_descendant_id` = 700, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:11:12', `name` = 'Billy' WHERE `parent_model_id` = 795[0m
+  [4;36;1mSQL (0.003966)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000071)[0m   [0mBEGIN[0m
+  [4;36;1mParentModel Destroy (0.000172)[0m   [0;1m DELETE FROM parent_models
+ WHERE `parent_model_id` = 795
+[0m
+  [4;35;1mChildModel Destroy (0.000105)[0m   [0m DELETE FROM child_models
+ WHERE `child_model_id` = 700
+[0m
+  [4;36;1mSQL (0.000602)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000084)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000186)[0m   [0;1mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Guy', NULL, '2007-05-19 22:11:12', NULL, '2007-05-19 22:11:12')[0m
+  [4;35;1mSQL (0.000254)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.000072)[0m   [0;1mBEGIN[0m
+  [4;35;1mParentModel Destroy (0.000171)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 796
+[0m
+  [4;36;1mSQL (0.001020)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000094)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000181)[0m   [0;1mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES(NULL, NULL, 'Manchester')[0m
+  [4;35;1mSQL (0.000145)[0m   [0mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Billy', 701, '2007-05-19 22:11:12', 'ChildModel', '2007-05-19 22:11:12')[0m
+  [4;36;1mParentModel Update (0.000164)[0m   [0;1mUPDATE parent_models SET `created_at` = '2007-05-19 22:11:12', `parent_model_descendant_id` = 701, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:11:12', `name` = 'Billy' WHERE `parent_model_id` = 797[0m
+  [4;35;1mSQL (0.001996)[0m   [0mCOMMIT[0m
+  [4;36;1mParentModel Load (0.000192)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 797) [0m
+  [4;35;1mChildModel Load (0.000165)[0m   [0mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 701) [0m
+  [4;36;1mSQL (0.000074)[0m   [0;1mBEGIN[0m
+  [4;35;1mParentModel Destroy (0.000184)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 797
+[0m
+  [4;36;1mChildModel Destroy (0.000104)[0m   [0;1m DELETE FROM child_models
+ WHERE `child_model_id` = 701
+[0m
+  [4;35;1mSQL (0.000257)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.000103)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.000173)[0m   [0mINSERT INTO grandchild_models (`color`) VALUES('black')[0m
+  [4;36;1mSQL (0.000139)[0m   [0;1mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES('GrandchildModel', 373, 'Annapolis')[0m
+  [4;35;1mSQL (0.000143)[0m   [0mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Troy', 702, '2007-05-19 22:11:12', 'ChildModel', '2007-05-19 22:11:12')[0m
+  [4;36;1mChildModel Update (0.000170)[0m   [0;1mUPDATE child_models SET `location` = 'Annapolis', `child_model_descendant_id` = 373, `child_model_descendant_type` = 'GrandchildModel' WHERE `child_model_id` = 702[0m
+  [4;35;1mParentModel Update (0.000141)[0m   [0mUPDATE parent_models SET `created_at` = '2007-05-19 22:11:12', `parent_model_descendant_id` = 702, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:11:12', `name` = 'Troy' WHERE `parent_model_id` = 798[0m
+  [4;36;1mSQL (0.000326)[0m   [0;1mCOMMIT[0m
+  [4;35;1mChildModel Load (0.000182)[0m   [0mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 702) [0m
+  [4;36;1mParentModel Load (0.000173)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 702 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;35;1mParentModel Load (0.000143)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 798) [0m
+  [4;36;1mSQL (0.000058)[0m   [0;1mBEGIN[0m
+  [4;35;1mParentModel Destroy (0.000140)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 798
+[0m
+  [4;36;1mChildModel Destroy (0.000103)[0m   [0;1m DELETE FROM child_models
+ WHERE `child_model_id` = 702
+[0m
+  [4;35;1mGrandchildModel Destroy (0.000123)[0m   [0m DELETE FROM grandchild_models
+ WHERE `grandchild_model_id` = 373
+[0m
+  [4;36;1mSQL (0.000262)[0m   [0;1mCOMMIT[0m
+  [4;35;1mParentModel Load (0.000177)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 798) LIMIT 1[0m
+  [4;36;1mChildModel Load (0.000162)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 702) LIMIT 1[0m
+  [4;35;1mGrandchildModel Load (0.000159)[0m   [0mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 702) LIMIT 1[0m
+  [4;36;1mSQL (0.000100)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.000174)[0m   [0mINSERT INTO grandchild_models (`color`) VALUES('black')[0m
+  [4;36;1mSQL (0.000144)[0m   [0;1mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES('GrandchildModel', 374, 'Annapolis')[0m
+  [4;35;1mSQL (0.000137)[0m   [0mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Troy', 703, '2007-05-19 22:11:12', 'ChildModel', '2007-05-19 22:11:12')[0m
+  [4;36;1mChildModel Update (0.000159)[0m   [0;1mUPDATE child_models SET `location` = 'Annapolis', `child_model_descendant_id` = 374, `child_model_descendant_type` = 'GrandchildModel' WHERE `child_model_id` = 703[0m
+  [4;35;1mParentModel Update (0.000142)[0m   [0mUPDATE parent_models SET `created_at` = '2007-05-19 22:11:12', `parent_model_descendant_id` = 703, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:11:12', `name` = 'Troy' WHERE `parent_model_id` = 799[0m
+  [4;36;1mSQL (0.000326)[0m   [0;1mCOMMIT[0m
+  [4;35;1mChildModel Load (0.000183)[0m   [0mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 703) [0m
+  [4;36;1mParentModel Load (0.000173)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 703 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;35;1mParentModel Load (0.000142)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 799) [0m
+  [4;36;1mSQL (0.000057)[0m   [0;1mBEGIN[0m
+  [4;35;1mParentModel Destroy (0.000141)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 799
+[0m
+  [4;36;1mChildModel Destroy (0.000103)[0m   [0;1m DELETE FROM child_models
+ WHERE `child_model_id` = 703
+[0m
+  [4;35;1mSQL (0.000253)[0m   [0mCOMMIT[0m
+  [4;36;1mParentModel Load (0.000170)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 799) LIMIT 1[0m
+  [4;35;1mGrandchildModel Load (0.000167)[0m   [0mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 374) LIMIT 1[0m
+  [4;36;1mChildModel Load (0.000151)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 703) LIMIT 1[0m
+  [4;35;1mSQL (0.000063)[0m   [0mBEGIN[0m
+  [4;36;1mParentModel Destroy (0.000137)[0m   [0;1m DELETE FROM parent_models
+ WHERE `parent_model_id` = 799
+[0m
+  [4;35;1mChildModel Destroy (0.000104)[0m   [0m DELETE FROM child_models
+ WHERE `child_model_id` = 703
+[0m
+  [4;36;1mGrandchildModel Destroy (0.000115)[0m   [0;1m DELETE FROM grandchild_models
+ WHERE `grandchild_model_id` = 374
+[0m
+  [4;35;1mSQL (0.004276)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.000094)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.000181)[0m   [0mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES(NULL, NULL, 'Manchester')[0m
+  [4;36;1mSQL (0.000140)[0m   [0;1mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Billy', 704, '2007-05-19 22:11:12', 'ChildModel', '2007-05-19 22:11:12')[0m
+  [4;35;1mParentModel Update (0.000167)[0m   [0mUPDATE parent_models SET `created_at` = '2007-05-19 22:11:12', `parent_model_descendant_id` = 704, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:11:12', `name` = 'Billy' WHERE `parent_model_id` = 800[0m
+  [4;36;1mSQL (0.002042)[0m   [0;1mCOMMIT[0m
+  [4;35;1mParentModel Load (0.000190)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 800) [0m
+  [4;36;1mSQL (0.000061)[0m   [0;1mBEGIN[0m
+  [4;35;1mParentModel Destroy (0.000164)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 800
+[0m
+  [4;36;1mChildModel Destroy (0.000104)[0m   [0;1m DELETE FROM child_models
+ WHERE `child_model_id` = 704
+[0m
+  [4;35;1mSQL (0.000246)[0m   [0mCOMMIT[0m
+  [4;36;1mChildModel Load (0.000160)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 704) LIMIT 1[0m
+  [4;35;1mParentModel Load (0.000164)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 800) LIMIT 1[0m
+  [4;36;1mSQL (0.000098)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.000208)[0m   [0mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES(NULL, NULL, 'Manchester')[0m
+  [4;36;1mSQL (0.000141)[0m   [0;1mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Billy', 705, '2007-05-19 22:11:12', 'ChildModel', '2007-05-19 22:11:12')[0m
+  [4;35;1mParentModel Update (0.000163)[0m   [0mUPDATE parent_models SET `created_at` = '2007-05-19 22:11:12', `parent_model_descendant_id` = 705, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:11:12', `name` = 'Billy' WHERE `parent_model_id` = 801[0m
+  [4;36;1mSQL (0.000324)[0m   [0;1mCOMMIT[0m
+  [4;35;1mParentModel Load (0.000189)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 801) [0m
+  [4;36;1mSQL (0.000058)[0m   [0;1mBEGIN[0m
+  [4;35;1mParentModel Destroy (0.000131)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 801
+[0m
+  [4;36;1mSQL (0.000249)[0m   [0;1mCOMMIT[0m
+  [4;35;1mChildModel Load (0.000169)[0m   [0mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 705) LIMIT 1[0m
+  [4;36;1mParentModel Load (0.000175)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 801) LIMIT 1[0m
+  [4;35;1mSQL (0.000062)[0m   [0mBEGIN[0m
+  [4;36;1mParentModel Destroy (0.000134)[0m   [0;1m DELETE FROM parent_models
+ WHERE `parent_model_id` = 801
+[0m
+  [4;35;1mChildModel Destroy (0.000140)[0m   [0m DELETE FROM child_models
+ WHERE `child_model_id` = 705
+[0m
+  [4;36;1mSQL (0.002360)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000084)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000183)[0m   [0;1mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Guy', NULL, '2007-05-19 22:11:12', NULL, '2007-05-19 22:11:12')[0m
+  [4;35;1mSQL (0.000262)[0m   [0mCOMMIT[0m
+  [4;36;1mParentModel Delete all (0.000340)[0m   [0;1mDELETE FROM parent_models WHERE (`parent_model_id` IN (802)) [0m
+  [4;35;1mParentModel Load (0.000178)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 802) LIMIT 1[0m
+  [4;36;1mSQL (0.000101)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.000175)[0m   [0mINSERT INTO grandchild_models (`color`) VALUES('black')[0m
+  [4;36;1mSQL (0.000142)[0m   [0;1mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES('GrandchildModel', 375, 'Annapolis')[0m
+  [4;35;1mSQL (0.000138)[0m   [0mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Troy', 706, '2007-05-19 22:11:12', 'ChildModel', '2007-05-19 22:11:12')[0m
+  [4;36;1mChildModel Update (0.000163)[0m   [0;1mUPDATE child_models SET `location` = 'Annapolis', `child_model_descendant_id` = 375, `child_model_descendant_type` = 'GrandchildModel' WHERE `child_model_id` = 706[0m
+  [4;35;1mParentModel Update (0.000140)[0m   [0mUPDATE parent_models SET `created_at` = '2007-05-19 22:11:12', `parent_model_descendant_id` = 706, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:11:12', `name` = 'Troy' WHERE `parent_model_id` = 803[0m
+  [4;36;1mSQL (0.000331)[0m   [0;1mCOMMIT[0m
+  [4;35;1mChildModel Load (0.000187)[0m   [0mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 706) [0m
+  [4;36;1mParentModel Load (0.000146)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 803) [0m
+  [4;35;1mChildModel Load (0.000156)[0m   [0mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 706) [0m
+  [4;36;1mGrandchildModel Load (0.000130)[0m   [0;1mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 375) [0m
+  [4;35;1mSQL (0.000072)[0m   [0mBEGIN[0m
+  [4;36;1mParentModel Destroy (0.000168)[0m   [0;1m DELETE FROM parent_models
+ WHERE `parent_model_id` = 803
+[0m
+  [4;35;1mChildModel Destroy (0.000104)[0m   [0m DELETE FROM child_models
+ WHERE `child_model_id` = 706
+[0m
+  [4;36;1mGrandchildModel Destroy (0.000100)[0m   [0;1m DELETE FROM grandchild_models
+ WHERE `grandchild_model_id` = 375
+[0m
+  [4;35;1mSQL (0.004892)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.000099)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.000177)[0m   [0mINSERT INTO grandchild_models (`color`) VALUES('black')[0m
+  [4;36;1mSQL (0.000152)[0m   [0;1mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES('GrandchildModel', 376, 'Annapolis')[0m
+  [4;35;1mSQL (0.000145)[0m   [0mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Troy', 707, '2007-05-19 22:11:12', 'ChildModel', '2007-05-19 22:11:12')[0m
+  [4;36;1mChildModel Update (0.000164)[0m   [0;1mUPDATE child_models SET `location` = 'Annapolis', `child_model_descendant_id` = 376, `child_model_descendant_type` = 'GrandchildModel' WHERE `child_model_id` = 707[0m
+  [4;35;1mParentModel Update (0.000141)[0m   [0mUPDATE parent_models SET `created_at` = '2007-05-19 22:11:12', `parent_model_descendant_id` = 707, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:11:12', `name` = 'Troy' WHERE `parent_model_id` = 804[0m
+  [4;36;1mSQL (0.000313)[0m   [0;1mCOMMIT[0m
+  [4;35;1mChildModel Load (0.000203)[0m   [0mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 707) [0m
+  [4;36;1mParentModel Load (0.000183)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 707 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;35;1mParentModel Load (0.000144)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 804) [0m
+  [4;36;1mChildModel Load (0.000165)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 707) [0m
+  [4;35;1mGrandchildModel Load (0.000131)[0m   [0mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 376) [0m
+  [4;36;1mChildModel Load (0.000174)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.child_model_descendant_id = 376 AND child_models.child_model_descendant_type = 'GrandchildModel') LIMIT 1[0m
+  [4;35;1mParentModel Load (0.000161)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 707 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;36;1mSQL (0.000071)[0m   [0;1mBEGIN[0m
+  [4;35;1mParentModel Destroy (0.000165)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 804
+[0m
+  [4;36;1mChildModel Destroy (0.000122)[0m   [0;1m DELETE FROM child_models
+ WHERE `child_model_id` = 707
+[0m
+  [4;35;1mGrandchildModel Destroy (0.000098)[0m   [0m DELETE FROM grandchild_models
+ WHERE `grandchild_model_id` = 376
+[0m
+  [4;36;1mSQL (0.000328)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000098)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000171)[0m   [0;1mINSERT INTO grandchild_models (`color`) VALUES('black')[0m
+  [4;35;1mSQL (0.000138)[0m   [0mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES('GrandchildModel', 377, 'Annapolis')[0m
+  [4;36;1mSQL (0.000140)[0m   [0;1mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Troy', 708, '2007-05-19 22:11:12', 'ChildModel', '2007-05-19 22:11:12')[0m
+  [4;35;1mChildModel Update (0.000160)[0m   [0mUPDATE child_models SET `location` = 'Annapolis', `child_model_descendant_id` = 377, `child_model_descendant_type` = 'GrandchildModel' WHERE `child_model_id` = 708[0m
+  [4;36;1mParentModel Update (0.000142)[0m   [0;1mUPDATE parent_models SET `created_at` = '2007-05-19 22:11:12', `parent_model_descendant_id` = 708, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:11:12', `name` = 'Troy' WHERE `parent_model_id` = 805[0m
+  [4;35;1mSQL (0.000339)[0m   [0mCOMMIT[0m
+  [4;36;1mChildModel Load (0.000188)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 708) [0m
+  [4;35;1mGrandchildModel Load (0.000163)[0m   [0mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 377) [0m
+  [4;36;1mChildModel Load (0.000218)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.child_model_descendant_id = 377 AND child_models.child_model_descendant_type = 'GrandchildModel') LIMIT 1[0m
+  [4;35;1mParentModel Load (0.000169)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 708 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;36;1mSQL (0.000069)[0m   [0;1mBEGIN[0m
+  [4;35;1mParentModel Destroy (0.000165)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 805
+[0m
+  [4;36;1mChildModel Destroy (0.000101)[0m   [0;1m DELETE FROM child_models
+ WHERE `child_model_id` = 708
+[0m
+  [4;35;1mGrandchildModel Destroy (0.000097)[0m   [0m DELETE FROM grandchild_models
+ WHERE `grandchild_model_id` = 377
+[0m
+  [4;36;1mSQL (0.000317)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000098)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000181)[0m   [0;1mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES(NULL, NULL, 'Manchester')[0m
+  [4;35;1mSQL (0.000138)[0m   [0mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Billy', 709, '2007-05-19 22:11:12', 'ChildModel', '2007-05-19 22:11:12')[0m
+  [4;36;1mParentModel Update (0.000168)[0m   [0;1mUPDATE parent_models SET `created_at` = '2007-05-19 22:11:12', `parent_model_descendant_id` = 709, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:11:12', `name` = 'Billy' WHERE `parent_model_id` = 806[0m
+  [4;35;1mSQL (0.000331)[0m   [0mCOMMIT[0m
+  [4;36;1mParentModel Load (0.000205)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 806) [0m
+  [4;35;1mChildModel Load (0.000169)[0m   [0mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 709) [0m
+  [4;36;1mParentModel Load (0.000234)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 709 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;35;1mSQL (0.000062)[0m   [0mBEGIN[0m
+  [4;36;1mParentModel Destroy (0.000162)[0m   [0;1m DELETE FROM parent_models
+ WHERE `parent_model_id` = 806
+[0m
+  [4;35;1mChildModel Destroy (0.000106)[0m   [0m DELETE FROM child_models
+ WHERE `child_model_id` = 709
+[0m
+  [4;36;1mSQL (0.000266)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000098)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000232)[0m   [0;1mINSERT INTO grandchild_models (`color`) VALUES('black')[0m
+  [4;35;1mSQL (0.000193)[0m   [0mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES('GrandchildModel', 378, 'Annapolis')[0m
+  [4;36;1mSQL (0.000252)[0m   [0;1mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Troy', 710, '2007-05-19 22:11:12', 'ChildModel', '2007-05-19 22:11:12')[0m
+  [4;35;1mChildModel Update (0.000176)[0m   [0mUPDATE child_models SET `location` = 'Annapolis', `child_model_descendant_id` = 378, `child_model_descendant_type` = 'GrandchildModel' WHERE `child_model_id` = 710[0m
+  [4;36;1mParentModel Update (0.000146)[0m   [0;1mUPDATE parent_models SET `created_at` = '2007-05-19 22:11:12', `parent_model_descendant_id` = 710, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:11:12', `name` = 'Troy' WHERE `parent_model_id` = 807[0m
+  [4;35;1mSQL (0.000333)[0m   [0mCOMMIT[0m
+  [4;36;1mChildModel Load (0.000192)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 710) [0m
+  [4;35;1mParentModel Load (0.000190)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 710 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;36;1mChildModel Load (0.000153)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 710) [0m
+  [4;35;1mSQL (0.000087)[0m   [0mBEGIN[0m
+  [4;36;1mParentModel Destroy (0.000183)[0m   [0;1m DELETE FROM parent_models
+ WHERE `parent_model_id` = 807
+[0m
+  [4;35;1mChildModel Destroy (0.000102)[0m   [0m DELETE FROM child_models
+ WHERE `child_model_id` = 710
+[0m
+  [4;36;1mGrandchildModel Destroy (0.000100)[0m   [0;1m DELETE FROM grandchild_models
+ WHERE `grandchild_model_id` = 378
+[0m
+  [4;35;1mSQL (0.007151)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.000099)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.000199)[0m   [0mINSERT INTO grandchild_models (`color`) VALUES('black')[0m
+  [4;36;1mSQL (0.000180)[0m   [0;1mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES('GrandchildModel', 379, 'Annapolis')[0m
+  [4;35;1mSQL (0.000162)[0m   [0mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Troy', 711, '2007-05-19 22:11:12', 'ChildModel', '2007-05-19 22:11:12')[0m
+  [4;36;1mChildModel Update (0.000170)[0m   [0;1mUPDATE child_models SET `location` = 'Annapolis', `child_model_descendant_id` = 379, `child_model_descendant_type` = 'GrandchildModel' WHERE `child_model_id` = 711[0m
+  [4;35;1mParentModel Update (0.000147)[0m   [0mUPDATE parent_models SET `created_at` = '2007-05-19 22:11:12', `parent_model_descendant_id` = 711, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:11:12', `name` = 'Troy' WHERE `parent_model_id` = 808[0m
+  [4;36;1mSQL (0.000308)[0m   [0;1mCOMMIT[0m
+  [4;35;1mChildModel Load (0.000184)[0m   [0mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 711) [0m
+  [4;36;1mParentModel Load (0.000175)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 711 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;35;1mParentModel Load (0.000142)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 808) [0m
+  [4;36;1mSQL (0.000070)[0m   [0;1mBEGIN[0m
+  [4;35;1mParentModel Destroy (0.000191)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 808
+[0m
+  [4;36;1mChildModel Destroy (0.000102)[0m   [0;1m DELETE FROM child_models
+ WHERE `child_model_id` = 711
+[0m
+  [4;35;1mGrandchildModel Destroy (0.000098)[0m   [0m DELETE FROM grandchild_models
+ WHERE `grandchild_model_id` = 379
+[0m
+  [4;36;1mSQL (0.001555)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000098)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000187)[0m   [0;1mINSERT INTO grandchild_models (`color`) VALUES('black')[0m
+  [4;35;1mSQL (0.000152)[0m   [0mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES('GrandchildModel', 380, 'Annapolis')[0m
+  [4;36;1mSQL (0.000148)[0m   [0;1mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Troy', 712, '2007-05-19 22:11:12', 'ChildModel', '2007-05-19 22:11:12')[0m
+  [4;35;1mChildModel Update (0.000173)[0m   [0mUPDATE child_models SET `location` = 'Annapolis', `child_model_descendant_id` = 380, `child_model_descendant_type` = 'GrandchildModel' WHERE `child_model_id` = 712[0m
+  [4;36;1mParentModel Update (0.000158)[0m   [0;1mUPDATE parent_models SET `created_at` = '2007-05-19 22:11:12', `parent_model_descendant_id` = 712, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:11:12', `name` = 'Troy' WHERE `parent_model_id` = 809[0m
+  [4;35;1mSQL (0.000310)[0m   [0mCOMMIT[0m
+  [4;36;1mChildModel Load (0.000196)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 712) [0m
+  [4;35;1mParentModel Load (0.000219)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 712 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;36;1mSQL (0.000073)[0m   [0;1mBEGIN[0m
+  [4;35;1mParentModel Destroy (0.000210)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 809
+[0m
+  [4;36;1mChildModel Destroy (0.000116)[0m   [0;1m DELETE FROM child_models
+ WHERE `child_model_id` = 712
+[0m
+  [4;35;1mGrandchildModel Destroy (0.000100)[0m   [0m DELETE FROM grandchild_models
+ WHERE `grandchild_model_id` = 380
+[0m
+  [4;36;1mSQL (0.000279)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000105)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000228)[0m   [0;1mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES(NULL, NULL, 'Manchester')[0m
+  [4;35;1mSQL (0.000145)[0m   [0mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Billy', 713, '2007-05-19 22:11:12', 'ChildModel', '2007-05-19 22:11:12')[0m
+  [4;36;1mParentModel Update (0.000162)[0m   [0;1mUPDATE parent_models SET `created_at` = '2007-05-19 22:11:12', `parent_model_descendant_id` = 713, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:11:12', `name` = 'Billy' WHERE `parent_model_id` = 810[0m
+  [4;35;1mSQL (0.000416)[0m   [0mCOMMIT[0m
+  [4;36;1mParentModel Load (0.000191)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 810) [0m
+  [4;35;1mSQL (0.000065)[0m   [0mBEGIN[0m
+  [4;36;1mParentModel Destroy (0.000165)[0m   [0;1m DELETE FROM parent_models
+ WHERE `parent_model_id` = 810
+[0m
+  [4;35;1mChildModel Destroy (0.000102)[0m   [0m DELETE FROM child_models
+ WHERE `child_model_id` = 713
+[0m
+  [4;36;1mSQL (0.000260)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000101)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000177)[0m   [0;1mINSERT INTO grandchild_models (`color`) VALUES('black')[0m
+  [4;35;1mSQL (0.000187)[0m   [0mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES('GrandchildModel', 381, 'Annapolis')[0m
+  [4;36;1mSQL (0.000143)[0m   [0;1mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Troy', 714, '2007-05-19 22:11:12', 'ChildModel', '2007-05-19 22:11:12')[0m
+  [4;35;1mChildModel Update (0.000162)[0m   [0mUPDATE child_models SET `location` = 'Annapolis', `child_model_descendant_id` = 381, `child_model_descendant_type` = 'GrandchildModel' WHERE `child_model_id` = 714[0m
+  [4;36;1mParentModel Update (0.000142)[0m   [0;1mUPDATE parent_models SET `created_at` = '2007-05-19 22:11:12', `parent_model_descendant_id` = 714, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:11:12', `name` = 'Troy' WHERE `parent_model_id` = 811[0m
+  [4;35;1mSQL (0.000324)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.000060)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.000165)[0m   [0mINSERT INTO grandchild_models (`color`) VALUES('black')[0m
+  [4;36;1mSQL (0.000138)[0m   [0;1mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES('GrandchildModel', 382, 'Annapolis')[0m
+  [4;35;1mSQL (0.000131)[0m   [0mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Vanessa', 715, '2007-05-19 22:11:12', 'ChildModel', '2007-05-19 22:11:12')[0m
+  [4;36;1mChildModel Update (0.000167)[0m   [0;1mUPDATE child_models SET `location` = 'Annapolis', `child_model_descendant_id` = 382, `child_model_descendant_type` = 'GrandchildModel' WHERE `child_model_id` = 715[0m
+  [4;35;1mParentModel Update (0.000148)[0m   [0mUPDATE parent_models SET `created_at` = '2007-05-19 22:11:12', `parent_model_descendant_id` = 715, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:11:12', `name` = 'Vanessa' WHERE `parent_model_id` = 812[0m
+  [4;36;1mSQL (0.000509)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000059)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000172)[0m   [0;1mINSERT INTO grandchild_models (`color`) VALUES('black')[0m
+  [4;35;1mSQL (0.000137)[0m   [0mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES('GrandchildModel', 383, 'Nashville')[0m
+  [4;36;1mSQL (0.000133)[0m   [0;1mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Troy', 716, '2007-05-19 22:11:12', 'ChildModel', '2007-05-19 22:11:12')[0m
+  [4;35;1mChildModel Update (0.000160)[0m   [0mUPDATE child_models SET `location` = 'Nashville', `child_model_descendant_id` = 383, `child_model_descendant_type` = 'GrandchildModel' WHERE `child_model_id` = 716[0m
+  [4;36;1mParentModel Update (0.000137)[0m   [0;1mUPDATE parent_models SET `created_at` = '2007-05-19 22:11:12', `parent_model_descendant_id` = 716, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:11:12', `name` = 'Troy' WHERE `parent_model_id` = 813[0m
+  [4;35;1mSQL (0.000314)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.000059)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.000192)[0m   [0mINSERT INTO grandchild_models (`color`) VALUES('grey')[0m
+  [4;36;1mSQL (0.000133)[0m   [0;1mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES('GrandchildModel', 384, 'Annapolis')[0m
+  [4;35;1mSQL (0.000131)[0m   [0mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Troy', 717, '2007-05-19 22:11:12', 'ChildModel', '2007-05-19 22:11:12')[0m
+  [4;36;1mChildModel Update (0.000158)[0m   [0;1mUPDATE child_models SET `location` = 'Annapolis', `child_model_descendant_id` = 384, `child_model_descendant_type` = 'GrandchildModel' WHERE `child_model_id` = 717[0m
+  [4;35;1mParentModel Update (0.000148)[0m   [0mUPDATE parent_models SET `created_at` = '2007-05-19 22:11:12', `parent_model_descendant_id` = 717, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:11:12', `name` = 'Troy' WHERE `parent_model_id` = 814[0m
+  [4;36;1mSQL (0.000329)[0m   [0;1mCOMMIT[0m
+  [4;35;1mParentModel Load (0.000219)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.`name` = 'Troy') [0m
+  [4;36;1mChildModel Load (0.000180)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.`location` = 'Annapolis') [0m
+  [4;35;1mGrandchildModel Load (0.000157)[0m   [0mSELECT * FROM grandchild_models WHERE (grandchild_models.`color` = 'black') [0m
+  [4;36;1mSQL (0.000058)[0m   [0;1mBEGIN[0m
+  [4;35;1mParentModel Destroy (0.000160)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 811
+[0m
+  [4;36;1mChildModel Destroy (0.000107)[0m   [0;1m DELETE FROM child_models
+ WHERE `child_model_id` = 714
+[0m
+  [4;35;1mGrandchildModel Destroy (0.000097)[0m   [0m DELETE FROM grandchild_models
+ WHERE `grandchild_model_id` = 381
+[0m
+  [4;36;1mSQL (0.000286)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000057)[0m   [0mBEGIN[0m
+  [4;36;1mParentModel Destroy (0.000124)[0m   [0;1m DELETE FROM parent_models
+ WHERE `parent_model_id` = 812
+[0m
+  [4;35;1mChildModel Destroy (0.000109)[0m   [0m DELETE FROM child_models
+ WHERE `child_model_id` = 715
+[0m
+  [4;36;1mGrandchildModel Destroy (0.000099)[0m   [0;1m DELETE FROM grandchild_models
+ WHERE `grandchild_model_id` = 382
+[0m
+  [4;35;1mSQL (0.000377)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.000063)[0m   [0;1mBEGIN[0m
+  [4;35;1mParentModel Destroy (0.000115)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 813
+[0m
+  [4;36;1mChildModel Destroy (0.000097)[0m   [0;1m DELETE FROM child_models
+ WHERE `child_model_id` = 716
+[0m
+  [4;35;1mGrandchildModel Destroy (0.000105)[0m   [0m DELETE FROM grandchild_models
+ WHERE `grandchild_model_id` = 383
+[0m
+  [4;36;1mSQL (0.000250)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000053)[0m   [0mBEGIN[0m
+  [4;36;1mParentModel Destroy (0.000126)[0m   [0;1m DELETE FROM parent_models
+ WHERE `parent_model_id` = 814
+[0m
+  [4;35;1mChildModel Destroy (0.000097)[0m   [0m DELETE FROM child_models
+ WHERE `child_model_id` = 717
+[0m
+  [4;36;1mGrandchildModel Destroy (0.000093)[0m   [0;1m DELETE FROM grandchild_models
+ WHERE `grandchild_model_id` = 384
+[0m
+  [4;35;1mSQL (0.000249)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.000089)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.000176)[0m   [0mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES(NULL, NULL, 'Manchester')[0m
+  [4;36;1mSQL (0.000134)[0m   [0;1mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Billy', 718, '2007-05-19 22:11:12', 'ChildModel', '2007-05-19 22:11:12')[0m
+  [4;35;1mParentModel Update (0.000166)[0m   [0mUPDATE parent_models SET `created_at` = '2007-05-19 22:11:12', `parent_model_descendant_id` = 718, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:11:12', `name` = 'Billy' WHERE `parent_model_id` = 815[0m
+  [4;36;1mSQL (0.000326)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000059)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000170)[0m   [0;1mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES(NULL, NULL, 'Manchester')[0m
+  [4;35;1mSQL (0.000130)[0m   [0mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Katie', 719, '2007-05-19 22:11:12', 'ChildModel', '2007-05-19 22:11:12')[0m
+  [4;36;1mParentModel Update (0.000156)[0m   [0;1mUPDATE parent_models SET `created_at` = '2007-05-19 22:11:12', `parent_model_descendant_id` = 719, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:11:12', `name` = 'Katie' WHERE `parent_model_id` = 816[0m
+  [4;35;1mSQL (0.001962)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.000057)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.000169)[0m   [0mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES(NULL, NULL, 'Nashville')[0m
+  [4;36;1mSQL (0.000128)[0m   [0;1mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Billy', 720, '2007-05-19 22:11:12', 'ChildModel', '2007-05-19 22:11:12')[0m
+  [4;35;1mParentModel Update (0.000156)[0m   [0mUPDATE parent_models SET `created_at` = '2007-05-19 22:11:12', `parent_model_descendant_id` = 720, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:11:12', `name` = 'Billy' WHERE `parent_model_id` = 817[0m
+  [4;36;1mSQL (0.003480)[0m   [0;1mCOMMIT[0m
+  [4;35;1mParentModel Load (0.000210)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.`name` = 'Billy') [0m
+  [4;36;1mChildModel Load (0.000167)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.`location` = 'Manchester') [0m
+  [4;35;1mSQL (0.000058)[0m   [0mBEGIN[0m
+  [4;36;1mParentModel Destroy (0.000154)[0m   [0;1m DELETE FROM parent_models
+ WHERE `parent_model_id` = 815
+[0m
+  [4;35;1mChildModel Destroy (0.000098)[0m   [0m DELETE FROM child_models
+ WHERE `child_model_id` = 718
+[0m
+  [4;36;1mSQL (0.000313)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000052)[0m   [0mBEGIN[0m
+  [4;36;1mParentModel Destroy (0.000119)[0m   [0;1m DELETE FROM parent_models
+ WHERE `parent_model_id` = 816
+[0m
+  [4;35;1mChildModel Destroy (0.000098)[0m   [0m DELETE FROM child_models
+ WHERE `child_model_id` = 719
+[0m
+  [4;36;1mSQL (0.000249)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000056)[0m   [0mBEGIN[0m
+  [4;36;1mParentModel Destroy (0.000116)[0m   [0;1m DELETE FROM parent_models
+ WHERE `parent_model_id` = 817
+[0m
+  [4;35;1mChildModel Destroy (0.000106)[0m   [0m DELETE FROM child_models
+ WHERE `child_model_id` = 720
+[0m
+  [4;36;1mSQL (0.003070)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000094)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000182)[0m   [0;1mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES(NULL, NULL, 'Manchester')[0m
+  [4;35;1mSQL (0.000134)[0m   [0mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Billy', 721, '2007-05-19 22:11:12', 'ChildModel', '2007-05-19 22:11:12')[0m
+  [4;36;1mParentModel Update (0.000161)[0m   [0;1mUPDATE parent_models SET `created_at` = '2007-05-19 22:11:12', `parent_model_descendant_id` = 721, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:11:12', `name` = 'Billy' WHERE `parent_model_id` = 818[0m
+  [4;35;1mSQL (0.002064)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.000057)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.000166)[0m   [0mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES(NULL, NULL, 'Nashville')[0m
+  [4;36;1mSQL (0.000132)[0m   [0;1mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Billy', 722, '2007-05-19 22:11:12', 'ChildModel', '2007-05-19 22:11:12')[0m
+  [4;35;1mParentModel Update (0.000155)[0m   [0mUPDATE parent_models SET `created_at` = '2007-05-19 22:11:12', `parent_model_descendant_id` = 722, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:11:12', `name` = 'Billy' WHERE `parent_model_id` = 819[0m
+  [4;36;1mSQL (0.003391)[0m   [0;1mCOMMIT[0m
+  [4;35;1mParentModel Load (0.000205)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.`name` = 'Billy') [0m
+  [4;36;1mSQL (0.000060)[0m   [0;1mBEGIN[0m
+  [4;35;1mParentModel Destroy (0.000201)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 818
+[0m
+  [4;36;1mChildModel Destroy (0.000104)[0m   [0;1m DELETE FROM child_models
+ WHERE `child_model_id` = 721
+[0m
+  [4;35;1mSQL (0.000276)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.000056)[0m   [0;1mBEGIN[0m
+  [4;35;1mParentModel Destroy (0.000118)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 819
+[0m
+  [4;36;1mChildModel Destroy (0.000112)[0m   [0;1m DELETE FROM child_models
+ WHERE `child_model_id` = 722
+[0m
+  [4;35;1mSQL (0.000243)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.000083)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.000185)[0m   [0mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Guy', NULL, '2007-05-19 22:11:12', NULL, '2007-05-19 22:11:12')[0m
+  [4;36;1mSQL (0.001969)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000058)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000144)[0m   [0;1mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Guy', NULL, '2007-05-19 22:11:12', NULL, '2007-05-19 22:11:12')[0m
+  [4;35;1mSQL (0.000264)[0m   [0mCOMMIT[0m
+  [4;36;1mParentModel Load (0.000218)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.`name` = 'Guy') [0m
+  [4;35;1mSQL (0.000059)[0m   [0mBEGIN[0m
+  [4;36;1mParentModel Destroy (0.000148)[0m   [0;1m DELETE FROM parent_models
+ WHERE `parent_model_id` = 820
+[0m
+  [4;35;1mSQL (0.000277)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.000052)[0m   [0;1mBEGIN[0m
+  [4;35;1mParentModel Destroy (0.000110)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 821
+[0m
+  [4;36;1mSQL (0.000231)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000089)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000170)[0m   [0;1mINSERT INTO grandchild_models (`color`) VALUES('black')[0m
+  [4;35;1mSQL (0.000135)[0m   [0mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES('GrandchildModel', 385, 'Annapolis')[0m
+  [4;36;1mSQL (0.000135)[0m   [0;1mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Troy', 723, '2007-05-19 22:11:12', 'ChildModel', '2007-05-19 22:11:12')[0m
+  [4;35;1mChildModel Update (0.000158)[0m   [0mUPDATE child_models SET `location` = 'Annapolis', `child_model_descendant_id` = 385, `child_model_descendant_type` = 'GrandchildModel' WHERE `child_model_id` = 723[0m
+  [4;36;1mParentModel Update (0.000141)[0m   [0;1mUPDATE parent_models SET `created_at` = '2007-05-19 22:11:12', `parent_model_descendant_id` = 723, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:11:12', `name` = 'Troy' WHERE `parent_model_id` = 822[0m
+  [4;35;1mSQL (0.000324)[0m   [0mCOMMIT[0m
+  [4;36;1mParentModel Load (0.000214)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.`name` = 'Troy') LIMIT 1[0m
+  [4;35;1mChildModel Load (0.000146)[0m   [0mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 723) [0m
+  [4;36;1mGrandchildModel Load (0.000126)[0m   [0;1mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 385) [0m
+  [4;35;1mChildModel Load (0.000159)[0m   [0mSELECT * FROM child_models WHERE (child_models.child_model_descendant_id = 385 AND child_models.child_model_descendant_type = 'GrandchildModel') LIMIT 1[0m
+  [4;36;1mParentModel Load (0.000154)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 723 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;35;1mChildModel Load (0.000180)[0m   [0mSELECT * FROM child_models WHERE (child_models.`location` = 'Annapolis') LIMIT 1[0m
+  [4;36;1mGrandchildModel Load (0.000143)[0m   [0;1mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 385) [0m
+  [4;35;1mChildModel Load (0.000155)[0m   [0mSELECT * FROM child_models WHERE (child_models.child_model_descendant_id = 385 AND child_models.child_model_descendant_type = 'GrandchildModel') LIMIT 1[0m
+  [4;36;1mParentModel Load (0.000197)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 723 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;35;1mGrandchildModel Load (0.000182)[0m   [0mSELECT * FROM grandchild_models WHERE (grandchild_models.`color` = 'black') LIMIT 1[0m
+  [4;36;1mChildModel Load (0.000167)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.child_model_descendant_id = 385 AND child_models.child_model_descendant_type = 'GrandchildModel') LIMIT 1[0m
+  [4;35;1mParentModel Load (0.000155)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 723 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;36;1mParentModel Load (0.000187)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 822) [0m
+  [4;35;1mChildModel Load (0.000162)[0m   [0mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 723) [0m
+  [4;36;1mParentModel Load (0.000170)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 723 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;35;1mGrandchildModel Load (0.000158)[0m   [0mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 385) [0m
+  [4;36;1mChildModel Load (0.000166)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.child_model_descendant_id = 385 AND child_models.child_model_descendant_type = 'GrandchildModel') LIMIT 1[0m
+  [4;35;1mParentModel Load (0.000160)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 723 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;36;1mSQL (0.000062)[0m   [0;1mBEGIN[0m
+  [4;35;1mParentModel Destroy (0.000163)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 822
+[0m
+  [4;36;1mChildModel Destroy (0.000157)[0m   [0;1m DELETE FROM child_models
+ WHERE `child_model_id` = 723
+[0m
+  [4;35;1mGrandchildModel Destroy (0.000105)[0m   [0m DELETE FROM grandchild_models
+ WHERE `grandchild_model_id` = 385
+[0m
+  [4;36;1mSQL (0.000319)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000091)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000174)[0m   [0;1mINSERT INTO grandchild_models (`color`) VALUES('black')[0m
+  [4;35;1mSQL (0.000140)[0m   [0mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES('GrandchildModel', 386, 'Annapolis')[0m
+  [4;36;1mSQL (0.000132)[0m   [0;1mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Troy', 724, '2007-05-19 22:11:12', 'ChildModel', '2007-05-19 22:11:12')[0m
+  [4;35;1mChildModel Update (0.000157)[0m   [0mUPDATE child_models SET `location` = 'Annapolis', `child_model_descendant_id` = 386, `child_model_descendant_type` = 'GrandchildModel' WHERE `child_model_id` = 724[0m
+  [4;36;1mParentModel Update (0.000138)[0m   [0;1mUPDATE parent_models SET `created_at` = '2007-05-19 22:11:12', `parent_model_descendant_id` = 724, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:11:12', `name` = 'Troy' WHERE `parent_model_id` = 823[0m
+  [4;35;1mSQL (0.002038)[0m   [0mCOMMIT[0m
+  [4;36;1mChildModel Load (0.000180)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 724) [0m
+  [4;35;1mParentModel Load (0.000177)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.`name` = 'Troy') LIMIT 1[0m
+  [4;36;1mChildModel Load (0.000156)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 724) [0m
+  [4;35;1mChildModel Load (0.000183)[0m   [0mSELECT * FROM child_models WHERE (child_models.`location` = 'Annapolis') LIMIT 1[0m
+  [4;36;1mGrandchildModel Load (0.000159)[0m   [0;1mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 386) [0m
+  [4;35;1mGrandchildModel Load (0.000124)[0m   [0mSELECT * FROM grandchild_models WHERE (grandchild_models.`grandchild_model_id` = 386) [0m
+  [4;36;1mParentModel Load (0.000217)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 724 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;35;1mParentModel Load (0.000151)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 823) [0m
+  [4;36;1mChildModel Load (0.000150)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 724) [0m
+  [4;35;1mParentModel Load (0.000167)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 724 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;36;1mSQL (0.000063)[0m   [0;1mBEGIN[0m
+  [4;35;1mParentModel Destroy (0.000159)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 823
+[0m
+  [4;36;1mChildModel Destroy (0.000108)[0m   [0;1m DELETE FROM child_models
+ WHERE `child_model_id` = 724
+[0m
+  [4;35;1mGrandchildModel Destroy (0.000104)[0m   [0m DELETE FROM grandchild_models
+ WHERE `grandchild_model_id` = 386
+[0m
+  [4;36;1mSQL (0.000509)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000091)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000177)[0m   [0;1mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES(NULL, NULL, 'Manchester')[0m
+  [4;35;1mSQL (0.000132)[0m   [0mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Billy', 725, '2007-05-19 22:11:12', 'ChildModel', '2007-05-19 22:11:12')[0m
+  [4;36;1mParentModel Update (0.000168)[0m   [0;1mUPDATE parent_models SET `created_at` = '2007-05-19 22:11:12', `parent_model_descendant_id` = 725, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:11:12', `name` = 'Billy' WHERE `parent_model_id` = 824[0m
+  [4;35;1mSQL (0.001302)[0m   [0mCOMMIT[0m
+  [4;36;1mParentModel Load (0.000204)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.`name` = 'Billy') LIMIT 1[0m
+  [4;35;1mChildModel Load (0.000148)[0m   [0mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 725) [0m
+  [4;36;1mChildModel Load (0.000196)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.`location` = 'Manchester') LIMIT 1[0m
+  [4;35;1mParentModel Load (0.000178)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 824) [0m
+  [4;36;1mChildModel Load (0.000147)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 725) [0m
+  [4;35;1mParentModel Load (0.000179)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.parent_model_descendant_id = 725 AND parent_models.parent_model_descendant_type = 'ChildModel') LIMIT 1[0m
+  [4;36;1mSQL (0.000068)[0m   [0;1mBEGIN[0m
+  [4;35;1mParentModel Destroy (0.000167)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 824
+[0m
+  [4;36;1mChildModel Destroy (0.000105)[0m   [0;1m DELETE FROM child_models
+ WHERE `child_model_id` = 725
+[0m
+  [4;35;1mSQL (0.002458)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.000088)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.000177)[0m   [0mINSERT INTO child_models (`child_model_descendant_type`, `child_model_descendant_id`, `location`) VALUES(NULL, NULL, 'Manchester')[0m
+  [4;36;1mSQL (0.000136)[0m   [0;1mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Billy', 726, '2007-05-19 22:11:12', 'ChildModel', '2007-05-19 22:11:12')[0m
+  [4;35;1mParentModel Update (0.000167)[0m   [0mUPDATE parent_models SET `created_at` = '2007-05-19 22:11:12', `parent_model_descendant_id` = 726, `parent_model_descendant_type` = 'ChildModel', `updated_at` = '2007-05-19 22:11:12', `name` = 'Billy' WHERE `parent_model_id` = 825[0m
+  [4;36;1mSQL (0.001999)[0m   [0;1mCOMMIT[0m
+  [4;35;1mParentModel Load (0.000204)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 825) [0m
+  [4;36;1mParentModel Load (0.000173)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.`name` = 'Billy') LIMIT 1[0m
+  [4;35;1mChildModel Load (0.000185)[0m   [0mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 726) [0m
+  [4;36;1mChildModel Load (0.000142)[0m   [0;1mSELECT * FROM child_models WHERE (child_models.`child_model_id` = 726) [0m
+  [4;35;1mParentModel Load (0.000177)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 825) [0m
+  [4;36;1mSQL (0.000061)[0m   [0;1mBEGIN[0m
+  [4;35;1mParentModel Destroy (0.000264)[0m   [0m DELETE FROM parent_models
+ WHERE `parent_model_id` = 825
+[0m
+  [4;36;1mChildModel Destroy (0.000116)[0m   [0;1m DELETE FROM child_models
+ WHERE `child_model_id` = 726
+[0m
+  [4;35;1mSQL (0.000342)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.000117)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.000215)[0m   [0mINSERT INTO parent_models (`name`, `parent_model_descendant_id`, `updated_at`, `parent_model_descendant_type`, `created_at`) VALUES('Guy', NULL, '2007-05-19 22:11:12', NULL, '2007-05-19 22:11:12')[0m
+  [4;36;1mSQL (0.000332)[0m   [0;1mCOMMIT[0m
+  [4;35;1mParentModel Load (0.000221)[0m   [0mSELECT * FROM parent_models WHERE (parent_models.`name` = 'Guy') LIMIT 1[0m
+  [4;36;1mParentModel Load (0.000187)[0m   [0;1mSELECT * FROM parent_models WHERE (parent_models.`parent_model_id` = 826) [0m
+  [4;35;1mSQL (0.000070)[0m   [0mBEGIN[0m
+  [4;36;1mParentModel Destroy (0.000157)[0m   [0;1m DELETE FROM parent_models
+ WHERE `parent_model_id` = 826
+[0m
+  [4;35;1mSQL (0.000263)[0m   [0mCOMMIT[0m

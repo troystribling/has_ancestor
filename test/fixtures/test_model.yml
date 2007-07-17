@@ -1,0 +1,46 @@
+GRANDCHILD_MODEL:
+  parent_model_attr: Troy
+  child_model_attr: Annapolis
+  grandchild_model_attr: black
+
+GRANDCHILD_ANCESTOR_MODEL:
+  parent_model_attr: Troy
+  child_model_attr: Annapolis
+
+GRANDCHILD_ANCESTOR_ANCESTOR_MODEL:
+  parent_model_attr: Troy
+
+GRANDCHILD_MODEL_FIND_ALL_PARENT:
+  parent_model_attr: Vanessa
+  child_model_attr: Annapolis
+  grandchild_model_attr: black
+
+GRANDCHILD_MODEL_FIND_ALL_CHILD:
+  parent_model_attr: Troy
+  child_model_attr: Nashville
+  grandchild_model_attr: black
+
+GRANDCHILD_MODEL_FIND_ALL_GRANDCHILD:
+  parent_model_attr: Troy
+  child_model_attr: Annapolis
+  grandchild_model_attr: grey
+  
+CHILD_MODEL:
+  parent_model_attr: Billy
+  child_model_attr: Manchester
+
+CHILD_MODEL_FIND_ALL_PARENT:
+  parent_model_attr: Katie
+  child_model_attr: Manchester
+
+CHILD_MODEL_FIND_ALL_CHILD:
+  parent_model_attr: Billy
+  child_model_attr: Nashville
+
+CHILD_ANCESTOR_MODEL:
+  parent_model_attr: Billy
+    
+PARENT_MODEL:
+  parent_model_attr: Guy
+
+     
