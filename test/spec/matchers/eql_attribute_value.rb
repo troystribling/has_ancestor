@@ -3,7 +3,7 @@
 module PlanB
   module SpecMatchers    
 
-      class HaveAttributeValue  #:nodoc:
+      class EqlAttributeValue  #:nodoc:
     
         def initialize(*exp)
           @mod_attr = exp[0]
@@ -30,13 +30,13 @@ module PlanB
         end
   
         def description
-          "match model attributes"
+          "eql attribute values"
         end
   
       end
     
-      def have_attribute_value(*exp)
-        HaveAttributeValue.new(*exp)
+      def eql_attribute_value(*exp)
+        EqlAttributeValue.new(*exp)
       end
    
   end

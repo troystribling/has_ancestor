@@ -20,7 +20,7 @@ describe "delegation of instance method call for a model that has descendants an
 
   before(:all) do
     @c = ChildModel.new(model_data['CHILD_MODEL'])
-    @c.save!
+    @c.save
     @p = ParentModel.find(@c.parent_model_id)
   end
 
@@ -43,7 +43,7 @@ describe "delegation of instance method call for a model that has no descendants
 
   before(:all) do
     @c = ChildModel.new(model_data['CHILD_MODEL'])
-    @c.save!
+    @c.save
     @p = ParentModel.find(@c.parent_model_id)
   end
 
@@ -66,7 +66,7 @@ describe "delegation of instance method call for a model that has descendants an
 
   before(:all) do
     @g = GrandchildModel.new(model_data['GRANDCHILD_MODEL'])
-    @g.save!
+    @g.save
     @c = ChildModel.find(@g.child_model_id)
   end
 
@@ -93,7 +93,7 @@ describe "delegation of instance method call that delgates calls to its ancestor
 
   before(:all) do
     @g = GrandchildModel.new(model_data['GRANDCHILD_MODEL'])
-    @g.save!
+    @g.save
     @c = ChildModel.find(@g.child_model_id)
     @p = ParentModel.find(@c.parent_model_id)
   end
@@ -119,7 +119,7 @@ describe "delgated instance method call with an implementations that takes argum
 
   before(:all) do
     @g = GrandchildModel.new(model_data['GRANDCHILD_MODEL'])
-    @g.save!
+    @g.save
     @c = ChildModel.find(@g.child_model_id)
   end
 

@@ -18,7 +18,7 @@ describe "call of a polymorphic method from a model instance that has descendant
 
   before(:all) do
     @c = ChildModel.new(model_data['CHILD_MODEL'])
-    @c.save!
+    @c.save
     @p = ParentModel.find(@c.parent_model_id)
   end
 
@@ -41,7 +41,7 @@ describe "call of a polymorphic method from a model instance that has no descend
 
   before(:all) do
     @c = ChildModel.new(model_data['CHILD_MODEL'])
-    @c.save!
+    @c.save
     @p = ParentModel.find(@c.parent_model_id)
   end
 
@@ -64,7 +64,7 @@ describe "call of a polymorphic method from a model instance that has descendant
 
   before(:all) do
     @g = GrandchildModel.new(model_data['GRANDCHILD_MODEL'])
-    @g.save!
+    @g.save
     @c = ChildModel.find(@g.child_model_id)
     @p = ParentModel.find(@c.parent_model_id)
   end
@@ -92,7 +92,7 @@ describe "call of a polymorphic method, from a model instance that has descendan
 
   before(:all) do
     @g = GrandchildModel.new(model_data['GRANDCHILD_MODEL'])
-    @g.save!
+    @g.save
     @c = ChildModel.find(@g.child_model_id)
     @p = ParentModel.find(@c.parent_model_id)
   end
@@ -113,7 +113,7 @@ describe "call of a polymorphic method from a model instance with an implementat
 
   before(:all) do
     @g = GrandchildModel.new(model_data['GRANDCHILD_MODEL'])
-    @g.save!
+    @g.save
     @c = ChildModel.find(@g.child_model_id)
     @p = ParentModel.find(@g.parent_model_id)
   end

@@ -5,7 +5,7 @@ describe "discovery of descendant model from model instance" do
 
   before(:all) do
     @c = ChildModel.new(model_data['CHILD_MODEL'])
-    @c.save!
+    @c.save
   end
 
   after(:all) do
@@ -31,7 +31,7 @@ describe "discovery of ancestor model from model instance" do
 
   before(:all) do
     @c = ChildModel.new(model_data['CHILD_MODEL'])
-    @c.save!
+    @c.save
   end
 
   after(:all) do

@@ -10,7 +10,8 @@ has_ancestor and has_descendant.
 test/spec/specs contains rspec examples which implement the 
 models in test/fixtures.
 
-to run specs type the following in the installation directory
+to run specs configure test/rails_root/config/database.yml and type the following in the 
+installation directory
 
 rake spec
 

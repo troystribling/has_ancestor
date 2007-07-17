@@ -80,7 +80,7 @@ describe "retrieval of all attributes for a model that has descendants" do
 
   before(:all) do
     @c = ChildModel.new(model_data['CHILD_MODEL'])
-    @c.save!
+    @c.save
     @p = ParentModel.find(@c.parent_model_id)
   end
 
@@ -89,11 +89,11 @@ describe "retrieval of all attributes for a model that has descendants" do
   end
 
   it "should be able to retrive attributes from model instance" do
-    @p.attributes.should have_model_attributes(model_data['CHILD_ANCESTOR_MODEL'])
+    @p.attributes.should eql_attributes(model_data['CHILD_ANCESTOR_MODEL'])
   end
 
   it "should be able to retrive model attributes and descendant attributes from model instance" do
-    @p.to_descendant.attributes.should have_model_attributes(model_data['CHILD_MODEL'])
+    @p.to_descendant.attributes.should eql_attributes(model_data['CHILD_MODEL'])
   end
 
 end
@@ -103,7 +103,7 @@ describe "retrieval of all attributes for a model that has descendants and has a
 
   before(:all) do
     @g = GrandchildModel.new(model_data['GRANDCHILD_MODEL'])
-    @g.save!
+    @g.save
     @c = ChildModel.find(@g.child_model_id)
   end
 
@@ -112,11 +112,11 @@ describe "retrieval of all attributes for a model that has descendants and has a
   end
 
   it "should be able to retrive model attributes and ancestor attributes from model instance" do
-    @c.attributes.should have_model_attributes(model_data['GRANDCHILD_ANCESTOR_MODEL'])
+    @c.attributes.should eql_attributes(model_data['GRANDCHILD_ANCESTOR_MODEL'])
   end
 
   it "should be able to retrive model attributes, ancestor attributes and descendant from model instance" do
-    @c.to_descendant.attributes.should have_model_attributes(model_data['GRANDCHILD_MODEL'])
+    @c.to_descendant.attributes.should eql_attributes(model_data['GRANDCHILD_MODEL'])
   end
 
 end
@@ -126,7 +126,7 @@ describe "retrieval of all attributes for a model that has an ancestor and is a 
 
   before(:all) do
     @g = GrandchildModel.new(model_data['GRANDCHILD_MODEL'])
-    @g.save!
+    @g.save
     @c = ChildModel.find(@g.child_model_id)
     @p = ParentModel.find(@g.parent_model_id)
   end
@@ -137,15 +137,15 @@ describe "retrieval of all attributes for a model that has an ancestor and is a 
 
 
   it "should be able to retrive model attributes, ancestor attributes and ancestor's ancestor attributes from model instance" do
-    @g.attributes.should have_model_attributes(model_data['GRANDCHILD_MODEL'])
+    @g.attributes.should eql_attributes(model_data['GRANDCHILD_MODEL'])
   end
 
   it "should be able to retrive model attributes, ancestor attributes and ancestor's ancestor attributes from ancestor model instance" do
-    @c.to_descendant.attributes.should have_model_attributes(model_data['GRANDCHILD_MODEL'])
+    @c.to_descendant.attributes.should eql_attributes(model_data['GRANDCHILD_MODEL'])
   end
 
   it "should be able to retrive model attributes, ancestor attributes and ancestor's ancestor attributes from ancestor's ancestor model instance" do
-    @p.to_descendant.attributes.should have_model_attributes(model_data['GRANDCHILD_MODEL'])
+    @p.to_descendant.attributes.should eql_attributes(model_data['GRANDCHILD_MODEL'])
   end
 
 end

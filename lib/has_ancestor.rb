@@ -140,6 +140,11 @@ module PlanB
               def attributes
                 super.merge(get_#{parent}.attributes)
               end
+
+              def update
+                super
+                get_#{parent}.update
+              end
     
               def method_missing(meth, *args, &blk)  
                 begin
