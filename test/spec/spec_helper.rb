@@ -21,7 +21,7 @@ class Spec::DSL::Behaviour
   end
 end
 
-##############################################################################################
+############################################################################################
 #### global configuration data
 Spec::Runner.configure do |config|
   config.use_transactional_fixtures = true
