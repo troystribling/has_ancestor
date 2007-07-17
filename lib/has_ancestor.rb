@@ -11,15 +11,15 @@ module PlanB
     ####################################################
     module Ancestor 
 
-      ####################################################
+      ###################################################
       def self.included(base) #:nodoc
         base.extend(ClassMethods)  
       end
   
-      ####################################################
+      ###################################################
       module ClassMethods
   
-        ####################################################
+        #################################################
         # Declare a model has descendants
         def has_descendants
           self.primary_key = "#{self.name.tableize.singularize}_id"
@@ -28,7 +28,7 @@ module PlanB
           InstanceMethods::AncestorMethods.add_methods(self)
         end
         
-        ####################################################
+        ##################################################
         # Declare a model ancestor
         def has_ancestor(args) 
           self.primary_key = "#{self.name.tableize.singularize}_id"
