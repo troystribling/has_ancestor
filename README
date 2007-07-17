@@ -1,13 +1,13 @@
 has_ancestor
 =================
 
-install and use
+install and use, see
 http://research.inplanb.com/has_ancestor
 
-see test/fixtures for examples of models which implement 
+test/fixtures contains examples of models which implement 
 has_ancestor and has_descendant.
 
-see test/spec/specs for rspec examples which implement the 
+test/spec/specs contains rspec examples which implement the 
 models in test/fixtures.
 
 to run specs type the following in the installation directory
