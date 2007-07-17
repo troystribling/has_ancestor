@@ -22,7 +22,7 @@ end
 desc "Generate HTML report for all has_ancestor examples"
 Spec::Rake::SpecTask.new(:spec_report) do |t|
   t.spec_files = FileList['test/spec/specs/**/*_spec.rb']
-  t.spec_opts = ['--format', 'html:has_ancestor.html', '--diff']
+  t.spec_opts = ['--format', 'html:has_ancestor_spec_report.html', '--diff']
   t.fail_on_error = false
 end
 
