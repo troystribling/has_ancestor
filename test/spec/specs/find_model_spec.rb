@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
-#########################TEST###########################################################################
+####################################################################################################
 describe "database queries for a model where model does not have an ancestor and does not have descendants" do
 
   before(:all) do
