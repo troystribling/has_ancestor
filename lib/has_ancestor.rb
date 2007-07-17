@@ -20,7 +20,7 @@ module PlanB
       module ClassMethods
   
         ####################################################
-        # Declare a model has descendants.
+        # Declare a model has descendants
         def has_descendants
           self.primary_key = "#{self.name.tableize.singularize}_id"
           eval("belongs_to :#{self.name.tableize.singularize}_descendant, :polymorphic => true")
@@ -29,7 +29,7 @@ module PlanB
         end
         
         ####################################################
-        # Declare a model ancestor.
+        # Declare a model ancestor
         def has_ancestor(args) 
           self.primary_key = "#{self.name.tableize.singularize}_id"
           eval("has_one args[:named], :as => :#{args[:named]}_descendant, :dependent => :destroy")
