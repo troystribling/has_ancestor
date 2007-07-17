@@ -96,11 +96,6 @@ module PlanB
              end
           end
 
-          def update
-            super
-            ancestor.update unless ancestor.nil?
-          end
-
         end
         
         ####################################################
@@ -144,6 +139,11 @@ module PlanB
            
               def attributes
                 super.merge(get_#{parent}.attributes)
+              end
+
+              def update
+                super
+                get_#{parent}.update
               end
     
               def method_missing(meth, *args, &blk)  
