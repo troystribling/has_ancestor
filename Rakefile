@@ -4,18 +4,33 @@ require 'rake/rdoctask'
 require 'test/rails_root/vendor/plugins/00_rspec/lib/spec/rake/spectask'
 
 desc 'Default: run unit tests.'
-task :default => :test
+task :default => :spec
 
-desc "Run has_ancestor plugin specs"
+desc "Run all has_ancestor plugin specs"
 Spec::Rake::SpecTask.new(:spec) do |t|
   t.spec_files = FileList['test/spec/specs/**/*_spec.rb']
   t.spec_opts = ['--options', 'test/spec/spec.opts']
 end
 
-desc "Generate HTML report for has_ancestor examples"
+desc "Run specified has_ancestor plugin spec"
+Spec::Rake::SpecTask.new(:spec_file) do |t|
+  file = ENV["FILE"] || ''
+  t.spec_files = ["test/spec/specs/**/#{file}.rb"]
+  t.spec_opts = ['--options', 'test/spec/spec.opts']
+end
+
+desc "Generate HTML report for all has_ancestor examples"
 Spec::Rake::SpecTask.new(:spec_report) do |t|
   t.spec_files = FileList['test/spec/specs/**/*_spec.rb']
-  t.spec_opts = ["--format", "html:has_ancestor.html", "--diff"]
+  t.spec_opts = ['--format', 'html:has_ancestor.html', '--diff']
+  t.fail_on_error = false
+end
+
+desc "Generate HTML report for specified example"
+Spec::Rake::SpecTask.new(:spec_report_file) do |t|
+  file = ENV["FILE"] || ''
+  t.spec_files = ["test/spec/specs/**/#{file}.rb"]
+  t.spec_opts = ['--format', "html:#{file}.html", '--diff']
   t.fail_on_error = false
 end
 
