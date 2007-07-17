@@ -9,26 +9,26 @@ class ParentModel < ActiveRecord::Base
    #### test instance method implementation 
    ###############################################################
    def method_on_parent_model
-     parent_model_attr
+     self.parent_model_attr
    end
    
    def method_on_child_model
-     parent_model_attr
+     self.parent_model_attr
    end
    
    def method_on_descendant_child_model
-     parent_model_attr
+     self.parent_model_attr
    end
 
    def method_on_descendant_grandchild_model
-     parent_model_attr
+     self.parent_model_attr
    end
 
    ###############################################################
    #### test instance method implementations that require agruments 
    ###############################################################
    def method_with_non_block_arguments(args)
-     "#{parent_model_attr}:#{args[:argument]}"
+     "#{self.parent_model_attr}:#{args[:argument]}"
    end
 
    def method_with_block_argument     
@@ -43,7 +43,7 @@ class ParentModel < ActiveRecord::Base
    #### test instance method delegation to ancestor
    ###############################################################
    def method_delegation_to_ancestor
-     parent_model_attr
+     self.parent_model_attr
    end
 
    ###############################################################

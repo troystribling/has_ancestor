@@ -6,13 +6,6 @@ require 'test/rails_root/vendor/plugins/00_rspec/lib/spec/rake/spectask'
 desc 'Default: run unit tests.'
 task :default => :test
 
-desc 'Test the has_ancestor plugin.'
-Rake::TestTask.new(:test) do |t|
-  t.libs << 'lib'
-  t.pattern = 'test/unit/**/*_test.rb'
-  t.verbose = true
-end
-
 desc "Run has_ancestor plugin specs"
 Spec::Rake::SpecTask.new(:spec) do |t|
   t.spec_files = FileList['test/spec/specs/**/*_spec.rb']
@@ -29,8 +22,9 @@ end
 desc 'Generate documentation for the has_ancestor plugin.'
 Rake::RDocTask.new(:rdoc) do |rdoc|
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title    = 'HasAncestor'
+  rdoc.title    = 'has_ancestor'
   rdoc.options << '--line-numbers' << '--inline-source'
+  rdoc.rdoc_files.include('MIT-LICENSE')
   rdoc.rdoc_files.include('README')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end

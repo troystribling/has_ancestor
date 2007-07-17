@@ -1,19 +1,26 @@
-
-module PlanB #:nodoc
-
+####################################################
+module PlanB 
+  
+  ####################################################
+  # invalid attribute type specified
   class InvalidType < ArgumentError; end  
 
-  module Has #:nodoc
-    module Ancestor #:nodoc
+  ####################################################
+  module Has 
+
+    ####################################################
+    module Ancestor 
 
       ####################################################
-      def self.included(base)
+      def self.included(base) #:nodoc
         base.extend(ClassMethods)  
       end
   
       ####################################################
       module ClassMethods
   
+        ####################################################
+        # Declare a model has descendants.
         def has_descendants
           self.primary_key = "#{self.name.tableize.singularize}_id"
           eval("belongs_to :#{self.name.tableize.singularize}_descendant, :polymorphic => true")
@@ -21,6 +28,8 @@ module PlanB #:nodoc
           InstanceMethods::AncestorMethods.add_methods(self)
         end
         
+        ####################################################
+        # Declare a model ancestor.
         def has_ancestor(args) 
           self.primary_key = "#{self.name.tableize.singularize}_id"
           eval("has_one args[:named], :as => :#{args[:named]}_descendant, :dependent => :destroy")
@@ -34,36 +43,50 @@ module PlanB #:nodoc
       module InstanceMethods
 
         ####################################################
-        module AncestorAndDescendantMethods
+        module AncestorAndDescendantMethods 
     
-          def to_descendant(arg = nil)
-            if arg.nil?
-              if descendant.nil?
-                self
-              else
-                descendant.to_descendant
-              end
-            else  
-              if self.class.name.eql?(arg.to_s.classify)
-                self
-              else
+          ####################################################
+          # Return descendant model if specified and throw 
+          # Planb::InvalidType if model is not a descendant. 
+          # If model is not specified return model at root of 
+          # inheritance hierarchy.
+           def to_descendant(arg = nil)
+              if arg.nil?
                 if descendant.nil?
-                  raise(PlanB::InvalidType, "target model is invalid")
+                  self
                 else
-                  descendant.to_descendant(arg)
+                  descendant.to_descendant
+                end
+              else  
+                if self.class.name.eql?(arg.to_s.classify)
+                  self
+                else
+                  if descendant.nil?
+                    raise(PlanB::InvalidType, "target model is invalid")
+                  else
+                    descendant.to_descendant(arg)
+                  end
                 end
               end
             end
-          end
   
+          ####################################################
+          # Returns true if specified model is a descendant 
+          # of model and false if not.
           def descendant
             respond_to?(:get_descendant) ? get_descendant : nil
           end
   
+          ####################################################
+          # Return descendant model instance. If model has no 
+          # descendant return nil.
           def ancestor
             respond_to?(:get_ancestor) ? get_ancestor : nil
           end
   
+          ####################################################
+          # Returns true if specified model is a descendant of 
+          # model and false if not.
           def descendant_of?(ancestor_model)
             unless ancestor.nil?
               ancestor.class.name.eql?(ancestor_model.to_s.classify) ? \
@@ -76,7 +99,7 @@ module PlanB #:nodoc
         end
         
         ####################################################
-        module AncestorMethods
+        module AncestorMethods #:nodoc :all
     
           def self.add_methods(target)
     
@@ -93,7 +116,7 @@ module PlanB #:nodoc
         end
   
         ####################################################
-        module DescendantMethods
+        module DescendantMethods #:nodoc :all
     
           def self.add_methods(target, parent)
     
@@ -143,7 +166,7 @@ module PlanB #:nodoc
       end
   
       ####################################################
-      module SingletonMethods
+      module SingletonMethods #:nodoc :all
       end
                 
     end

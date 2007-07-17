@@ -9,7 +9,7 @@ class GrandchildModel < ActiveRecord::Base
    #### test method implementation 
    ###############################################################
    def method_on_descendant_grandchild_model
-     grandchild_model_attr
+     self.grandchild_model_attr
    end
 
    ###############################################################
@@ -23,7 +23,7 @@ class GrandchildModel < ActiveRecord::Base
    #### test method implementations that require agruments 
    ###############################################################
    def method_with_non_block_arguments(args)
-     "#{grandchild_model_attr}:#{args[:argument]}"
+     "#{self.grandchild_model_attr}:#{args[:argument]}"
    end
 
    def method_with_block_argument

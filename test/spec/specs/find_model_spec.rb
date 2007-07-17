@@ -37,11 +37,11 @@ describe "database queries for a model where model has descendants and does not 
   end
 
   it "should find model by specification of model primary key" do
-    ParentModel.find(@p.id).should == @p
+    ParentModel.find(@p.id).should eql(@p)
   end
 
   it "should find descendant model by specification of descendant model primary key" do
-    ChildModel.find(@p.descendant.id).should == @c
+    ChildModel.find(@p.descendant.id).should eql(@c)
   end
 
   it "should find model by specification of model attribute" do

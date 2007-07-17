@@ -27,6 +27,5 @@ Spec::Runner.configure do |config|
   config.use_transactional_fixtures = true
   config.use_instantiated_fixtures  = false
   config.fixture_path = File.dirname(__FILE__) + "/../fixtures/"
-  config.global_fixtures = :parent_model, :child_model, :grandchild_model
   config.model_data = File.open(File.dirname(__FILE__) + '/../fixtures/test_model.yml') {|yf| YAML::load(yf)}
 end

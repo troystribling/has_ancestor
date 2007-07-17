@@ -43,4 +43,19 @@ CHILD_ANCESTOR_MODEL:
 PARENT_MODEL:
   parent_model_attr: Guy
 
+ITEM_PURCHASE:
+  item: keyboard
+  unit_cost: 500
+  unit_count: 1
+
+STOCK_ITEM_PURCHASE:
+  item: paper
+  unit_cost: 5
+  unit_count: 100
+
+CONTRACT_ITEM_PURCHASE:
+  item: human
+  unit_cost: 75
+  unit_count: 2
+  length: 50
      
