@@ -1,0 +1,20 @@
+has_ancestor
+=================
+
+install and use
+http://research.inplanb.com/has_ancestor
+
+see test/fixtures for examples of models which implement 
+has_ancestor and has_descendant.
+
+see test/spec/specs for rspec examples which implement the 
+models in test/fixtures.
+
+to run specs type the following in the installation directory
+
+rake spec
+
+to generate html spec report type the following in the 
+installation directory
+
+rake spec_report
