@@ -8,7 +8,7 @@ silence_warnings { RAILS_ENV = ENV['RAILS_ENV'] }
 ActiveRecord::Migrator.migrate("#{RAILS_ROOT}/db/migrate")
 
 ############################################################################################
-# customization
+# customize
 require File.dirname(__FILE__) + '/spec_custom_matchers'
 require File.dirname(__FILE__) + '/spec_extensions'
 

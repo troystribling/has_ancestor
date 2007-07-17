@@ -17,14 +17,14 @@ module PlanB #:nodoc
         def has_descendants
           self.primary_key = "#{self.name.tableize.singularize}_id"
           eval("belongs_to :#{self.name.tableize.singularize}_descendant, :polymorphic => true")
-          InstanceMethods::AncestorAndDescendantMethods.add_methods(self)
+          include InstanceMethods::AncestorAndDescendantMethods
           InstanceMethods::AncestorMethods.add_methods(self)
         end
         
         def has_ancestor(args) 
           self.primary_key = "#{self.name.tableize.singularize}_id"
           eval("has_one args[:named], :as => :#{args[:named]}_descendant, :dependent => :destroy")
-          InstanceMethods::AncestorAndDescendantMethods.add_methods(self)
+          include InstanceMethods::AncestorAndDescendantMethods
           InstanceMethods::DescendantMethods.add_methods(self, args[:named])
         end       
                                 
@@ -36,51 +36,43 @@ module PlanB #:nodoc
         ####################################################
         module AncestorAndDescendantMethods
     
-          def self.add_methods(target)
-    
-            target.class_eval <<-do_eval
-
-              def to_descendant(arg = nil)
-                if arg.nil?
-                  if descendant.nil?
-                    self
-                  else
-                    descendant.to_descendant
-                  end
-                else  
-                  if self.class.name.eql?(arg.to_s.classify)
-                    self
-                  else
-                    if descendant.nil?
-                      raise(PlanB::InvalidType, "target model is invalid")
-                    else
-                      descendant.to_descendant(arg)
-                    end
-                  end
-                end
+          def to_descendant(arg = nil)
+            if arg.nil?
+              if descendant.nil?
+                self
+              else
+                descendant.to_descendant
               end
-
-              def descendant
-                respond_to?(:get_descendant) ? get_descendant : nil
-              end
-
-              def ancestor
-                respond_to?(:get_ancestor) ? get_ancestor : nil
-              end
-
-              def descendant_of?(ancestor_model)
-                unless ancestor.nil?
-                  ancestor.class.name.eql?(ancestor_model.to_s.classify) ? \
-                    true : ancestor.descendant_of?(ancestor_model)
+            else  
+              if self.class.name.eql?(arg.to_s.classify)
+                self
+              else
+                if descendant.nil?
+                  raise(PlanB::InvalidType, "target model is invalid")
                 else
-                  raise(PlanB::InvalidType, "ancestor model is invalid")
+                  descendant.to_descendant(arg)
                 end
               end
+            end
+          end
+  
+          def descendant
+            respond_to?(:get_descendant) ? get_descendant : nil
+          end
+  
+          def ancestor
+            respond_to?(:get_ancestor) ? get_ancestor : nil
+          end
+  
+          def descendant_of?(ancestor_model)
+            unless ancestor.nil?
+              ancestor.class.name.eql?(ancestor_model.to_s.classify) ? \
+                true : ancestor.descendant_of?(ancestor_model)
+             else
+               false
+             end
+          end
 
-            do_eval
-    
-          end  
-                   
         end
         
         ####################################################

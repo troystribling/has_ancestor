@@ -64,11 +64,11 @@ describe "validation from model instance of model ancestor" do
   end
 
   it "should raise exception if model specified is not an ancestor" do
-    lambda {@g.descendant_of?(:this_will_fail)}.should raise_error(PlanB::InvalidType)
+    @g.should_not be_descendant_of(:this_will_fail)
   end
   
   it "should raise exception if model has no ancestor" do
-    lambda {ParentModel.new(model_data['PARENT_MODEL']).descendant_of?(:this_will_fail)}.should raise_error(PlanB::InvalidType)
+    ParentModel.new(model_data['PARENT_MODEL']).should_not be_descendant_of(:this_will_fail)
   end
   
 end
@@ -80,9 +80,4 @@ describe "discovery from model instance of model inheritance hierarchy" do
     GrandchildModel.new(model_data['GRANDCHILD_MODEL']).ancestor.class.name.should be_eql('ChildModel')
   end
   
-end
-
-
-########################################################################################################
-describe "accesses to descendant classes of model that has descendants from model class" do
 end
