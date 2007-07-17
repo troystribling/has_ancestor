@@ -162,3 +162,34 @@ describe "closing item purchases from an ancestor model" do
   end
 
 end
+
+################################################################################################
+describe "has_ancestor limitations" do
+
+  before(:all) do
+    @stock_item = StockItemPurchase.new(model_data['STOCK_ITEM_PURCHASE'])
+    @stock_item.save
+    @contract_item = ContractItemPurchase.new(model_data['CONTRACT_ITEM_PURCHASE'])
+    @contract_item.save
+  end
+
+  after(:all) do 
+    @stock_item.destroy
+    @contract_item.destroy
+  end
+  
+  it "should be able to perform query filtering multiple attributes on a single model" do
+    ItemPurchase.find_all_by_unit_cost_and_item(model_data['STOCK_ITEM_PURCHASE']['unit_cost'],
+      model_data['STOCK_ITEM_PURCHASE']['item']).first.id.should eql(@stock_item.ancestor.id)
+  end
+
+  it "should not be able to perform query filtering multiple attributes on different models" do
+    lambda{ItemPurchase.find_all_by_unit_cost_and_length(model_data['CONTRACT_ITEM_PURCHASE']['unit_cost'],
+      model_data['CONTRACT_ITEM_PURCHASE']['length'])}.should raise_error(NoMethodError)
+  end
+
+  it "should return wrong model type when query from descendant matches ancestor atrtribute of some other descendant" do
+    ContractItemPurchase.find_by_unit_cost(model_data['STOCK_ITEM_PURCHASE']['unit_cost']).id.should eql(@stock_item.ancestor.id)
+  end
+
+end
