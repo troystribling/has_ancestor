@@ -5,7 +5,7 @@ describe "retrieval of descendant model from ancestor model instance when descen
 
   before(:all) do
     @c = ChildModel.new(model_data['CHILD_MODEL'])
-    @c.save!
+    @c.save
     @p = ParentModel.find(@c.parent_model_id)
   end
 
@@ -28,7 +28,7 @@ describe "retrieval of descendant model from its own instance when model has no 
 
   before(:all) do
     @p = ParentModel.new(model_data['PARENT_MODEL'])
-    @p.save!
+    @p.save
   end
 
   after(:all) do
@@ -51,7 +51,7 @@ describe "retrieval of descendant model from own instance  when descendant is le
 
   before(:all) do
     @c = ChildModel.new(model_data['CHILD_MODEL'])
-    @c.save!
+    @c.save
   end
 
   after(:all) do
@@ -73,7 +73,7 @@ describe "retrieval of descendant model from own instance when descendant is not
 
   before(:all) do
     @g = GrandchildModel.new(model_data['GRANDCHILD_MODEL'])
-    @g.save!
+    @g.save
     @c = ChildModel.find(@g.child_model_id)
   end
 
@@ -93,7 +93,7 @@ describe "retrieval of descendant model from ancestor's ancestor model instance 
 
   before(:all) do
     @g = GrandchildModel.new(model_data['GRANDCHILD_MODEL'])
-    @g.save!
+    @g.save
     @c = ChildModel.find(@g.child_model_id)
     @p = ParentModel.find(@c.parent_model_id)
   end
@@ -121,7 +121,7 @@ describe "error conditions resulting from retrieval of descendant model from anc
 
   before(:all) do
     @g = GrandchildModel.new(model_data['GRANDCHILD_MODEL'])
-    @g.save!
+    @g.save
     @c = ChildModel.find(@g.child_model_id)
     @p = ParentModel.find(@c.parent_model_id)
   end

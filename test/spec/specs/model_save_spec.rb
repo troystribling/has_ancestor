@@ -5,7 +5,7 @@ describe "save model to database that has no descendants and has no ancestor" do
 
   before(:all) do
     @p = ParentModel.new(model_data['PARENT_MODEL'])
-    @p.save!
+    @p.save
   end
 
   after(:all) do
@@ -23,7 +23,7 @@ describe "save model to database that has no descendants but has ancestor" do
 
   before(:all) do
     @c = ChildModel.new(model_data['CHILD_MODEL'])
-    @c.save!
+    @c.save
   end
 
   after(:all) do
@@ -45,7 +45,7 @@ describe "save model to database that has no descendants and has an ancestor tha
 
   before(:all) do
     @g = GrandchildModel.new(model_data['GRANDCHILD_MODEL'])
-    @g.save!
+    @g.save
   end
 
   after(:all) do
@@ -71,7 +71,7 @@ describe "callback executed before database save of any model instance in an inh
 
   it "should execute callback implemented on model with no ancestor or descendant" do
     p = ParentModel.new(model_data['PARENT_MODEL'])
-    p.save!
+    p.save
     p.parent_model_save.should be_true 
     p.destroy
   end
@@ -81,7 +81,7 @@ describe "callback executed before database save of any model instance in an inh
     c.save
     p = ParentModel.find(c.parent_model_id)
     p.parent_model_save.should be_nil 
-    p.save!
+    p.save
     p.parent_model_save.should be_true 
     c.destroy
   end
@@ -89,17 +89,17 @@ describe "callback executed before database save of any model instance in an inh
   it "should execute callback implemented on model that has descendants but no ancestor on descendant model save" do
     c = ChildModel.new(model_data['CHILD_MODEL'])
     c.parent_model_save.should be_nil 
-    c.save!
+    c.save
     c.parent_model_save.should be_true 
     c.destroy
   end
 
   it "should execute callback implemented on model that has ancestor and has descendants on model save" do
     g = GrandchildModel.new(model_data['GRANDCHILD_MODEL'])
-    g.save!
+    g.save
     c = ChildModel.find(g.child_model_id)
     c.child_model_save.should be_nil 
-    c.save!
+    c.save
     c.child_model_save.should be_true 
     g.destroy
   end
@@ -107,7 +107,7 @@ describe "callback executed before database save of any model instance in an inh
   it "should execute callback implemented on model that has ancestor and has descendants on descendant model save" do
     g = GrandchildModel.new(model_data['CHILD_MODEL'])
     g.child_model_save.should be_nil 
-    g.save!
+    g.save
     g.child_model_save.should be_true 
     g.destroy
   end
@@ -115,7 +115,7 @@ describe "callback executed before database save of any model instance in an inh
   it "should execute callback implemented on model that has descendants that have descendants when decsendant's descendant is saved" do
     g = GrandchildModel.new(model_data['CHILD_MODEL'])
     g.parent_model_save.should be_nil 
-    g.save!
+    g.save
     g.parent_model_save.should be_true 
     g.destroy
   end
@@ -127,10 +127,10 @@ describe "conditions under which not all models in inheritance hierarchy are sav
 
   it "if a model has descendants a descendant will not be saved if the model is saved" do
     c = ChildModel.new(model_data['CHILD_MODEL'])
-    c.save!
+    c.save
     p = ParentModel.find(c.parent_model_id)
     p.descendant.child_model_save.should be_nil 
-    p.save!
+    p.save
     p.descendant.child_model_save.should be_nil 
     c.destroy
   end

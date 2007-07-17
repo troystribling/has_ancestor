@@ -5,7 +5,7 @@ describe "deletion from database of model with no ancestor and no descendants" d
 
   before(:all) do
     @p = ParentModel.new(model_data['PARENT_MODEL'])
-    @p.save!
+    @p.save
     ParentModel.delete(@p.id)
   end
 
@@ -20,7 +20,7 @@ describe "deletion from database of model that has descendants and no ancestor" 
 
   before(:all) do
     @c = ChildModel.new(model_data['CHILD_MODEL'])
-    @c.save!
+    @c.save
     @p = ParentModel.find(@c.parent_model_id)
     @p.destroy
   end
@@ -44,7 +44,7 @@ describe "deletion from database of model that has an ancestor and no descendant
 
   before(:all) do
     @c = ChildModel.new(model_data['CHILD_MODEL'])
-    @c.save!
+    @c.save
     @p = ParentModel.find(@c.parent_model_id)
     @c.destroy
   end
@@ -64,7 +64,7 @@ describe "deletion from database of model that has descendants and has an ancest
 
   before(:all) do
     @g = GrandchildModel.new(model_data['GRANDCHILD_MODEL'])
-    @g.save!
+    @g.save
     @c = ChildModel.find(@g.child_model_id)
     @p = ParentModel.find(@c.parent_model_id)
     @c.destroy
@@ -93,7 +93,7 @@ describe "deletion from database of model that has no descendants and has an anc
 
   before(:all) do
     @g = GrandchildModel.new(model_data['GRANDCHILD_MODEL'])
-    @g.save!
+    @g.save
     @c = ChildModel.find(@g.child_model_id)
     @p = ParentModel.find(@c.parent_model_id)
     @g.destroy

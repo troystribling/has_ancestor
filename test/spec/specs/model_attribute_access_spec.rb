@@ -80,7 +80,7 @@ describe "retrieval of all attributes for a model that has descendants" do
 
   before(:all) do
     @c = ChildModel.new(model_data['CHILD_MODEL'])
-    @c.save!
+    @c.save
     @p = ParentModel.find(@c.parent_model_id)
   end
 
@@ -103,7 +103,7 @@ describe "retrieval of all attributes for a model that has descendants and has a
 
   before(:all) do
     @g = GrandchildModel.new(model_data['GRANDCHILD_MODEL'])
-    @g.save!
+    @g.save
     @c = ChildModel.find(@g.child_model_id)
   end
 
@@ -126,7 +126,7 @@ describe "retrieval of all attributes for a model that has an ancestor and is a 
 
   before(:all) do
     @g = GrandchildModel.new(model_data['GRANDCHILD_MODEL'])
-    @g.save!
+    @g.save
     @c = ChildModel.find(@g.child_model_id)
     @p = ParentModel.find(@g.parent_model_id)
   end

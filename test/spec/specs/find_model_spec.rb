@@ -5,7 +5,7 @@ describe "database queries for a model where model does not have an ancestor and
 
   before(:all) do
     @p = ParentModel.new(model_data['PARENT_MODEL'])
-    @p.save!
+    @p.save
   end
 
   after(:all) do
@@ -28,7 +28,7 @@ describe "database queries for a model where model has descendants and does not 
 
   before(:all) do
     @c = ChildModel.new(model_data['CHILD_MODEL'])
-    @c.save!
+    @c.save
     @p = ParentModel.find(@c.parent_model_id)
   end
 
@@ -55,7 +55,7 @@ describe "database queries for a model where model has an ancestor and does not 
 
   before(:all) do
     @c = ChildModel.new(model_data['CHILD_MODEL'])
-    @c.save!
+    @c.save
   end
 
   after(:all) do
@@ -86,7 +86,7 @@ describe "database queries for a model where model has an ancestor and has desce
 
   before(:all) do
     @g = GrandchildModel.new(model_data['GRANDCHILD_MODEL'])
-    @g.save!
+    @g.save
     @c = ChildModel.find(@g.child_model_id)
   end
 
@@ -122,7 +122,7 @@ describe "database queries for a model where model has an ancestor and is a desc
 
   before(:all) do
     @g = GrandchildModel.new(model_data['GRANDCHILD_MODEL'])
-    @g.save!
+    @g.save
   end
 
   after(:all) do
@@ -164,9 +164,9 @@ describe "database queries for all models of a specified type where the models h
 
   before(:all) do
     @p1 = ParentModel.new(model_data['PARENT_MODEL'])
-    @p1.save!
+    @p1.save
     @p2 = ParentModel.new(model_data['PARENT_MODEL'])
-    @p2.save!
+    @p2.save
   end
 
   after(:all) do
@@ -186,9 +186,9 @@ describe "database queries for all models of a specified type where the models h
 
   before(:all) do
     @c1 = ChildModel.new(model_data['CHILD_MODEL'])
-    @c1.save!
+    @c1.save
     @c2 = ChildModel.new(model_data['CHILD_MODEL_FIND_ALL_CHILD'])
-    @c2.save!
+    @c2.save
   end
 
   after(:all) do
@@ -208,11 +208,11 @@ describe "database queries for all models of a specified type where the models h
 
   before(:all) do
     @c = ChildModel.new(model_data['CHILD_MODEL'])
-    @c.save!
+    @c.save
     @cp = ChildModel.new(model_data['CHILD_MODEL_FIND_ALL_PARENT'])
-    @cp.save!
+    @cp.save
     @cc = ChildModel.new(model_data['CHILD_MODEL_FIND_ALL_CHILD'])
-    @cc.save!
+    @cc.save
   end
 
   after(:all) do
@@ -238,13 +238,13 @@ describe "database queries for all models of a specified type where the models h
 
   before(:all) do
     @g = GrandchildModel.new(model_data['GRANDCHILD_MODEL'])
-    @g.save!
+    @g.save
     @gp = GrandchildModel.new(model_data['GRANDCHILD_MODEL_FIND_ALL_PARENT'])
-    @gp.save!
+    @gp.save
     @gc = GrandchildModel.new(model_data['GRANDCHILD_MODEL_FIND_ALL_CHILD'])
-    @gc.save!
+    @gc.save
     @gg = GrandchildModel.new(model_data['GRANDCHILD_MODEL_FIND_ALL_GANDCHILD'])
-    @gg.save!
+    @gg.save
   end
 
   after(:all) do
