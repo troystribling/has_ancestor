@@ -42,7 +42,7 @@ module PlanB
       ####################################################
       module InstanceMethods
 
-        ####################################################
+        ##################################################
         module AncestorAndDescendantMethods 
     
           ####################################################
@@ -98,7 +98,7 @@ module PlanB
 
         end
         
-        ####################################################
+        ##################################################
         module AncestorMethods #:nodoc :all
     
           def self.add_methods(target)
@@ -115,7 +115,7 @@ module PlanB
     
         end
   
-        ####################################################
+        ##################################################
         module DescendantMethods #:nodoc :all
     
           def self.add_methods(target, parent)
