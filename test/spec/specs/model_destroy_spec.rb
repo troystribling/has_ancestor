@@ -39,7 +39,7 @@ describe "deletion from database of model that has descendants and no ancestor" 
 
 end
 
-#########################################################################################################
+##########################################################################################################
 describe "deletion from database of model that has an ancestor and no descendants" do
 
   before(:all) do
