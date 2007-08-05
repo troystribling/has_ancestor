@@ -43,6 +43,17 @@ class ChildModel < ActiveRecord::Base
        @descendant_init_called = args[0][:descendant_init_called] unless args[0][:descendant_init_called].nil? 
      end
    end
+
+   ###############################################################
+   #### test implementation of descendant_method_missing
+   ###############################################################
+   def descendant_method_missing(meth, *args, &blk)
+     if meth.to_s.eql?('print_this')
+         "#{meth.to_s}_from_instance"
+     else
+       get_parent_model.send(meth, *args, &blk)
+     end
+   end
     
    ###############################################################
    #### test implimentation of before_save
@@ -73,6 +84,17 @@ class ChildModel < ActiveRecord::Base
      ###############################################################
      def method_delegation_to_ancestor
        "method_on_child_model:#{ParentModel.method_delegation_to_ancestor}"
+     end
+
+     ###############################################################
+     #### test implementation of descendant_method_missing
+     ###############################################################
+     def descendant_method_missing(meth, *args, &blk)
+       if meth.to_s.eql?('print_this')
+         "#{meth.to_s}_from_class"
+       else
+         ParentModel.send(meth, *args, &blk)
+       end
      end
    
    end

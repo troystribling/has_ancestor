@@ -181,7 +181,7 @@ describe "delegation of class method call for a model that has no descendants an
     GrandchildModel.method_on_parent_model.should eql('method_on_parent_model')
   end
 
-  it "should call the method on the ancestor model when the method is implemented only on the ancestor" do
+  it "should call the method on the ancestor model when the method is implemented on the ancestor and ancestor's ancestor" do
     GrandchildModel.method_on_child_model.should eql('method_on_child_model')
   end
 
