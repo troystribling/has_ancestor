@@ -146,11 +146,15 @@ module PlanB
                 get_#{parent}.update
               end
     
-              def method_missing(meth, *args, &blk)  
+              def method_missing(meth, *args, &blk) 
                 begin
                   super
                 rescue NoMethodError
-                  get_#{parent}.send(meth, *args, &blk)
+                  if self.respond_to?(:descendant_method_missing)
+                    self.descendant_method_missing(meth, *args, &blk)
+                  else
+                    get_#{parent}.send(meth, *args, &blk)
+                  end
                 end
               end
     
@@ -158,8 +162,12 @@ module PlanB
                 begin
                   super
                 rescue NoMethodError
-                  #{parent.to_s.classify}.send(meth, *args, &blk)
-                end
+                  if self.respond_to?(:descendant_method_missing)
+                    self.descendant_method_missing(meth, *args, &blk)
+                  else
+                    #{parent.to_s.classify}.send(meth, *args, &blk)
+                  end
+                 end
               end
     
             do_eval
