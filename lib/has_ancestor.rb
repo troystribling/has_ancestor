@@ -85,6 +85,12 @@ module PlanB
           end
   
           ####################################################
+          # Return list of ancestor models 
+          def ancestors
+            ancestor == nil ? [] : ancestor.ancestors << ancestor.class.name
+          end
+
+          ####################################################
           # Returns true if specified model is a descendant of 
           # model and false if not.
           def descendant_of?(ancestor_model)

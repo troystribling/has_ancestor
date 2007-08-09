@@ -13,7 +13,7 @@ describe "discovery of descendant model from model instance" do
   end
 
   it "should be possible if model has descendants is not a leaf in inheritance hierarchy" do
-    ParentModel.find(@c.parent_model_id).descendant.should be_eql(@c)
+    ParentModel.find(@c.parent_model_id).descendant.should eql(@c)
   end
 
   it "should be nil if model has descendants but is a leaf in inheritance hierarchy" do
@@ -77,7 +77,15 @@ end
 describe "discovery from model instance of model inheritance hierarchy" do
 
   it "should be able to determine the class of direct ancestor" do
-    GrandchildModel.new(model_data['GRANDCHILD_MODEL']).ancestor.class.name.should be_eql('ChildModel')
+    GrandchildModel.new(model_data['GRANDCHILD_MODEL']).ancestor.class.name.should eql('ChildModel')
+  end
+
+  it "should be able to determine the class of all ancestors for model with ancestores" do
+    GrandchildModel.new(model_data['GRANDCHILD_MODEL']).ancestors.should eql(['ParentModel', 'ChildModel'])
   end
   
+  it "should return empty array if model has no ancestors" do
+    ParentModel.new(model_data['PARENT_MODEL']).ancestors.should be_empty
+  end
+
 end
