@@ -103,23 +103,23 @@ end
 describe "closing item purchases" do
 
   it "should compute total cost as product of unit count and unit cost and close purchase for item_purchase" do
-    item = ItemPurchase.new(model_data['ITEM_PURCHASE'])
+    item = ItemPurchase.new(model_data[:item_purchase])
     item.close_item_purchase
-    item.cost.should eql(model_data['ITEM_PURCHASE']['unit_cost'] * model_data['ITEM_PURCHASE']['unit_count'])
+    item.cost.should eql(model_data[:item_purchase]['unit_cost'] * model_data[:item_purchase]['unit_count'])
     item.closed.should eql(1)
   end
 
   it "should compute total cost as product of unit count and unit cost and close purchase for stock_item_purchase" do
-    item = StockItemPurchase.new(model_data['STOCK_ITEM_PURCHASE'])
+    item = StockItemPurchase.new(model_data[:stock_item_purchase])
     item.close_item_purchase
-    item.cost.should eql(model_data['STOCK_ITEM_PURCHASE']['unit_cost'] * model_data['STOCK_ITEM_PURCHASE']['unit_count'])
+    item.cost.should eql(model_data[:stock_item_purchase]['unit_cost'] * model_data[:stock_item_purchase]['unit_count'])
     item.closed.should eql(1)
   end
 
   it "should compute total cost as product of contract length, unit count and unit cost and close purchase for contract_item_purchase" do
-    item = ContractItemPurchase.new(model_data['CONTRACT_ITEM_PURCHASE'])
+    item = ContractItemPurchase.new(model_data[:contract_item_purchase])
     item.close_item_purchase
-    item.cost.should eql(model_data['CONTRACT_ITEM_PURCHASE']['unit_cost'] * model_data['CONTRACT_ITEM_PURCHASE']['unit_count'] * model_data['CONTRACT_ITEM_PURCHASE']['length'])
+    item.cost.should eql(model_data[:contract_item_purchase]['unit_cost'] * model_data[:contract_item_purchase]['unit_count'] * model_data[:contract_item_purchase]['length'])
     item.closed.should eql(1)
   end
 
@@ -129,32 +129,32 @@ end
 describe "closing item purchases from an ancestor model" do
 
   it "should close stock_item_purchase when called from ancestor item_purchase" do
-    stock_item = StockItemPurchase.new(model_data['STOCK_ITEM_PURCHASE'])
+    stock_item = StockItemPurchase.new(model_data[:stock_item_purchase])
     stock_item.save
     
-    update_item = ItemPurchase.find_by_item(model_data['STOCK_ITEM_PURCHASE']['item']).to_descendant
+    update_item = ItemPurchase.find_by_item(model_data[:stock_item_purchase]['item']).to_descendant
     update_item.close_item_purchase
     update_item.to_descendant.save
 
-    test_item = ItemPurchase.find_by_item(model_data['STOCK_ITEM_PURCHASE']['item'])
+    test_item = ItemPurchase.find_by_item(model_data[:stock_item_purchase]['item'])
     test_item.cost.should
-      eql(model_data['STOCK_ITEM_PURCHASE']['unit_cost'] * model_data['STOCK_ITEM_PURCHASE']['unit_count'])
+      eql(model_data[:stock_item_purchase]['unit_cost'] * model_data[:stock_item_purchase]['unit_count'])
     test_item.closed.should eql(1)
 
     stock_item.destroy
   end
 
   it "should close contract_item_purchase when called from ancestor item_purchase" do
-    contract_item = ContractItemPurchase.new(model_data['CONTRACT_ITEM_PURCHASE'])
+    contract_item = ContractItemPurchase.new(model_data[:contract_item_purchase])
     contract_item.save
 
-    update_item = ItemPurchase.find_by_item(model_data['CONTRACT_ITEM_PURCHASE']['item']).to_descendant
+    update_item = ItemPurchase.find_by_item(model_data[:contract_item_purchase]['item']).to_descendant
     update_item.close_item_purchase
     update_item.save
 
-    test_item = ItemPurchase.find_by_item(model_data['CONTRACT_ITEM_PURCHASE']['item'])
-    test_item.cost.should eql(model_data['CONTRACT_ITEM_PURCHASE']['unit_cost'] * model_data['CONTRACT_ITEM_PURCHASE']['unit_count'] \
-       * model_data['CONTRACT_ITEM_PURCHASE']['length'])
+    test_item = ItemPurchase.find_by_item(model_data[:contract_item_purchase]['item'])
+    test_item.cost.should eql(model_data[:contract_item_purchase]['unit_cost'] * model_data[:contract_item_purchase]['unit_count'] \
+       * model_data[:contract_item_purchase]['length'])
     test_item.closed.should eql(1)
 
     contract_item.destroy    
@@ -167,9 +167,9 @@ end
 describe "has_ancestor limitations" do
 
   before(:all) do
-    @stock_item = StockItemPurchase.new(model_data['STOCK_ITEM_PURCHASE'])
+    @stock_item = StockItemPurchase.new(model_data[:stock_item_purchase])
     @stock_item.save
-    @contract_item = ContractItemPurchase.new(model_data['CONTRACT_ITEM_PURCHASE'])
+    @contract_item = ContractItemPurchase.new(model_data[:contract_item_purchase])
     @contract_item.save
   end
 
@@ -179,17 +179,17 @@ describe "has_ancestor limitations" do
   end
   
   it "should be able to perform query filtering multiple attributes on a single model" do
-    ItemPurchase.find_all_by_unit_cost_and_item(model_data['STOCK_ITEM_PURCHASE']['unit_cost'],
-      model_data['STOCK_ITEM_PURCHASE']['item']).first.id.should eql(@stock_item.ancestor.id)
+    ItemPurchase.find_all_by_unit_cost_and_item(model_data[:stock_item_purchase]['unit_cost'],
+      model_data[:stock_item_purchase]['item']).first.id.should eql(@stock_item.ancestor.id)
   end
 
   it "should not be able to perform query filtering multiple attributes on different models" do
-    lambda{ItemPurchase.find_all_by_unit_cost_and_length(model_data['CONTRACT_ITEM_PURCHASE']['unit_cost'],
-      model_data['CONTRACT_ITEM_PURCHASE']['length'])}.should raise_error(NoMethodError)
+    lambda{ItemPurchase.find_all_by_unit_cost_and_length(model_data[:contract_item_purchase]['unit_cost'],
+      model_data[:contract_item_purchase]['length'])}.should raise_error(NoMethodError)
   end
 
   it "should return wrong model type when query from descendant matches ancestor atrtribute of some other descendant" do
-    ContractItemPurchase.find_by_unit_cost(model_data['STOCK_ITEM_PURCHASE']['unit_cost']).id.should eql(@stock_item.ancestor.id)
+    ContractItemPurchase.find_by_unit_cost(model_data[:stock_item_purchase]['unit_cost']).id.should eql(@stock_item.ancestor.id)
   end
 
 end

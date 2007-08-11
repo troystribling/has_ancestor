@@ -4,7 +4,7 @@ require File.dirname(__FILE__) + '/../spec_helper'
 describe "discovery of descendant model from model instance" do
 
   before(:all) do
-    @c = ChildModel.new(model_data['CHILD_MODEL'])
+    @c = ChildModel.new(model_data[:child_model])
     @c.save
   end
 
@@ -21,7 +21,7 @@ describe "discovery of descendant model from model instance" do
   end
 
   it "should be nil if model does not have descendants" do
-    ParentModel.new(model_data['PARENT_MODEL']).descendant.should be_nil
+    ParentModel.new(model_data[:parent_model]).descendant.should be_nil
   end
 
 end
@@ -30,7 +30,7 @@ end
 describe "discovery of ancestor model from model instance" do
 
   before(:all) do
-    @c = ChildModel.new(model_data['CHILD_MODEL'])
+    @c = ChildModel.new(model_data[:child_model])
     @c.save
   end
 
@@ -52,7 +52,7 @@ end
 describe "validation from model instance of model ancestor" do
 
   before(:all) do
-    @g = GrandchildModel.new(model_data['GRANDCHILD_MODEL'])
+    @g = GrandchildModel.new(model_data[:grandchild_model])
   end
 
   it "should be able to determine if immediate ancestor is of a specified class" do
@@ -68,7 +68,7 @@ describe "validation from model instance of model ancestor" do
   end
   
   it "should raise exception if model has no ancestor" do
-    ParentModel.new(model_data['PARENT_MODEL']).should_not be_descendant_of(:this_will_fail)
+    ParentModel.new(model_data[:parent_model]).should_not be_descendant_of(:this_will_fail)
   end
   
 end
@@ -77,15 +77,15 @@ end
 describe "discovery from model instance of model inheritance hierarchy" do
 
   it "should be able to determine the class of direct ancestor" do
-    GrandchildModel.new(model_data['GRANDCHILD_MODEL']).ancestor.class.name.should eql('ChildModel')
+    GrandchildModel.new(model_data[:grandchild_model]).ancestor.class.name.should eql('ChildModel')
   end
 
   it "should be able to determine the class of all ancestors for model with ancestores" do
-    GrandchildModel.new(model_data['GRANDCHILD_MODEL']).ancestors.should eql(['ParentModel', 'ChildModel'])
+    GrandchildModel.new(model_data[:grandchild_model]).ancestors.should eql(['ParentModel', 'ChildModel'])
   end
   
   it "should return empty array if model has no ancestors" do
-    ParentModel.new(model_data['PARENT_MODEL']).ancestors.should be_empty
+    ParentModel.new(model_data[:parent_model]).ancestors.should be_empty
   end
 
 end

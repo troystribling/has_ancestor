@@ -34,7 +34,8 @@ module PlanB
           self.primary_key = "#{self.name.tableize.singularize}_id"
           eval("has_one args[:named], :as => :#{args[:named]}_descendant, :dependent => :destroy")
           include InstanceMethods::AncestorAndDescendantMethods
-          InstanceMethods::DescendantMethods.add_methods(self, args[:named])
+          include InstanceMethods::DescendantStaticMethods
+          InstanceMethods::DescendantDynamicMethods.add_methods(self, args[:named])
         end       
                                 
       end
@@ -122,7 +123,13 @@ module PlanB
         end
   
         ##################################################
-        module DescendantMethods #:nodoc :all
+        module DescendantStaticMethods #:nodoc :all
+
+
+        end
+
+        ##################################################
+        module DescendantDynamicMethods #:nodoc :all
     
           def self.add_methods(target, parent)
     

@@ -4,7 +4,7 @@ require File.dirname(__FILE__) + '/../spec_helper'
 describe "retrieval of descendant model from ancestor model instance when descendent is leaf in inheritance hierarchy" do
 
   before(:all) do
-    @c = ChildModel.new(model_data['CHILD_MODEL'])
+    @c = ChildModel.new(model_data[:child_model])
     @c.save
     @p = ParentModel.find(@c.parent_model_id)
   end
@@ -27,7 +27,7 @@ end
 describe "retrieval of descendant model from its own instance when model has no descendants or ancestors" do
 
   before(:all) do
-    @p = ParentModel.new(model_data['PARENT_MODEL'])
+    @p = ParentModel.new(model_data[:parent_model])
     @p.save
   end
 
@@ -50,7 +50,7 @@ end
 describe "retrieval of descendant model from own instance  when descendant is leaf in inheritance hierarchy" do
 
   before(:all) do
-    @c = ChildModel.new(model_data['CHILD_MODEL'])
+    @c = ChildModel.new(model_data[:child_model])
     @c.save
   end
 
@@ -72,7 +72,7 @@ end
 describe "retrieval of descendant model from own instance when descendant is not leaf in inheritance hierarchy" do
 
   before(:all) do
-    @g = GrandchildModel.new(model_data['GRANDCHILD_MODEL'])
+    @g = GrandchildModel.new(model_data[:grandchild_model])
     @g.save
     @c = ChildModel.find(@g.child_model_id)
   end
@@ -92,7 +92,7 @@ end
 describe "retrieval of descendant model from ancestor's ancestor model instance when descendant is leaf in inheritance hierarchy" do
 
   before(:all) do
-    @g = GrandchildModel.new(model_data['GRANDCHILD_MODEL'])
+    @g = GrandchildModel.new(model_data[:grandchild_model])
     @g.save
     @c = ChildModel.find(@g.child_model_id)
     @p = ParentModel.find(@c.parent_model_id)
@@ -120,7 +120,7 @@ end
 describe "error conditions resulting from retrieval of descendant model from ancestor model instance" do
 
   before(:all) do
-    @g = GrandchildModel.new(model_data['GRANDCHILD_MODEL'])
+    @g = GrandchildModel.new(model_data[:grandchild_model])
     @g.save
     @c = ChildModel.find(@g.child_model_id)
     @p = ParentModel.find(@c.parent_model_id)

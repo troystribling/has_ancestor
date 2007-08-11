@@ -1,71 +1,81 @@
-GRANDCHILD_MODEL:
+grandchild_model:
   parent_model_attr: Troy
   child_model_attr: Annapolis
   grandchild_model_attr: black
 
-GRANDCHILD_MODEL_UPDATE:
+grandchild_model_update:
   parent_model_attr: Todd
   child_model_attr: Atalanta
   grandchild_model_attr: green
 
-GRANDCHILD_ANCESTOR_MODEL:
+grandchild_ancestor_model:
   parent_model_attr: Troy
   child_model_attr: Annapolis
 
-GRANDCHILD_ANCESTOR_ANCESTOR_MODEL:
+grandchild_ancestor_ancestor_model:
   parent_model_attr: Troy
 
-GRANDCHILD_MODEL_FIND_ALL_PARENT:
+grandchild_model_find_all_parent:
   parent_model_attr: Vanessa
   child_model_attr: Annapolis
   grandchild_model_attr: black
 
-GRANDCHILD_MODEL_FIND_ALL_CHILD:
+grandchild_model_find_all_child:
   parent_model_attr: Troy
   child_model_attr: Nashville
   grandchild_model_attr: black
 
-GRANDCHILD_MODEL_FIND_ALL_GRANDCHILD:
+grandchild_model_find_all_grandchild:
   parent_model_attr: Troy
   child_model_attr: Annapolis
   grandchild_model_attr: grey
   
-CHILD_MODEL:
+child_model:
   parent_model_attr: Billy
   child_model_attr: Manchester
 
-CHILD_MODEL_UPDATE:
+child_model_update:
   parent_model_attr: Charelene
   child_model_attr: Hendersonville
 
-CHILD_MODEL_FIND_ALL_PARENT:
+child_model_find_all_parent:
   parent_model_attr: Katie
   child_model_attr: Manchester
 
-CHILD_MODEL_FIND_ALL_CHILD:
+child_model_find_all_child:
   parent_model_attr: Billy
   child_model_attr: Nashville
 
-CHILD_ANCESTOR_MODEL:
+child_model_multiple_find:
+  parent_model_attr: Billy
+  parent_model_other_attr: Debbie
+  child_model_attr: Manchester
+  child_model_other_attr: Smyrna
+
+child_ancestor_model:
   parent_model_attr: Billy
     
-PARENT_MODEL:
+parent_model:
   parent_model_attr: Guy
 
-PARENT_MODEL_UPDATE:
+parent_model_update:
   parent_model_attr: Winfred
 
-ITEM_PURCHASE:
+parent_model_multiple_find:
+  parent_model_attr: Guy
+  parent_model_other_attr: Sybil
+
+item_purchase:
   item: keyboard
   unit_cost: 500
   unit_count: 1
 
-STOCK_ITEM_PURCHASE:
+stock_item_purchase:
   item: paper
   unit_cost: 5
   unit_count: 100
 
-CONTRACT_ITEM_PURCHASE:
+contract_item_purchase:
   item: human
   unit_cost: 75
   unit_count: 2

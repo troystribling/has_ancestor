@@ -6,11 +6,11 @@ require File.dirname(__FILE__) + '/../spec_helper'
 describe "delegation of instance method call for a model that has no descendants and has no ancestor" do
 
   before(:all) do
-    @p = ParentModel.new(model_data['PARENT_MODEL'])
+    @p = ParentModel.new(model_data[:parent_model])
   end
 
   it "should call the method on the model" do
-    @p.method_on_parent_model.should eql(model_data['PARENT_MODEL']['parent_model_attr'])
+    @p.method_on_parent_model.should eql(model_data[:parent_model]['parent_model_attr'])
   end
 
 end
@@ -19,7 +19,7 @@ end
 describe "delegation of instance method call for a model that has descendants and has no ancestor" do
 
   before(:all) do
-    @c = ChildModel.new(model_data['CHILD_MODEL'])
+    @c = ChildModel.new(model_data[:child_model])
     @c.save
     @p = ParentModel.find(@c.parent_model_id)
   end
@@ -29,11 +29,11 @@ describe "delegation of instance method call for a model that has descendants an
   end
 
   it "should call the method on the model when the method is implemented on the model" do
-    @p.method_on_parent_model.should eql(model_data['CHILD_MODEL']['parent_model_attr'])
+    @p.method_on_parent_model.should eql(model_data[:child_model]['parent_model_attr'])
   end
 
   it "should call the method on the model when the method is implemented on the descendant model" do
-    @p.method_on_descendant_child_model.should eql(model_data['CHILD_MODEL']['parent_model_attr'])
+    @p.method_on_descendant_child_model.should eql(model_data[:child_model]['parent_model_attr'])
   end
 
 end
@@ -42,7 +42,7 @@ end
 describe "delegation of instance method call for a model that has no descendants and has an ancestor" do
 
   before(:all) do
-    @c = ChildModel.new(model_data['CHILD_MODEL'])
+    @c = ChildModel.new(model_data[:child_model])
     @c.save
     @p = ParentModel.find(@c.parent_model_id)
   end
@@ -52,11 +52,11 @@ describe "delegation of instance method call for a model that has no descendants
   end
 
   it "should call the method on the model when the method is implemented on the model" do
-    @c.method_on_child_model.should eql(model_data['CHILD_MODEL']['child_model_attr'])
+    @c.method_on_child_model.should eql(model_data[:child_model]['child_model_attr'])
   end
 
   it "should call the method on the ancestor model when the method is not implemented on the model" do
-    @c.method_on_parent_model.should eql(model_data['CHILD_MODEL']['parent_model_attr'])
+    @c.method_on_parent_model.should eql(model_data[:child_model]['parent_model_attr'])
   end
 
 end
@@ -65,7 +65,7 @@ end
 describe "delegation of instance method call for a model that has descendants and has an ancestor" do
 
   before(:all) do
-    @g = GrandchildModel.new(model_data['GRANDCHILD_MODEL'])
+    @g = GrandchildModel.new(model_data[:grandchild_model])
     @g.save
     @c = ChildModel.find(@g.child_model_id)
   end
@@ -75,15 +75,15 @@ describe "delegation of instance method call for a model that has descendants an
   end
 
   it "should call the method on the model when the method is implemented on the model" do
-    @c.method_on_child_model.should eql(model_data['GRANDCHILD_MODEL']['child_model_attr'])
+    @c.method_on_child_model.should eql(model_data[:grandchild_model]['child_model_attr'])
   end
 
   it "should call the method on the ancestor model when the method is implemented only on the ancestor" do
-    @c.method_on_parent_model.should eql(model_data['GRANDCHILD_MODEL']['parent_model_attr'])
+    @c.method_on_parent_model.should eql(model_data[:grandchild_model]['parent_model_attr'])
   end
 
   it "should call the method on the model when the method is implemented on the descendant model" do
-    @c.method_on_descendant_grandchild_model.should eql(model_data['GRANDCHILD_MODEL']['child_model_attr'])
+    @c.method_on_descendant_grandchild_model.should eql(model_data[:grandchild_model]['child_model_attr'])
   end
 
 end
@@ -92,7 +92,7 @@ end
 describe "delegation of instance method call that delgates calls to its ancestor in the method implementation" do
 
   before(:all) do
-    @g = GrandchildModel.new(model_data['GRANDCHILD_MODEL'])
+    @g = GrandchildModel.new(model_data[:grandchild_model])
     @g.save
     @c = ChildModel.find(@g.child_model_id)
     @p = ParentModel.find(@c.parent_model_id)
@@ -103,12 +103,12 @@ describe "delegation of instance method call that delgates calls to its ancestor
   end
 
   it "should call the method implementations in model and ancestor when called from model with a single ancestor" do
-    expected_method_result = "#{model_data['GRANDCHILD_MODEL']['child_model_attr']}:#{model_data['GRANDCHILD_MODEL']['parent_model_attr']}"
+    expected_method_result = "#{model_data[:grandchild_model]['child_model_attr']}:#{model_data[:grandchild_model]['parent_model_attr']}"
     @c.method_delegation_to_ancestor.should be_eql(expected_method_result)
   end
 
   it "should call the method implementations on model and an all ancestors when called from model with an ancestor that has an ancestor" do
-    expected_method_result = "#{model_data['GRANDCHILD_MODEL']['grandchild_model_attr']}:#{model_data['GRANDCHILD_MODEL']['child_model_attr']}:#{model_data['GRANDCHILD_MODEL']['parent_model_attr']}"
+    expected_method_result = "#{model_data[:grandchild_model]['grandchild_model_attr']}:#{model_data[:grandchild_model]['child_model_attr']}:#{model_data[:grandchild_model]['parent_model_attr']}"
     @g.method_delegation_to_ancestor.should be_eql(expected_method_result)
   end
 
@@ -118,7 +118,7 @@ end
 describe "delgated instance method call with an implementations that takes arguments" do
 
   before(:all) do
-    @g = GrandchildModel.new(model_data['GRANDCHILD_MODEL'])
+    @g = GrandchildModel.new(model_data[:grandchild_model])
     @g.save
     @c = ChildModel.find(@g.child_model_id)
   end
@@ -128,7 +128,7 @@ describe "delgated instance method call with an implementations that takes argum
   end
 
   it "should be possible to implement delegated methods that take non-block arguments" do
-    expected_method_result = "#{model_data['GRANDCHILD_MODEL']['parent_model_attr']}:the_argument"
+    expected_method_result = "#{model_data[:grandchild_model]['parent_model_attr']}:the_argument"
     @c.method_with_non_block_arguments(:argument=>'the_argument').should be_eql(expected_method_result)
   end
 
