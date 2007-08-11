@@ -18,6 +18,7 @@ class CreateHasAncestorModel < ActiveRecord::Migration
   
     create_table :grandchild_models, :force => true, :primary_key => :grandchild_model_id  do |t|
       t.column :grandchild_model_attr, :string
+      t.column :grandchild_model_other_attr, :string
     end
     
     create_table :item_purchases, :force => true, :primary_key => :item_purchase_id do |t|

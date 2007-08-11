@@ -76,16 +76,12 @@ end
 ########################################################################################################
 describe "discovery from model instance of model inheritance hierarchy" do
 
-  it "should be able to determine the class of direct ancestor" do
-    GrandchildModel.new(model_data[:grandchild_model]).ancestor.class.name.should eql('ChildModel')
+  it "should return model if model has no ancestors" do
+    ParentModel.new(model_data[:parent_model]).class_hierarchy.should eql(['ParentModel'])
   end
 
-  it "should be able to determine the class of all ancestors for model with ancestores" do
-    GrandchildModel.new(model_data[:grandchild_model]).ancestors.should eql(['ParentModel', 'ChildModel'])
-  end
-  
-  it "should return empty array if model has no ancestors" do
-    ParentModel.new(model_data[:parent_model]).ancestors.should be_empty
+  it "should be able to determine the class of all ancestors for model that has ancestors" do
+    GrandchildModel.new(model_data[:grandchild_model]).class_hierarchy.should eql(['ParentModel', 'ChildModel', 'GrandchildModel'])
   end
 
 end

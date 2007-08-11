@@ -86,9 +86,9 @@ module PlanB
           end
   
           ####################################################
-          # Return list of ancestor models 
-          def ancestors
-            ancestor == nil ? [] : ancestor.ancestors << ancestor.class.name
+          # Return list of classes in hierarchy
+          def class_hierarchy
+            ancestor == nil ? [self.class.name] : ancestor.class_hierarchy << self.class.name
           end
 
           ####################################################
