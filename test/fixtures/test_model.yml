@@ -4,12 +4,28 @@ grandchild_model:
   grandchild_model_attr: black
 
 grandchild_model_multiple_find:
+  parent_model_attr: Troy
+  parent_model_other_attr: Michelle 
+  child_model_attr: Annapolis
+  child_model_other_attr: Mt.Juliet
+  grandchild_model_attr: black
+  grandchild_model_other_attr: red
+
+grandchild_model_multiple_find_1:
   parent_model_attr: Todd
   parent_model_other_attr: Angie
   child_model_attr: Atlanta
   child_model_other_attr: Nashville
   grandchild_model_attr: orange
-  grandchild_model_other_attr: orange
+  grandchild_model_other_attr: yellow
+
+grandchild_model_multiple_find_2:
+  parent_model_attr: Troy
+  parent_model_other_attr: Vanessa
+  child_model_attr: Annapolis
+  child_model_other_attr: Rockville
+  grandchild_model_attr: black
+  grandchild_model_other_attr: pink
 
 grandchild_model_update:
   parent_model_attr: Todd

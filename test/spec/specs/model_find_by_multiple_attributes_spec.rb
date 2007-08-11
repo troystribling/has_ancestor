@@ -54,12 +54,18 @@ end
 describe "database queries by multible attributes for a model where model has an ancestor and ancestor has ancestor but does not have descendants" do
 
   before(:all) do
-    @g = GrandchildModel.new(model_data[:grandchild_model_multiple_find])
-    @g.save
+    @g1 = GrandchildModel.new(model_data[:grandchild_model_multiple_find])
+    @g1.save
+    @g2 = GrandchildModel.new(model_data[:grandchild_model_multiple_find_1])
+    @g2.save
+    @g3 = GrandchildModel.new(model_data[:grandchild_model_multiple_find_2])
+    @g3.save
   end
 
   after(:all) do
-    @g.destroy
+    @g1.destroy
+    @g2.destroy
+    @g3.destroy
   end
 
 #  it "should find model by specification of mutiple model attribute match condition where all attributes belong to model" do
@@ -67,14 +73,20 @@ describe "database queries by multible attributes for a model where model has an
 #      eql_attributes(model_data[:child_model_multiple_find])
 #  end
 #
-  it "should find model by specification of mutiple model attribute match condition where some attributes belong to model and other belong to ancestorof ancestor" do
-    gchk = GrandchildModel.find(:first, 
+#  it "should find model by specification of mutiple model attribute match condition where some attributes belong to model and other belong to ancestorof ancestor" do
+#    gchk = GrandchildModel.find(:first, 
+#      :conditions => "grandchild_models.grandchild_model_attr = '#{model_data[:grandchild_model_multiple_find]['grandchild_model_attr']}' AND parent_models.parent_model_attr = '#{model_data[:grandchild_model_multiple_find]['parent_model_attr']}'",
+#      :joins => ["LEFT JOIN child_models ON child_models.child_model_descendant_id = grandchild_models.grandchild_model_id LEFT JOIN parent_models ON parent_models.parent_model_descendant_id = child_models.child_model_id"])
+#      gchk.attributes.should eql_attributes(model_data[:grandchild_model_multiple_find])
+#  end
+
+  it "should find all models by specification of mutiple model attribute match condition where some attributes belong to model and other belong to ancestorof ancestor" do
+    gchk = GrandchildModel.find(:all, :readonly => false, 
       :conditions => "grandchild_models.grandchild_model_attr = '#{model_data[:grandchild_model_multiple_find]['grandchild_model_attr']}' AND parent_models.parent_model_attr = '#{model_data[:grandchild_model_multiple_find]['parent_model_attr']}'",
       :joins => ["LEFT JOIN child_models ON child_models.child_model_descendant_id = grandchild_models.grandchild_model_id LEFT JOIN parent_models ON parent_models.parent_model_descendant_id = child_models.child_model_id"])
-      gchk.attributes.should eql_attributes(model_data[:grandchild_model_multiple_find])
-      p gchk.class.name
-      p gchk.ancestor.class.name
-      p gchk.ancestor.ancestor.class.name
+    p gchk.length
+    p gchk
+#      gchk.attributes.should eql_attributes(model_data[:grandchild_model_multiple_find])
   end
 
 end
