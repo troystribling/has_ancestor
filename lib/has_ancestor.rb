@@ -24,7 +24,7 @@ module PlanB
         def has_descendants
           self.primary_key = "#{self.name.tableize.singularize}_id"
           eval("belongs_to :#{self.name.tableize.singularize}_descendant, :polymorphic => true")
-          include InstanceMethods::AncestorAndDescendantMethods
+          include(InstanceMethods::AncestorAndDescendantMethods)
           InstanceMethods::AncestorMethods.add_methods(self)
         end
         
@@ -33,9 +33,8 @@ module PlanB
         def has_ancestor(args) 
           self.primary_key = "#{self.name.tableize.singularize}_id"
           eval("has_one args[:named], :as => :#{args[:named]}_descendant, :dependent => :destroy")
-          include InstanceMethods::AncestorAndDescendantMethods
-          include InstanceMethods::DescendantStaticMethods
-          InstanceMethods::DescendantDynamicMethods.add_methods(self, args[:named])
+          include(InstanceMethods::AncestorAndDescendantMethods)
+          InstanceMethods::DescendantMethods.add_methods(self, args[:named])
         end       
                                 
       end
@@ -51,26 +50,26 @@ module PlanB
           # Planb::InvalidType if model is not a descendant. 
           # If model is not specified return model at root of 
           # inheritance hierarchy.
-           def to_descendant(arg = nil)
-              if arg.nil?
+          def to_descendant(arg = nil)
+            if arg.nil?
+              if descendant.nil?
+                self
+              else
+                descendant.to_descendant
+              end
+            else  
+              if self.class.name.eql?(arg.to_s.classify)
+                self
+              else
                 if descendant.nil?
-                  self
+                  raise(PlanB::InvalidType, "target model is invalid")
                 else
-                  descendant.to_descendant
-                end
-              else  
-                if self.class.name.eql?(arg.to_s.classify)
-                  self
-                else
-                  if descendant.nil?
-                    raise(PlanB::InvalidType, "target model is invalid")
-                  else
-                    descendant.to_descendant(arg)
-                  end
+                  descendant.to_descendant(arg)
                 end
               end
             end
-  
+          end
+
           ####################################################
           # Returns true if specified model is a descendant 
           # of model and false if not.
@@ -123,15 +122,7 @@ module PlanB
         end
   
         ##################################################
-        module DescendantStaticMethods #:nodoc :all
-
-          def self.find_model(*args)
-          end
-        
-        end
-
-        ##################################################
-        module DescendantDynamicMethods #:nodoc :all
+        module DescendantMethods #:nodoc :all
     
           def self.add_methods(target, parent)
     
@@ -183,6 +174,13 @@ module PlanB
                     #{parent.to_s.classify}.send(meth, *args, &blk)
                   end
                  end
+              end
+    
+              def self.find_model(*args)
+                p args
+                find(:first, 
+                 :conditions => args[0][:conditions],
+                 :joins => "LEFT JOIN parent_models ON parent_models.parent_model_descendant_id = child_models.child_model_id")
               end
     
             do_eval
