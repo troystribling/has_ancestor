@@ -125,7 +125,9 @@ module PlanB
         ##################################################
         module DescendantStaticMethods #:nodoc :all
 
-
+          def self.find_model(*args)
+          end
+        
         end
 
         ##################################################
