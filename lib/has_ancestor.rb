@@ -24,7 +24,7 @@ module PlanB
         def has_descendants
           self.primary_key = "#{self.name.tableize.singularize}_id"
           eval("belongs_to :#{self.name.tableize.singularize}_descendant, :polymorphic => true")
-          include(InstanceMethods::AncestorAndDescendantMethods)
+          InstanceMethods::AncestorAndDescendantMethods.add_methods(self, self.name)
           InstanceMethods::AncestorMethods.add_methods(self)
         end
         
@@ -33,7 +33,7 @@ module PlanB
         def has_ancestor(args) 
           self.primary_key = "#{self.name.tableize.singularize}_id"
           eval("has_one args[:named], :as => :#{args[:named]}_descendant, :dependent => :destroy")
-          include(InstanceMethods::AncestorAndDescendantMethods)
+          InstanceMethods::AncestorAndDescendantMethods.add_methods(self, args[:named])
           InstanceMethods::DescendantMethods.add_methods(self, args[:named])
         end       
                                 
@@ -44,64 +44,81 @@ module PlanB
 
         ##################################################
         module AncestorAndDescendantMethods 
+
+          def self.add_methods(target, model_name)
     
-          ####################################################
-          # Return descendant model if specified and throw 
-          # Planb::InvalidType if model is not a descendant. 
-          # If model is not specified return model at root of 
-          # inheritance hierarchy.
-          def to_descendant(arg = nil)
-            if arg.nil?
-              if descendant.nil?
-                self
-              else
-                descendant.to_descendant
+             target.class_eval <<-do_eval
+              
+              ####################################################
+              # ancestor class hierarchy
+              @@ancestor_class = "#{model_name}"
+
+              def self.class_hierarchy
+              p @@ancestor_class
+                @@ancestor_class == nil ? [self.name] : @@ancestor_class.class_hierarchy << self.name
               end
-            else  
-              if self.class.name.eql?(arg.to_s.classify)
-                self
-              else
-                if descendant.nil?
-                  raise(PlanB::InvalidType, "target model is invalid")
-                else
-                  descendant.to_descendant(arg)
+              
+              ####################################################
+              # Return descendant model if specified and throw 
+              # Planb::InvalidType if model is not a descendant. 
+              # If model is not specified return model at root of 
+              # inheritance hierarchy.
+              def to_descendant(arg = nil)
+                if arg.nil?
+                  if descendant.nil?
+                    self
+                  else
+                    descendant.to_descendant
+                  end
+                else  
+                  if self.class.name.eql?(arg.to_s.classify)
+                    self
+                  else
+                    if descendant.nil?
+                      raise(PlanB::InvalidType, "target model is invalid")
+                    else
+                      descendant.to_descendant(arg)
+                    end
+                  end
                 end
               end
-            end
-          end
+    
+              ####################################################
+              # Returns true if specified model is a descendant 
+              # of model and false if not.
+              def descendant
+                respond_to?(:get_descendant) ? get_descendant : nil
+              end
+      
+              ####################################################
+              # Return descendant model instance. If model has no 
+              # descendant return nil.
+              def ancestor
+                respond_to?(:get_ancestor) ? get_ancestor : nil
+              end
+      
+              ####################################################
+              # Return list of classes in hierarchy
+              def class_hierarchy
+                ancestor == nil ? [self.class.name] : ancestor.class_hierarchy << self.class.name
+              end
+    
+              ####################################################
+              # Returns true if specified model is a descendant of 
+              # model and false if not.
+              def descendant_of?(ancestor_model)
+                unless ancestor.nil?
+                  ancestor.class.name.eql?(ancestor_model.to_s.classify) ? \
+                    true : ancestor.descendant_of?(ancestor_model)
+                 else
+                   false
+                 end
+              end
 
-          ####################################################
-          # Returns true if specified model is a descendant 
-          # of model and false if not.
-          def descendant
-            respond_to?(:get_descendant) ? get_descendant : nil
-          end
-  
-          ####################################################
-          # Return descendant model instance. If model has no 
-          # descendant return nil.
-          def ancestor
-            respond_to?(:get_ancestor) ? get_ancestor : nil
-          end
-  
-          ####################################################
-          # Return list of classes in hierarchy
-          def class_hierarchy
-            ancestor == nil ? [self.class.name] : ancestor.class_hierarchy << self.class.name
-          end
+            do_eval
 
-          ####################################################
-          # Returns true if specified model is a descendant of 
-          # model and false if not.
-          def descendant_of?(ancestor_model)
-            unless ancestor.nil?
-              ancestor.class.name.eql?(ancestor_model.to_s.classify) ? \
-                true : ancestor.descendant_of?(ancestor_model)
-             else
-               false
-             end
           end
-
+          
         end
         
         ##################################################
@@ -127,7 +144,7 @@ module PlanB
           def self.add_methods(target, parent)
     
             target.class_eval <<-do_eval
-    
+   
               def initialize(*args)
                 super
                 get_#{parent}.#{parent}_descendant = self

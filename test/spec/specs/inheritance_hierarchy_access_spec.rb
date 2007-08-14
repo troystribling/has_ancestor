@@ -85,3 +85,17 @@ describe "discovery from model instance of model inheritance hierarchy" do
   end
 
 end
+
+########################################################################################################
+describe "discovery from model class of model inheritance hierarchy" do
+
+  it "should return model if model has no ancestors" do
+    ParentModel.class_hierarchy.should eql(['ParentModel'])
+  end
+
+  it "should be able to determine the class of all ancestors for model that has ancestors" do
+    GrandchildModel.class_hierarchy.should eql(['ParentModel', 'ChildModel', 'GrandchildModel'])
+  end
+
+end
+
