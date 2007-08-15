@@ -49,6 +49,19 @@ describe "discovery of ancestor model from model instance" do
 end
 
 ########################################################################################################
+describe "discovery of ancestor class from model class" do
+
+  it "should be possible if model has an ancestor" do
+   ParentModel.ancestor.should be_nil
+  end
+
+  it "should be nill if model does not have an ancestor" do
+    ChildModel.ancestor.should be_eql(ParentModel)
+  end
+
+end
+
+########################################################################################################
 describe "validation from model instance of model ancestor" do
 
   before(:all) do
@@ -81,7 +94,7 @@ describe "discovery from model instance of model inheritance hierarchy" do
   end
 
   it "should be able to determine the class of all ancestors for model that has ancestors" do
-    GrandchildModel.new(model_data[:grandchild_model]).class_hierarchy.should eql(['ParentModel', 'ChildModel', 'GrandchildModel'])
+    GrandchildModel.new(model_data[:grandchild_model]).class_hierarchy.should eql(['GrandchildModel', 'ChildModel', 'ParentModel'])
   end
 
 end
@@ -94,7 +107,7 @@ describe "discovery from model class of model inheritance hierarchy" do
   end
 
   it "should be able to determine the class of all ancestors for model that has ancestors" do
-    GrandchildModel.class_hierarchy.should eql(['ParentModel', 'ChildModel', 'GrandchildModel'])
+    GrandchildModel.class_hierarchy.should eql(['GrandchildModel', 'ChildModel', 'ParentModel'])
   end
 
 end

@@ -51,10 +51,10 @@ module PlanB
               
               ####################################################
               # ancestor class hierarchy
-              "#{parent}" != '' ? @@ancestor_class = eval("#{parent}".classify) : @@ancestor_class = nil
+              "#{parent}" != "" ? @@ancestor_class = eval("#{parent}".classify) : @@ancestor_class = nil
 
               def self.class_hierarchy
-                @@ancestor_class == nil ? [self.name] : @@ancestor_class.class_hierarchy << self.name
+                @@ancestor_class == nil ? [self.name] : [self.name] + @@ancestor_class.class_hierarchy
               end
               
               def class_hierarchy
@@ -100,6 +100,10 @@ module PlanB
                 respond_to?(:get_ancestor) ? get_ancestor : nil
               end
       
+              def self.ancestor
+                @@ancestor_class
+              end
+              
               ####################################################
               # Returns true if specified model is a descendant of 
               # model and false if not.
@@ -191,12 +195,23 @@ module PlanB
               end
     
               def self.find_model(*args)
-                p args
                 find(:first, 
                  :conditions => args[0][:conditions],
-                 :joins => "LEFT JOIN parent_models ON parent_models.parent_model_descendant_id = child_models.child_model_id")
+                 :joins => do_joins)
               end
-    
+
+             def self.do_joins
+               ch = class_hierarchy
+               joins = ""
+               if ch.length > 1
+                 (0..ch.length-2).each do |i|
+                   joins << "LEFT JOIN " + ch[i+1].tableize + " ON " + ch[i+1].tableize.singularize +
+                            "_descendant_id = " + ch[i].tableize.singularize + "_id "
+                 end
+               end
+               joins
+             end
+
             do_eval
     
           end           

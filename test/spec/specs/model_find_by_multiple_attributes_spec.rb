@@ -72,10 +72,8 @@ describe "database queries by multible attributes for a model where model has an
   end
 
   it "should find model by specification of mutiple model attribute match condition where some attributes belong to model and other belong to ancestorof ancestor" do
-    gchk = GrandchildModel.find(:first, 
-      :conditions => "grandchild_models.grandchild_model_attr = '#{model_data[:grandchild_model_multiple_find]['grandchild_model_attr']}' AND parent_models.parent_model_attr = '#{model_data[:grandchild_model_multiple_find]['parent_model_attr']}'",
-      :joins => ["LEFT JOIN child_models ON child_models.child_model_descendant_id = grandchild_models.grandchild_model_id LEFT JOIN parent_models ON parent_models.parent_model_descendant_id = child_models.child_model_id"])
-      gchk.attributes.should eql_attributes(model_data[:grandchild_model_multiple_find])
+    gchk = GrandchildModel.find_model(:conditions => "grandchild_models.grandchild_model_attr = '#{model_data[:grandchild_model_multiple_find]['grandchild_model_attr']}' AND parent_models.parent_model_attr = '#{model_data[:grandchild_model_multiple_find]['parent_model_attr']}'")
+    gchk.attributes.should eql_attributes(model_data[:grandchild_model_multiple_find])
   end
 
   it "should find all models by specification of mutiple model attribute match condition where some attributes belong to model and other belong to ancestorof ancestor" do
