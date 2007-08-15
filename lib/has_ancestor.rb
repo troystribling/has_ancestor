@@ -24,7 +24,7 @@ module PlanB
         def has_descendants
           self.primary_key = "#{self.name.tableize.singularize}_id"
           eval("belongs_to :#{self.name.tableize.singularize}_descendant, :polymorphic => true")
-          InstanceMethods::AncestorAndDescendantMethods.add_methods(self, self.name)
+          InstanceMethods::AncestorAndDescendantMethods.add_methods(self, '')
           InstanceMethods::AncestorMethods.add_methods(self)
         end
         
@@ -45,19 +45,22 @@ module PlanB
         ##################################################
         module AncestorAndDescendantMethods 
 
-          def self.add_methods(target, model_name)
+          def self.add_methods(target, parent)
     
              target.class_eval <<-do_eval
               
               ####################################################
               # ancestor class hierarchy
-              @@ancestor_class = "#{model_name}"
+              "#{parent}" != '' ? @@ancestor_class = eval("#{parent}".classify) : @@ancestor_class = nil
 
               def self.class_hierarchy
-              p @@ancestor_class
                 @@ancestor_class == nil ? [self.name] : @@ancestor_class.class_hierarchy << self.name
               end
               
+              def class_hierarchy
+                self.class.class_hierarchy
+              end
+    
               ####################################################
               # Return descendant model if specified and throw 
               # Planb::InvalidType if model is not a descendant. 
@@ -97,12 +100,6 @@ module PlanB
                 respond_to?(:get_ancestor) ? get_ancestor : nil
               end
       
-              ####################################################
-              # Return list of classes in hierarchy
-              def class_hierarchy
-                ancestor == nil ? [self.class.name] : ancestor.class_hierarchy << self.class.name
-              end
-    
               ####################################################
               # Returns true if specified model is a descendant of 
               # model and false if not.
