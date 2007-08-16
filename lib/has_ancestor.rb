@@ -49,8 +49,6 @@ module PlanB
     
              target.class_eval <<-do_eval
               
-              ####################################################
-              # ancestor class hierarchy
               "#{parent}" != "" ? @@ancestor_class = eval("#{parent}".classify) : @@ancestor_class = nil
 
               def self.class_hierarchy
@@ -61,11 +59,6 @@ module PlanB
                 self.class.class_hierarchy
               end
     
-              ####################################################
-              # Return descendant model if specified and throw 
-              # Planb::InvalidType if model is not a descendant. 
-              # If model is not specified return model at root of 
-              # inheritance hierarchy.
               def to_descendant(arg = nil)
                 if arg.nil?
                   if descendant.nil?
@@ -86,16 +79,10 @@ module PlanB
                 end
               end
     
-              ####################################################
-              # Returns true if specified model is a descendant 
-              # of model and false if not.
               def descendant
                 respond_to?(:get_descendant) ? get_descendant : nil
               end
       
-              ####################################################
-              # Return descendant model instance. If model has no 
-              # descendant return nil.
               def ancestor
                 respond_to?(:get_ancestor) ? get_ancestor : nil
               end
@@ -104,9 +91,6 @@ module PlanB
                 @@ancestor_class
               end
               
-              ####################################################
-              # Returns true if specified model is a descendant of 
-              # model and false if not.
               def descendant_of?(ancestor_model)
                 unless ancestor.nil?
                   ancestor.class.name.eql?(ancestor_model.to_s.classify) ? \
@@ -115,6 +99,22 @@ module PlanB
                    false
                  end
               end
+
+              def self.find_model(*args)
+                if args.first == :first || args.first == :all 
+                  ch = class_hierarchy
+                  joins = ""
+                  if ch.length > 1
+                    (0..ch.length-2).each do |i|
+                      joins << " LEFT JOIN " + ch[i+1].tableize + " ON " + ch[i+1].tableize + "." + ch[i+1].tableize.singularize +
+                               "_descendant_id = " + ch[i].tableize + "." + ch[i].tableize.singularize + "_id "
+                    end
+                  end     
+                  args[1].include?(:joins) ?  args[1][:joins] << joins : args[1][:joins] = joins
+                end
+                find(*args)
+              end
+
 
             do_eval
 
@@ -194,23 +194,6 @@ module PlanB
                  end
               end
     
-              def self.find_model(args = {})
-                args.include?(:joins) ? args[:joins] << do_joins : args[:joins] = do_joins
-                find(args)
-              end
-
-             def self.do_joins
-               ch = class_hierarchy
-               joins = ""
-               if ch.length > 1
-                 (0..ch.length-2).each do |i|
-                   joins << " LEFT JOIN " + ch[i+1].tableize + " ON " + ch[i+1].tableize.singularize +
-                            "_descendant_id = " + ch[i].tableize.singularize + "_id "
-                 end
-               end
-               joins
-             end
-
             do_eval
     
           end           

@@ -13,11 +13,11 @@ describe "database queries by single attribute for a model where model does not 
   end
 
   it "should find model by specification of model primary key" do
-    ParentModel.find(@p.id).attributes.should eql_attributes(model_data[:parent_model])
+    ParentModel.find_model(@p.id).attributes.should eql_attributes(model_data[:parent_model])
   end
 
   it "should find model by specification of model attribute" do
-    ParentModel.find_by_parent_model_attr(model_data[:parent_model]['parent_model_attr']).attributes.should \
+    ParentModel.find_model(:first, :conditions => "parent_models.parent_model_attr = '#{model_data[:parent_model]['parent_model_attr']}'").attributes.should \
       eql_attributes(model_data[:parent_model])
   end
 
@@ -29,7 +29,7 @@ describe "database queries by single attribute for a model where model has desce
   before(:all) do
     @c = ChildModel.new(model_data[:child_model])
     @c.save
-    @p = ParentModel.find(@c.parent_model_id)
+    @p = ParentModel.find_model(@c.parent_model_id)
   end
 
   after(:all) do
@@ -37,15 +37,15 @@ describe "database queries by single attribute for a model where model has desce
   end
 
   it "should find model by specification of model primary key" do
-    ParentModel.find(@p.id).should eql(@p)
+    ParentModel.find_model(@p.id).should eql(@p)
   end
 
   it "should find descendant model by specification of descendant model primary key" do
-    ChildModel.find(@p.descendant.id).should eql(@c)
+    ChildModel.find_model(@p.descendant.id).should eql(@c)
   end
 
   it "should find model by specification of model attribute" do
-    ParentModel.find_by_parent_model_attr(model_data[:child_model]['parent_model_attr']).should eql(@p)
+    ParentModel.find_model(:first, :conditions => "parent_models.parent_model_attr = '#{model_data[:child_model]['parent_model_attr']}'").should eql(@p)
   end
 
 end
@@ -63,19 +63,19 @@ describe "database queries by single attribute for a model where model has an an
   end
     
   it "should find model by specification of model primary key" do
-    ChildModel.find(@c.id).attributes.should eql_attributes(model_data[:child_model])
+    ChildModel.find_model(@c.id).attributes.should eql_attributes(model_data[:child_model])
   end
 
   it "should find ancestor model by specification of ancestor model primary key" do
-    ParentModel.find(@c.ancestor.id).attributes.should eql_attributes(model_data[:child_ancestor_model])
+    ParentModel.find_model(@c.ancestor.id).attributes.should eql_attributes(model_data[:child_ancestor_model])
   end
 
   it "should find model by specification of model attribute" do
-    ChildModel.find_by_child_model_attr(model_data[:child_model]['child_model_attr']).should eql(@c)
+    ChildModel.find_model(:first, :conditions => "child_models.child_model_attr = '#{model_data[:child_model]['child_model_attr']}'").should eql(@c)
   end
 
   it "should find model by specification of ancestor model attribute" do
-    ChildModel.find_by_parent_model_attr(model_data[:child_model]['parent_model_attr']).to_descendant.should eql(@c)
+    ChildModel.find_model(:first, :conditions => "parent_models.parent_model_attr = '#{model_data[:child_model]['parent_model_attr']}'").should eql(@c)
   end
 
 end
@@ -87,7 +87,7 @@ describe "database queries by single attribute for a model where model has an an
   before(:all) do
     @g = GrandchildModel.new(model_data[:grandchild_model])
     @g.save
-    @c = ChildModel.find(@g.child_model_id)
+    @c = ChildModel.find_model(@g.child_model_id)
   end
 
   after(:all) do
@@ -95,24 +95,24 @@ describe "database queries by single attribute for a model where model has an an
   end
 
   it "should find model by specification of model primary key" do
-    ChildModel.find(@c.id).attributes.should eql_attributes(model_data[:grandchild_ancestor_model])
+    ChildModel.find_model(@c.id).attributes.should eql_attributes(model_data[:grandchild_ancestor_model])
   end
 
   it "should find ancestor model by specification of ancestor model primary key" do
-    ParentModel.find(@c.ancestor.id).attributes.should \
+    ParentModel.find_model(@c.ancestor.id).attributes.should \
       eql_attributes(model_data[:grandchild_ancestor_ancestor_model])
   end
 
   it "should find descendant model by specification of descendant model primary key" do
-    GrandchildModel.find(@c.descendant.id).should eql(@g)
+    GrandchildModel.find_model(@c.descendant.id).should eql(@g)
   end
 
   it "should find model by specification of model attribute" do
-    ChildModel.find_by_child_model_attr(model_data[:grandchild_model]['child_model_attr']).should eql(@c)
+    ChildModel.find_model(:first, :conditions => "child_models.child_model_attr = '#{model_data[:grandchild_model]['child_model_attr']}'").should eql(@c)
   end
 
   it "should find model by specification of ancestor model attribute" do
-    ChildModel.find_by_parent_model_attr(model_data[:grandchild_model]['parent_model_attr']).to_descendant(:child_model).should  eql(@c)
+    ChildModel.find_model(:first, :conditions => "parent_models.parent_model_attr = '#{model_data[:grandchild_model]['parent_model_attr']}'").should  eql(@c)
   end
 
 end
@@ -130,30 +130,30 @@ describe "database queries by single attribute for a model where model has an an
   end
 
   it "should find model by specification of model primary key" do
-    GrandchildModel.find(@g.id).attributes.should eql_attributes(model_data[:grandchild_model])
+    GrandchildModel.find_model(@g.id).attributes.should eql_attributes(model_data[:grandchild_model])
   end
 
   it "should find ancestor model by specification of ancestor model primary key" do
-    ChildModel.find(@g.ancestor.id).attributes.should eql_attributes(model_data[:grandchild_ancestor_model])
+    ChildModel.find_model(@g.ancestor.id).attributes.should eql_attributes(model_data[:grandchild_ancestor_model])
   end
 
   it "should find ancestor's ancestor model by specification of ancestor's ancestor model primary key" do
-    ParentModel.find(@g.ancestor.ancestor.id).attributes.should \
+    ParentModel.find_model(@g.ancestor.ancestor.id).attributes.should \
       eql_attributes(model_data[:grandchild_ancestor_ancestor_model])
   end
 
   it "should find model by specification of model attribute" do
-    GrandchildModel.find_by_grandchild_model_attr(model_data[:grandchild_model]['grandchild_model_attr']).attributes.should \
+    GrandchildModel.find_model(:first, :conditions => "grandchild_models.grandchild_model_attr = '#{model_data[:grandchild_model]['grandchild_model_attr']}'").attributes.should \
       eql_attributes(model_data[:grandchild_model])
   end
 
   it "should find model by specification of ancestor model attribute" do
-    GrandchildModel.find_by_child_model_attr(model_data[:grandchild_model]['child_model_attr']).to_descendant.attributes.should \
+    GrandchildModel.find_model(:first, :conditions => "child_models.child_model_attr = '#{model_data[:grandchild_model]['child_model_attr']}'").attributes.should \
       eql_attributes(model_data[:grandchild_model])
   end
 
   it "should find model by specification of  ancestor's ancestor model attribute" do
-    GrandchildModel.find_by_parent_model_attr(model_data[:grandchild_model]['parent_model_attr']).to_descendant.attributes.should \
+    GrandchildModel.find_model(:first, :conditions => "parent_models.parent_model_attr = '#{model_data[:grandchild_model]['parent_model_attr']}'").attributes.should \
       eql_attributes(model_data[:grandchild_model])
   end
 
