@@ -30,7 +30,7 @@ module PlanB
         
         ##################################################
         # Declare a model ancestor
-        def has_ancestor(args) 
+        def has_ancestor(args = {}) 
           self.primary_key = "#{self.name.tableize.singularize}_id"
           eval("has_one args[:named], :as => :#{args[:named]}_descendant, :dependent => :destroy")
           InstanceMethods::AncestorAndDescendantMethods.add_methods(self, args[:named])
@@ -194,10 +194,9 @@ module PlanB
                  end
               end
     
-              def self.find_model(*args)
-                find(:first, 
-                 :conditions => args[0][:conditions],
-                 :joins => do_joins)
+              def self.find_model(args = {})
+                args.include?(:joins) ? args[:joins] << do_joins : args[:joins] = do_joins
+                find(args)
               end
 
              def self.do_joins
@@ -205,7 +204,7 @@ module PlanB
                joins = ""
                if ch.length > 1
                  (0..ch.length-2).each do |i|
-                   joins << "LEFT JOIN " + ch[i+1].tableize + " ON " + ch[i+1].tableize.singularize +
+                   joins << " LEFT JOIN " + ch[i+1].tableize + " ON " + ch[i+1].tableize.singularize +
                             "_descendant_id = " + ch[i].tableize.singularize + "_id "
                  end
                end
