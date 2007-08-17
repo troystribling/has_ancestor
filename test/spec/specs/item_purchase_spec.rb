@@ -164,7 +164,7 @@ describe "closing item purchases from an ancestor model" do
 end
 
 ################################################################################################
-describe "has_ancestor limitations" do
+describe "has_ancestor limitation fixes" do
 
   before(:all) do
     @stock_item = StockItemPurchase.new(model_data[:stock_item_purchase])
@@ -178,19 +178,12 @@ describe "has_ancestor limitations" do
     @contract_item.destroy
   end
   
-  it "should be able to perform query filtering multiple attributes on a single model" do
-    ItemPurchase.find_all_by_unit_cost_and_item(model_data[:stock_item_purchase]['unit_cost'],
-      model_data[:stock_item_purchase]['item']).first.id.should eql(@stock_item.ancestor.id)
+  it "should be able to perform query filtering multiple attributes on different models" do
+    ContractItemPurchase.find_model(:first, :conditions => "item_purchases.unit_cost = '#{model_data[:contract_item_purchase]['unit_cost']}' and contract_item_purchases.length = '#{model_data[:contract_item_purchase]['length']}'").should be_eql(@contract_item)
   end
 
-  it "should not be able to perform query filtering multiple attributes on different models" do
-    lambda{ItemPurchase.find_all_by_unit_cost_and_length(model_data[:contract_item_purchase]['unit_cost'],
-      model_data[:contract_item_purchase]['length'])}.should raise_error(NoMethodError)
-  end
-
-  it "should return wrong model type when query from descendant matches ancestor atrtribute of some other descendant" do
-  p ContractItemPurchase.find_model(:first, :conditions => "item_purchases.unit_cost = '#{model_data[:stock_item_purchase]['unit_cost']}'")
-    ContractItemPurchase.find_model(:first, :conditions => "item_purchases.unit_cost = '#{model_data[:stock_item_purchase]['unit_cost']}'").id.should eql(@stock_item.ancestor.id)
+  it "should return nil when query from descendant matches ancestor atrtribute of some other descendant" do
+    ContractItemPurchase.find_model(:first, :conditions => "item_purchases.unit_cost = '#{model_data[:stock_item_purchase]['unit_cost']}'").should be_nil
   end
 
 end

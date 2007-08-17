@@ -31,6 +31,7 @@ module PlanB
         ##################################################
         # Declare a model ancestor
         def has_ancestor(args = {}) 
+          args.assert_valid_keys(:named)
           self.primary_key = "#{self.name.tableize.singularize}_id"
           eval("has_one args[:named], :as => :#{args[:named]}_descendant, :dependent => :destroy")
           InstanceMethods::AncestorAndDescendantMethods.add_methods(self, args[:named])
@@ -101,20 +102,20 @@ module PlanB
               end
 
               def self.find_model(*args)
-                if args.first == :first || args.first == :all 
+                if args.first.eql?(:first) || args.first.eql?(:all)
                   ch = class_hierarchy
                   joins = ""
-                  conds = ""
+                  conditions = ""
                   if ch.length > 1
                     (0..ch.length-2).each do |i|
-                      joins << " LEFT JOIN " + ch[i+1].tableize + " ON " + ch[i+1].tableize + "." + ch[i+1].tableize.singularize +
+                      joins << "LEFT JOIN " + ch[i+1].tableize + " ON " + ch[i+1].tableize + "." + ch[i+1].tableize.singularize +
                                "_descendant_id = " + ch[i].tableize + "." + ch[i].tableize.singularize + "_id "
-                      conds << " " + ch[i+1].tableize + "_descendant_type = '" + ch[i] + "'"
-                      conds << "and" if i < ch.length-2
+                      conditions << ch[i+1].tableize + "." + ch[i+1].tableize.singularize + "_descendant_type = '" + ch[i] + "'"
+                      conditions << " and " if i < ch.length-2
                     end
-                  end     
-                  args[1].include?(:joins) ?  args[1][:joins] << joins : args[1][:joins] = joins
-                  args[1].include?(:condtitions) ?  args[1][:condtitions] << conds : args[1][:condtitions] = conds
+                    args[1].include?(:joins) ?  args[1][:joins] << ' ' + joins : args[1][:joins] = joins
+                    args[1].include?(:conditions) ? args[1][:conditions] << ' and ' + conditions : args[1][:conditions] = conditions
+                  end  
                 end
                 find(*args)
               end
