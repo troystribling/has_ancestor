@@ -104,13 +104,17 @@ module PlanB
                 if args.first == :first || args.first == :all 
                   ch = class_hierarchy
                   joins = ""
+                  conds = ""
                   if ch.length > 1
                     (0..ch.length-2).each do |i|
                       joins << " LEFT JOIN " + ch[i+1].tableize + " ON " + ch[i+1].tableize + "." + ch[i+1].tableize.singularize +
                                "_descendant_id = " + ch[i].tableize + "." + ch[i].tableize.singularize + "_id "
+                      conds << " " + ch[i+1].tableize + "_descendant_type = '" + ch[i] + "'"
+                      conds << "and" if i < ch.length-2
                     end
                   end     
                   args[1].include?(:joins) ?  args[1][:joins] << joins : args[1][:joins] = joins
+                  args[1].include?(:condtitions) ?  args[1][:condtitions] << conds : args[1][:condtitions] = conds
                 end
                 find(*args)
               end

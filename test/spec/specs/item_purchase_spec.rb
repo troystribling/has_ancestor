@@ -189,7 +189,8 @@ describe "has_ancestor limitations" do
   end
 
   it "should return wrong model type when query from descendant matches ancestor atrtribute of some other descendant" do
-    ContractItemPurchase.find_by_unit_cost(model_data[:stock_item_purchase]['unit_cost']).id.should eql(@stock_item.ancestor.id)
+  p ContractItemPurchase.find_model(:first, :conditions => "item_purchases.unit_cost = '#{model_data[:stock_item_purchase]['unit_cost']}'")
+    ContractItemPurchase.find_model(:first, :conditions => "item_purchases.unit_cost = '#{model_data[:stock_item_purchase]['unit_cost']}'").id.should eql(@stock_item.ancestor.id)
   end
 
 end
