@@ -113,8 +113,12 @@ module PlanB
                       conditions << ch[i+1].tableize + "." + ch[i+1].tableize.singularize + "_descendant_type = '" + ch[i] + "'"
                       conditions << " and " if i < ch.length-2
                     end
-                    args[1].include?(:joins) ?  args[1][:joins] << ' ' + joins : args[1][:joins] = joins
-                    args[1].include?(:conditions) ? args[1][:conditions] << ' and ' + conditions : args[1][:conditions] = conditions
+                    if args[1].nil?
+                      args[1] = {:conditions => conditions, :joins => joins}
+                    else
+                      args[1].include?(:joins) ?  args[1][:joins] << ' ' + joins : args[1][:joins] = joins
+                      args[1].include?(:conditions) ? args[1][:conditions] << ' and ' + conditions : args[1][:conditions] = conditions
+                    end
                   end  
                 end
                 find(*args)

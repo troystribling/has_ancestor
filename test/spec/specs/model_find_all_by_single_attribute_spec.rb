@@ -20,6 +20,10 @@ describe "database queries for all models of a specified type where the models h
       eql_attribute_value(:parent_model_attr, model_data[:parent_model]['parent_model_attr']) 
   end
 
+  it "should find all models" do
+    ParentModel.find_model(:all).should eql_attribute_value(:parent_model_attr, model_data[:parent_model]['parent_model_attr']) 
+  end
+
 end
 
 #########################################################################################################

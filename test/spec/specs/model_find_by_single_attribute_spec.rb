@@ -16,6 +16,10 @@ describe "database queries by single attribute for a model where model does not 
     ParentModel.find_model(@p.id).attributes.should eql_attributes(model_data[:parent_model])
   end
 
+  it "should find first model" do
+    ParentModel.find_model(:first).attributes.should eql_attributes(model_data[:parent_model])
+  end
+
   it "should find model by specification of model attribute" do
     ParentModel.find_model(:first, :conditions => "parent_models.parent_model_attr = '#{model_data[:parent_model]['parent_model_attr']}'").attributes.should \
       eql_attributes(model_data[:parent_model])
