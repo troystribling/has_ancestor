@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 ################################################################################################
-describe "database queries by single attribute for a model where model does not have an ancestor and does not have descendants" do
+describe "queries by single attribute for a model where model does not have an ancestor and does not have descendants" do
 
   before(:all) do
     @p = ParentModel.new(model_data[:parent_model])
@@ -28,7 +28,7 @@ describe "database queries by single attribute for a model where model does not 
 end
 
 #########################################################################################################
-describe "database queries by single attribute for a model where model has descendants and does not have an ancestor" do
+describe "queries by single attribute for a model where model has descendants and does not have an ancestor" do
 
   before(:all) do
     @c = ChildModel.new(model_data[:child_model])
@@ -55,7 +55,7 @@ describe "database queries by single attribute for a model where model has desce
 end
 
 #########################################################################################################
-describe "database queries by single attribute for a model where model has an ancestor and does not have descendants" do
+describe "queries by single attribute for a model where model has an ancestor and does not have descendants" do
 
   before(:all) do
     @c = ChildModel.new(model_data[:child_model])
@@ -86,7 +86,7 @@ end
 
 
 #########################################################################################################
-describe "database queries by single attribute for a model where model has an ancestor and has descendants" do
+describe "queries by single attribute for a model where model has an ancestor and has descendants" do
 
   before(:all) do
     @g = GrandchildModel.new(model_data[:grandchild_model])
@@ -122,7 +122,7 @@ describe "database queries by single attribute for a model where model has an an
 end
 
 #########################################################################################################
-describe "database queries by single attribute for a model where model has an ancestor and is a descendant of a model that has an ancestor" do
+describe "queries by single attribute for a model where model has an ancestor and is a descendant of a model that has an ancestor" do
 
   before(:all) do
     @g = GrandchildModel.new(model_data[:grandchild_model])

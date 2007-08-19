@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 #########################################################################################################
-describe "database queries for all models of a specified type where the models have no ancestor and no descendants" do
+describe "queries for all models of a specified type where the models have no ancestor and no descendants" do
 
   before(:all) do
     @p1 = ParentModel.new(model_data[:parent_model])
@@ -27,7 +27,7 @@ describe "database queries for all models of a specified type where the models h
 end
 
 #########################################################################################################
-describe "database queries for all models of a specified type where the models have no ancestor and have descendants" do
+describe "queries for all models of a specified type where the models have no ancestor and have descendants" do
 
   before(:all) do
     @c1 = ChildModel.new(model_data[:child_model])
@@ -49,7 +49,7 @@ describe "database queries for all models of a specified type where the models h
 end
 
 #########################################################################################################
-describe "database queries for all models of a specified type where the models have an ancestor and have no descendants" do
+describe "queries for all models of a specified type where the models have an ancestor and have no descendants" do
 
   before(:all) do
     @c = ChildModel.new(model_data[:child_model])
@@ -79,7 +79,7 @@ describe "database queries for all models of a specified type where the models h
 end
 
 #########################################################################################################
-describe "database queries for all models of a specified type where the models have no descendants and have an ancestor has an ancestor" do
+describe "queries for all models of a specified type where the models have no descendants and have an ancestor has an ancestor" do
 
   before(:all) do
     @g = GrandchildModel.new(model_data[:grandchild_model])

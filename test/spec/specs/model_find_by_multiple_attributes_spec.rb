@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 ################################ #################################################################
-describe "database queries by multible attributes for a model where model does not have an ancestor and does not have descendants" do
+describe "queries by multible attributes for a model where model does not have an ancestor and does not have descendants" do
 
   before(:all) do
     @p = ParentModel.new(model_data[:parent_model_multiple_find])
@@ -25,7 +25,7 @@ describe "database queries by multible attributes for a model where model does n
 end
 
 #################################################################################################
-describe "database queries by multible attributes for a model where model has an ancestor and does not have descendants" do
+describe "queries by multible attributes for a model where model has an ancestor and does not have descendants" do
 
   before(:all) do
     @c = ChildModel.new(model_data[:child_model_multiple_find])
@@ -49,7 +49,7 @@ describe "database queries by multible attributes for a model where model has an
 end
 
 #################################################################################################
-describe "database queries by multible attributes for a model where model has an ancestor and ancestor has ancestor but does not have descendants" do
+describe "queries by multible attributes for a model where model has an ancestor and ancestor has ancestor but does not have descendants" do
 
   before(:all) do
     @g1 = GrandchildModel.new(model_data[:grandchild_model_multiple_find])
