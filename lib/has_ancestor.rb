@@ -101,7 +101,7 @@ module PlanB
                  end
               end
 
-              def self.find_model(*args)
+              def self.find_by_model(*args)
                 if args.first.eql?(:first) || args.first.eql?(:all)
                   ch = class_hierarchy
                   joins = ""
