@@ -13,7 +13,7 @@ describe "queries by multible attributes for a model where model does not have a
   end
 
   it "should find model by specification of mutiple model attribute match condition where all attributes belong to model" do
-    ParentModel.find_model(:first, :conditions => "parent_model_attr = '#{model_data[:parent_model_multiple_find]['parent_model_attr']}' and parent_model_other_attr = '#{model_data[:parent_model_multiple_find]['parent_model_other_attr']}'").attributes.should \
+    ParentModel.find_by_model(:first, :conditions => "parent_model_attr = '#{model_data[:parent_model_multiple_find]['parent_model_attr']}' and parent_model_other_attr = '#{model_data[:parent_model_multiple_find]['parent_model_other_attr']}'").attributes.should \
       eql_attributes(model_data[:parent_model_multiple_find])
   end
 
@@ -37,12 +37,12 @@ describe "queries by multible attributes for a model where model has an ancestor
   end
 
   it "should find model by specification of mutiple model attribute match condition where all attributes belong to model" do
-    ChildModel.find_model(:first, :conditions => "child_model_attr = '#{model_data[:child_model_multiple_find]['child_model_attr']}' and child_model_other_attr = '#{model_data[:child_model_multiple_find]['child_model_other_attr']}'").attributes.should \
+    ChildModel.find_by_model(:first, :conditions => "child_model_attr = '#{model_data[:child_model_multiple_find]['child_model_attr']}' and child_model_other_attr = '#{model_data[:child_model_multiple_find]['child_model_other_attr']}'").attributes.should \
       eql_attributes(model_data[:child_model_multiple_find])
   end
 
   it "should find model by specification of mutiple model attribute match condition where some attributes belong to model and other belong to ancestor" do
-    ChildModel.find_model(:first, :conditions => "child_models.child_model_attr = '#{model_data[:child_model_multiple_find]['child_model_attr']}' AND parent_models.parent_model_attr = '#{model_data[:child_model_multiple_find]['parent_model_attr']}'").attributes.should \
+    ChildModel.find_by_model(:first, :conditions => "child_models.child_model_attr = '#{model_data[:child_model_multiple_find]['child_model_attr']}' AND parent_models.parent_model_attr = '#{model_data[:child_model_multiple_find]['parent_model_attr']}'").attributes.should \
       eql_attributes(model_data[:child_model_multiple_find])
   end
 
@@ -67,17 +67,17 @@ describe "queries by multible attributes for a model where model has an ancestor
   end
 
   it "should find model by specification of mutiple model attribute match condition where all attributes belong to model" do
-    GrandchildModel.find_model(:first, :conditions => "grandchild_model_attr = '#{model_data[:grandchild_model_multiple_find]['grandchild_model_attr']}' and grandchild_model_other_attr = '#{model_data[:grandchild_model_multiple_find]['grandchild_model_other_attr']}'").attributes.should \
+    GrandchildModel.find_by_model(:first, :conditions => "grandchild_model_attr = '#{model_data[:grandchild_model_multiple_find]['grandchild_model_attr']}' and grandchild_model_other_attr = '#{model_data[:grandchild_model_multiple_find]['grandchild_model_other_attr']}'").attributes.should \
       eql_attributes(model_data[:grandchild_model_multiple_find])
   end
 
   it "should find model by specification of mutiple model attribute match condition where some attributes belong to model and other belong to ancestor of ancestor" do
-    GrandchildModel.find_model(:first, :conditions => "grandchild_models.grandchild_model_attr = '#{model_data[:grandchild_model_multiple_find]['grandchild_model_attr']}' AND parent_models.parent_model_attr = '#{model_data[:grandchild_model_multiple_find]['parent_model_attr']}'").attributes.should \
+    GrandchildModel.find_by_model(:first, :conditions => "grandchild_models.grandchild_model_attr = '#{model_data[:grandchild_model_multiple_find]['grandchild_model_attr']}' AND parent_models.parent_model_attr = '#{model_data[:grandchild_model_multiple_find]['parent_model_attr']}'").attributes.should \
       eql_attributes(model_data[:grandchild_model_multiple_find])
   end
 
   it "should find all models by specification of mutiple model attribute match condition where some attributes belong to model and other belong to ancestor of ancestor" do
-    gchk = GrandchildModel.find_model(:all, :readonly => false, :conditions => "grandchild_models.grandchild_model_attr = '#{model_data[:grandchild_model_multiple_find]['grandchild_model_attr']}' AND parent_models.parent_model_attr = '#{model_data[:grandchild_model_multiple_find]['parent_model_attr']}'")
+    gchk = GrandchildModel.find_by_model(:all, :readonly => false, :conditions => "grandchild_models.grandchild_model_attr = '#{model_data[:grandchild_model_multiple_find]['grandchild_model_attr']}' AND parent_models.parent_model_attr = '#{model_data[:grandchild_model_multiple_find]['parent_model_attr']}'")
 #      gchk.attributes.should eql_attributes(model_data[:grandchild_model_multiple_find])
   end
 

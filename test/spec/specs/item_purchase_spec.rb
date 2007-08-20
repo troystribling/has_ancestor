@@ -179,11 +179,11 @@ describe "has_ancestor limitation fixes" do
   end
   
   it "should be able to perform query filtering multiple attributes on different models" do
-    ContractItemPurchase.find_model(:first, :conditions => "item_purchases.unit_cost = '#{model_data[:contract_item_purchase]['unit_cost']}' and contract_item_purchases.length = '#{model_data[:contract_item_purchase]['length']}'").should be_eql(@contract_item)
+    ContractItemPurchase.find_by_model(:first, :conditions => "item_purchases.unit_cost = '#{model_data[:contract_item_purchase]['unit_cost']}' and contract_item_purchases.length = '#{model_data[:contract_item_purchase]['length']}'").should be_eql(@contract_item)
   end
 
   it "should return nil when query from descendant matches ancestor atrtribute of some other descendant" do
-    ContractItemPurchase.find_model(:first, :conditions => "item_purchases.unit_cost = '#{model_data[:stock_item_purchase]['unit_cost']}'").should be_nil
+    ContractItemPurchase.find_by_model(:first, :conditions => "item_purchases.unit_cost = '#{model_data[:stock_item_purchase]['unit_cost']}'").should be_nil
   end
 
 end

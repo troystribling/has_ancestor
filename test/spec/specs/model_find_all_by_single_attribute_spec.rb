@@ -16,12 +16,12 @@ describe "queries for all models of a specified type where the models have no an
   end
 
   it "should find models by specification of model attribute" do
-    ParentModel.find_model(:all, :conditions => "parent_models.parent_model_attr = '#{model_data[:parent_model]['parent_model_attr']}'").should \
+    ParentModel.find_by_model(:all, :conditions => "parent_models.parent_model_attr = '#{model_data[:parent_model]['parent_model_attr']}'").should \
       eql_attribute_value(:parent_model_attr, model_data[:parent_model]['parent_model_attr']) 
   end
 
   it "should find all models" do
-    ParentModel.find_model(:all).should eql_attribute_value(:parent_model_attr, model_data[:parent_model]['parent_model_attr']) 
+    ParentModel.find_by_model(:all).should eql_attribute_value(:parent_model_attr, model_data[:parent_model]['parent_model_attr']) 
   end
 
 end
@@ -42,7 +42,7 @@ describe "queries for all models of a specified type where the models have no an
   end
 
   it "should find models by specification of model attribute" do
-    ParentModel.find_model(:all, :conditions => "parent_models.parent_model_attr = '#{model_data[:child_model]['parent_model_attr']}'").should \
+    ParentModel.find_by_model(:all, :conditions => "parent_models.parent_model_attr = '#{model_data[:child_model]['parent_model_attr']}'").should \
       eql_attribute_value(:parent_model_attr, model_data[:child_model]['parent_model_attr']) 
   end
 
@@ -67,12 +67,12 @@ describe "queries for all models of a specified type where the models have an an
   end
 
   it "should find models by specification of model attribute" do
-    ChildModel.find_model(:all, :conditions => "child_models.child_model_attr = '#{model_data[:child_model]['child_model_attr']}'").should \
+    ChildModel.find_by_model(:all, :conditions => "child_models.child_model_attr = '#{model_data[:child_model]['child_model_attr']}'").should \
       eql_attribute_value(:child_model_attr, model_data[:child_model]['child_model_attr']) 
   end
 
   it "should find models by specification of ancestor model attribute" do
-    ChildModel.find_model(:all, :conditions => "parent_models.parent_model_attr = '#{model_data[:child_model]['parent_model_attr']}'").should \
+    ChildModel.find_by_model(:all, :conditions => "parent_models.parent_model_attr = '#{model_data[:child_model]['parent_model_attr']}'").should \
       eql_attribute_value(:parent_model_attr, model_data[:child_model]['parent_model_attr']) 
   end
 
@@ -100,17 +100,17 @@ describe "queries for all models of a specified type where the models have no de
   end
 
   it "should find models by specification of model attribute" do
-    GrandchildModel.find_model(:all, :conditions => "grandchild_models.grandchild_model_attr = '#{model_data[:grandchild_model]['grandchild_model_attr']}'").should \
+    GrandchildModel.find_by_model(:all, :conditions => "grandchild_models.grandchild_model_attr = '#{model_data[:grandchild_model]['grandchild_model_attr']}'").should \
       eql_attribute_value(:grandchild_model_attr, model_data[:grandchild_model]['grandchild_model_attr']) 
   end
 
   it "should find models by specification of ancestor attribute" do
-    GrandchildModel.find_model(:all, :conditions => "child_models.child_model_attr = '#{model_data[:grandchild_model]['child_model_attr']}'").should \
+    GrandchildModel.find_by_model(:all, :conditions => "child_models.child_model_attr = '#{model_data[:grandchild_model]['child_model_attr']}'").should \
       eql_attribute_value(:child_model_attr, model_data[:grandchild_model]['child_model_attr']) 
   end
 
   it "should find models by specification of ancestor's ancestor attribute" do
-    GrandchildModel.find_model(:all, :conditions => "parent_models.parent_model_attr = '#{model_data[:grandchild_model]['parent_model_attr']}'").should \
+    GrandchildModel.find_by_model(:all, :conditions => "parent_models.parent_model_attr = '#{model_data[:grandchild_model]['parent_model_attr']}'").should \
       eql_attribute_value(:parent_model_attr, model_data[:grandchild_model]['parent_model_attr']) 
   end
 
