@@ -41,15 +41,20 @@ module PlanB
                 get_#{parent}.update
               end
     
-              def method_missing(meth, *args, &blk) 
-                begin
-                  super
-                rescue NoMethodError
-                  if self.respond_to?(:descendant_method_missing)
-                    self.descendant_method_missing(meth, *args, &blk)
-                  else
-                    get_#{parent}.send(meth, *args, &blk)
+              def method_missing(meth, *args, &blk)
+                meth_class = self.class.attribute_to_ancestor(meth) 
+                if meth_class.nil? || meth_class == self.class.name
+                  begin
+                    super
+                  rescue NoMethodError
+                    if self.respond_to?(:descendant_method_missing)
+                      self.descendant_method_missing(meth, *args, &blk)
+                    else
+                      get_#{parent}.send(meth, *args, &blk)
+                    end
                   end
+                else
+                 eval(meth_class.tableize.singularize).send(meth, *args, &blk)
                 end
               end
     
