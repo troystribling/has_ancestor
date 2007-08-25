@@ -23,7 +23,7 @@ module PlanB
                 @@ancestor_class == nil ? [self.name] : [self.name] + @@ancestor_class.class_hierarchy
               end
               
-              def self.attribute_to_ancestor(attr)
+              def self.ancestor_for_attribute(attr)
                 class_hierarchy.detect {|c| eval(c).column_names.include?(attr.to_s)}
               end
               

@@ -42,7 +42,7 @@ module PlanB
               end
     
               def method_missing(meth, *args, &blk)
-                meth_class = self.class.attribute_to_ancestor(meth) 
+                meth_class = self.class.ancestor_for_attribute(meth) 
                 if meth_class.nil? || meth_class == self.class.name
                   begin
                     super
