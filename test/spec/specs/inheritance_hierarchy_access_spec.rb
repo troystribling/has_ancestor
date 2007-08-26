@@ -76,11 +76,11 @@ describe "validation from model instance of model ancestor" do
     @g.should be_descendant_of(:parent_model)
   end
 
-  it "should raise exception if model specified is not an ancestor" do
+  it "should be able to determine if model specified is not an ancestor" do
     @g.should_not be_descendant_of(:this_will_fail)
   end
   
-  it "should raise exception if model has no ancestor" do
+  it "should be able to determine if model has no ancestor" do
     ParentModel.new(model_data[:parent_model]).should_not be_descendant_of(:this_will_fail)
   end
   
@@ -112,3 +112,23 @@ describe "discovery from model class of model inheritance hierarchy" do
 
 end
 
+########################################################################################################
+describe "discovery from descendant model class of ancestor model class with a specified attribute" do
+
+  it "should return name of model class if attribute belongs to model" do
+    ParentModel.ancestor_for_attribute(:parent_model_attr).should eql('ParentModel')
+  end
+
+  it "should return name of ancestor class if attribute belongs to ancestor" do
+    ChildModel.ancestor_for_attribute(:parent_model_attr).should eql('ParentModel')
+  end
+
+  it "should return name of ancestor's ancestor class if attribute belongs to ancestor's ancestor" do
+    GrandchildModel.ancestor_for_attribute(:parent_model_attr).should eql('ParentModel')
+  end
+
+  it "should return nil if attribute belongs to no class in inheritance hierarchy" do
+    GrandchildModel.ancestor_for_attribute(:this_should_fail).should be_nil
+  end
+
+end
