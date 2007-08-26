@@ -42,10 +42,7 @@ module PlanB
               end
     
               def method_missing(meth, *args, &blk)
-              p meth
-              p self.class.name
                 meth_class = self.class.ancestor_for_attribute(meth) 
-              p self.class.ancestor_for_attribute(meth)
                 if meth_class.nil? || meth_class == self.class.name
                   begin
                     super
@@ -57,8 +54,11 @@ module PlanB
                     end
                   end
                 else
-                p eval(meth_class.tableize.singularize).send(meth, *args, &blk)
-                 eval(meth_class.tableize.singularize).send(meth, *args, &blk)
+                 if self.respond_to?(meth_class.tableize.singularize.to_sym)
+                   get_#{parent}.send(meth, *args, &blk)
+                 else
+                   self.descendant_method_missing(meth, *args, &blk)
+                 end
                 end
               end
     

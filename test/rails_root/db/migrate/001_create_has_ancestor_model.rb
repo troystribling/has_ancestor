@@ -8,16 +8,14 @@ class CreateHasAncestorModel < ActiveRecord::Migration
       t.column :parent_model_attr, :string
       t.column :parent_model_other_attr, :string
       t.column :parent_model_string, :string, :default => 'aString'
-#      t.column :parent_model_text, :text, :default => 'someText'
-#      t.column :parent_model_integer, :integer, :default => 0
-#      t.column :parent_model_float, :float, :default => 1.0
-#      t.column :parent_model_decimal, :decimal, :default => 1.0
-#      t.column :parent_model_date, :date, :default => Date.today
-#      t.column :parent_model_time, :time, :default => Time.now
-#      t.column :parent_model_datetime, :datetime, :default => DateTime.now
-#      t.column :parent_model_timestamp, :timestamp, :default => Time.now
-#      t.column :parent_model_boolean, :boolean, :default => true
-#      t.column :parent_model_binary, :binary, :default => 'someBinary'
+      t.column :parent_model_integer, :integer, :default => 0
+      t.column :parent_model_float, :float, :default => 1.0
+      t.column :parent_model_decimal, :decimal, :default => 1.0
+      t.column :parent_model_date, :date, :default => Date.today
+      t.column :parent_model_time, :time, :default => Time.now
+      t.column :parent_model_datetime, :datetime, :default => Time.now
+      t.column :parent_model_timestamp, :timestamp, :default => Time.now
+      t.column :parent_model_boolean, :boolean, :default => true
     end
    
     create_table :child_models, :force => true, :primary_key => :child_model_id  do |t|
@@ -26,16 +24,14 @@ class CreateHasAncestorModel < ActiveRecord::Migration
       t.column :child_model_attr, :string
       t.column :child_model_other_attr, :string
       t.column :child_model_string, :string, :default => 'aString'
-#      t.column :child_model_text, :text, :default => 'someText'
-#      t.column :child_model_integer, :integer, :default => 0
-#      t.column :child_model_float, :float, :default => 1.0
-#      t.column :child_model_decimal, :decimal, :default => 1.0
-#      t.column :child_model_date, :date, :default => Date.today
-#      t.column :child_model_time, :time, :default => Time.now
-#      t.column :child_model_datetime, :datetime, :default => DateTime.now
-#      t.column :child_model_timestamp, :timestamp, :default => Time.now
-#      t.column :child_model_boolean, :boolean, :default => true
-#      t.column :child_model_binary, :binary, :default => 'someBinary'
+      t.column :child_model_integer, :integer, :default => 0
+      t.column :child_model_float, :float, :default => 1.0
+      t.column :child_model_decimal, :decimal, :default => 1.0
+      t.column :child_model_date, :date, :default => Date.today
+      t.column :child_model_time, :time, :default => Time.now
+      t.column :child_model_datetime, :datetime, :default => Time.now
+      t.column :child_model_timestamp, :timestamp, :default => Time.now
+      t.column :child_model_boolean, :boolean, :default => true
     end
   
     create_table :grandchild_models, :force => true, :primary_key => :grandchild_model_id  do |t|
