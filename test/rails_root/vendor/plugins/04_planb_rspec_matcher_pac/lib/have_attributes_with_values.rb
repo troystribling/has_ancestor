@@ -1,4 +1,4 @@
-############################################################
+##############################################################
 # match attributes of model against hash of expected values
 module PlanB
   module SpecMatchers    
@@ -7,26 +7,47 @@ module PlanB
     
         def initialize(expected)
           @expected = expected
+          @expt_error = @expected
         end
     
         def matches?(mod)  
           if mod.class.eql?(Array) and not @expected.class.eql?(Array)
-            mod.find {|m| check_model_for_expected(m, @expected).eql?(false)}
+            check_models(mod, @expected, false)
           elsif not mod.class.eql?(Array) and @expected.class.eql?(Array)
-          elsif mod.class.eql?(Array) and @expected.class.eql?(Array)
+            @expected.detect do |e| 
+              @expt_error = e
+              check_expected(mod,e).eql?(true)
+            end.nil? ? false : true              
+          elsif mod.class.eql?(Array) and @expected.class.eql?(Array) 
+            @expected.detect do |e| 
+              @expt_error = e
+              check_models(mod,e, true).eql?(false)
+            end.nil? ? true : false
           else
-            check_model_for_expected(mod)
+            check_expected(mod, @expected)
           end
         end
         
-        def check_model_for_expected(mod, expt)
+        def check_models(mod, expt, cond)
+          mod.detect {|m| check_expected(m, expt).eql?(cond)}.nil? ? !cond : cond          
+        end
+        
+        def check_expected(mod, expt)
           @attr = mod.attributes
-          expt.find {|key, val| val.eql?(@attr[key])}.nil? ? true : false
+          expt.detect {|key, val| not val.eql?(@attr[key])}.nil? ? true : false
         end
         
         def failure_message
           error_msg = "Attribute match error\n"
-          @expected.each do |key, val|
+          @expt_error.each do |key, val|
+             error_msg << " attribute value '#{@attr[key]}' for '#{key}' expecting '#{val}'\n" 
+          end
+          error_msg
+        end
+  
+        def negative_failure_message
+          error_msg = "Attribute match\n"
+          @expt_error.each do |key, val|
              error_msg << " attribute value '#{@attr[key]}' for '#{key}' expecting '#{val}'\n" 
           end
           error_msg
