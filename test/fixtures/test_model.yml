@@ -1,93 +1,97 @@
 grandchild_model:
-  parent_model_attr: Troy
-  child_model_attr: Annapolis
-  grandchild_model_attr: black
+  parent_model_string: Troy
+  child_model_string: Annapolis
+  grandchild_model_string: black
+  child_model_integer: 2
+  parent_model_integer: 5
+  grandchild_model_integer: 3
 
-grandchild_model_multiple_find:
-  parent_model_attr: Troy
-  parent_model_other_attr: Michelle 
-  child_model_attr: Annapolis
-  child_model_other_attr: Mt.Juliet
-  grandchild_model_attr: black
-  grandchild_model_other_attr: red
+grandchild_model_find_1:
+  parent_model_string: Troy
+  child_model_string: Annapolis
+  grandchild_model_string: black
+  child_model_integer: 2
+  parent_model_integer: 5
+  grandchild_model_integer: 3
 
-grandchild_model_multiple_find_1:
-  parent_model_attr: Todd
-  parent_model_other_attr: Angie
-  child_model_attr: Atlanta
-  child_model_other_attr: Nashville
-  grandchild_model_attr: orange
-  grandchild_model_other_attr: yellow
+grandchild_model_find_2:
+  parent_model_string: Troy
+  child_model_string: Annapolis
+  grandchild_model_string: black
+  child_model_integer: 12
+  parent_model_integer: 15
+  grandchild_model_integer: 3
 
-grandchild_model_multiple_find_2:
-  parent_model_attr: Troy
-  parent_model_other_attr: Vanessa
-  child_model_attr: Annapolis
-  child_model_other_attr: Rockville
-  grandchild_model_attr: black
-  grandchild_model_other_attr: pink
+grandchild_model_find_3:
+  parent_model_string: Todd
+  child_model_string: Atlanta
+  grandchild_model_string: orange
+  grandchild_model_other_string: yellow
+  child_model_integer: 6
+  parent_model_integer: 16
+  grandchild_model_integer: 26
 
 grandchild_model_update:
-  parent_model_attr: Todd
-  child_model_attr: Atlanta
-  grandchild_model_attr: green
+  parent_model_string: Todd
+  child_model_string: Atlanta
+  grandchild_model_string: green
 
 grandchild_ancestor_model:
-  parent_model_attr: Troy
-  child_model_attr: Annapolis
+  parent_model_string: Troy
+  child_model_string: Annapolis
 
 grandchild_ancestor_ancestor_model:
-  parent_model_attr: Troy
+  parent_model_string: Troy
 
-grandchild_model_find_all_parent:
-  parent_model_attr: Vanessa
-  child_model_attr: Annapolis
-  grandchild_model_attr: black
-
-grandchild_model_find_all_child:
-  parent_model_attr: Troy
-  child_model_attr: Nashville
-  grandchild_model_attr: black
-
-grandchild_model_find_all_grandchild:
-  parent_model_attr: Troy
-  child_model_attr: Annapolis
-  grandchild_model_attr: grey
-  
 child_model:
-  parent_model_attr: Billy
-  child_model_attr: Manchester
+  parent_model_string: Billy
+  child_model_string: Manchester
+  child_model_integer: 2
+  parent_model_integer: 5
 
 child_model_update:
-  parent_model_attr: Charelene
-  child_model_attr: Hendersonville
+  parent_model_string: Charelene
+  child_model_string: Hendersonville
 
-child_model_find_all_parent:
-  parent_model_attr: Katie
-  child_model_attr: Manchester
+child_model_find_1:
+  parent_model_string: Billy
+  child_model_string: Manchester
+  child_model_integer: 2
+  parent_model_integer: 5
 
-child_model_find_all_child:
-  parent_model_attr: Billy
-  child_model_attr: Nashville
+child_model_find_2:
+  parent_model_string: Billy
+  child_model_string: MtJuliet
+  child_model_integer: 2
+  parent_model_integer: 15
 
-child_model_multiple_find:
-  parent_model_attr: Billy
-  parent_model_other_attr: Debbie
-  child_model_attr: Manchester
-  child_model_other_attr: Smyrna
+child_model_find_3:
+  parent_model_string: Charlene
+  child_model_string: Hendersonville
+  child_model_integer: 12
+  parent_model_integer: 15
 
 child_ancestor_model:
-  parent_model_attr: Billy
+  parent_model_string: Billy
     
 parent_model:
-  parent_model_attr: Guy
+  parent_model_string: Guy
 
 parent_model_update:
-  parent_model_attr: Winfred
+  parent_model_string: Winfred
+  parent_model_integer: 5
 
-parent_model_multiple_find:
-  parent_model_attr: Guy
-  parent_model_other_attr: Sybil
+parent_model_find_1:
+  parent_model_string: Guy
+  parent_model_integer: 5
+
+parent_model_find_2:
+  parent_model_string: Guy
+  parent_model_integer: 5
+
+parent_model_find_3:
+  parent_model_string: Winfred
+  parent_model_integer: 15
 
 item_purchase:
   item: keyboard

@@ -5,8 +5,6 @@ class CreateHasAncestorModel < ActiveRecord::Migration
     create_table :parent_models, :force => true, :primary_key => :parent_model_id do |t|
       t.column :parent_model_descendant_id, :integer
       t.column :parent_model_descendant_type, :string
-      t.column :parent_model_attr, :string
-      t.column :parent_model_other_attr, :string
       t.column :parent_model_string, :string, :default => 'aString'
       t.column :parent_model_integer, :integer, :default => 0
       t.column :parent_model_float, :float, :default => 1.0
@@ -21,8 +19,6 @@ class CreateHasAncestorModel < ActiveRecord::Migration
     create_table :child_models, :force => true, :primary_key => :child_model_id  do |t|
       t.column :child_model_descendant_id, :integer
       t.column :child_model_descendant_type, :string
-      t.column :child_model_attr, :string
-      t.column :child_model_other_attr, :string
       t.column :child_model_string, :string, :default => 'aString'
       t.column :child_model_integer, :integer, :default => 0
       t.column :child_model_float, :float, :default => 1.0
@@ -35,8 +31,15 @@ class CreateHasAncestorModel < ActiveRecord::Migration
     end
   
     create_table :grandchild_models, :force => true, :primary_key => :grandchild_model_id  do |t|
-      t.column :grandchild_model_attr, :string
-      t.column :grandchild_model_other_attr, :string
+      t.column :grandchild_model_string, :string, :default => 'aString'
+      t.column :grandchild_model_integer, :integer, :default => 0
+      t.column :grandchild_model_float, :float, :default => 1.0
+      t.column :grandchild_model_decimal, :decimal, :default => 1.0
+      t.column :grandchild_model_date, :date, :default => Date.today
+      t.column :grandchild_model_time, :time, :default => Time.now
+      t.column :grandchild_model_datetime, :datetime, :default => Time.now
+      t.column :grandchild_model_timestamp, :timestamp, :default => Time.now
+      t.column :grandchild_model_boolean, :boolean, :default => true
     end
     
     create_table :item_purchases, :force => true, :primary_key => :item_purchase_id do |t|
