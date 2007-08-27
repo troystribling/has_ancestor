@@ -28,29 +28,33 @@ module PlanB
           end
         end
         
-        def check_models(mod, expt, cond)
-          mod.detect {|m| check_expected(m, expt).eql?(cond)}.nil? ? !cond : cond          
+        def check_models(models, expt, cond)
+          match_model = models.detect {|m| check_expected(m, expt).eql?(cond)}
+          if match_model.nil?
+            !cond
+          else
+            models.delete(match_model) if cond
+            cond
+          end          
         end
         
-        def check_expected(mod, expt)
-          @attr = mod.attributes
-          expt.detect {|key, val| not val.eql?(@attr[key])}.nil? ? true : false
+        def check_expected(model, expt)
+          expt.detect {|key, val| not val.eql?(model.attributes[key])}.nil? ? true : false
         end
         
-        def failure_message
-          error_msg = "Attribute match error\n"
+        def message(error_msg)
           @expt_error.each do |key, val|
-             error_msg << " attribute value '#{@attr[key]}' for '#{key}' expecting '#{val}'\n" 
+             error_msg << "'#{key}' expecting '#{val}'\n" 
           end
           error_msg
+        end
+
+        def failure_message
+          message("Could not match attributes\n")
         end
   
         def negative_failure_message
-          error_msg = "Attribute match\n"
-          @expt_error.each do |key, val|
-             error_msg << " attribute value '#{@attr[key]}' for '#{key}' expecting '#{val}'\n" 
-          end
-          error_msg
+          message("Matched attributes\n")
         end
   
         def description
