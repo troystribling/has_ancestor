@@ -10,22 +10,18 @@ module PlanB
         end
     
         def matches?(mod)  
-          if mod.class.eql?(Array)
-            result = mod.find do |m|
-              check_model(m) == false
-            end
-            result.nil? ? true : false
+          if mod.class.eql?(Array) and not @expected.class.eql?(Array)
+            mod.find {|m| check_model_for_expected(m, @expected).eql?(false)}
+          elsif not mod.class.eql?(Array) and @expected.class.eql?(Array)
+          elsif mod.class.eql?(Array) and @expected.class.eql?(Array)
           else
-            check_model(mod)
+            check_model_for_expected(mod)
           end
         end
         
-        def check_model(mod)
+        def check_model_for_expected(mod, expt)
           @attr = mod.attributes
-          result = @expected.find do |key, val|
-            val != @attr[key]
-          end
-          result.nil? ? true : false
+          expt.find {|key, val| val.eql?(@attr[key])}.nil? ? true : false
         end
         
         def failure_message

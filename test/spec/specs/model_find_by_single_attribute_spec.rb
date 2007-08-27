@@ -4,12 +4,11 @@ require File.dirname(__FILE__) + '/../spec_helper'
 describe "queries by single attribute for a model where model does not have an ancestor and does not have descendants" do
 
   before(:all) do
-    @p = ParentModel.new(model_data[:parent_model])
-    @p.save
+    ParentModel.new(model_data[:parent_model]).save
   end
 
   after(:all) do
-    @p.destroy
+    ParentModel.find_by_model(:all).each {|m| m.to_descendant.destroy}
   end
 
   it "should find model by specification of model primary key" do
@@ -31,13 +30,11 @@ end
 describe "queries by single attribute for a model where model has descendants and does not have an ancestor" do
 
   before(:all) do
-    @c = ChildModel.new(model_data[:child_model])
-    @c.save
-    @p = ParentModel.find_by_model(@c.parent_model_id)
+    ChildModel.new(model_data[:child_model]).save
   end
 
   after(:all) do
-    @c.destroy
+    ParentModel.find_by_model(:all).each {|m| m.to_descendant.destroy}
   end
 
   it "should find model by specification of model primary key" do
@@ -58,12 +55,11 @@ end
 describe "queries by single attribute for a model where model has an ancestor and does not have descendants" do
 
   before(:all) do
-    @c = ChildModel.new(model_data[:child_model])
-    @c.save
+    ChildModel.new(model_data[:child_model]).save
   end
 
   after(:all) do
-    @c.destroy
+    ParentModel.find_by_model(:all).each {|m| m.to_descendant.destroy}
   end
     
   it "should find model by specification of model primary key" do
@@ -89,13 +85,11 @@ end
 describe "queries by single attribute for a model where model has an ancestor and has descendants" do
 
   before(:all) do
-    @g = GrandchildModel.new(model_data[:grandchild_model])
-    @g.save
-    @c = ChildModel.find_by_model(@g.child_model_id)
+    GrandchildModel.new(model_data[:grandchild_model]).save
   end
 
   after(:all) do
-    @g.destroy
+    ParentModel.find_by_model(:all).each {|m| m.to_descendant.destroy}
   end
 
   it "should find model by specification of model primary key" do
@@ -125,12 +119,11 @@ end
 describe "queries by single attribute for a model where model has an ancestor and is a descendant of a model that has an ancestor" do
 
   before(:all) do
-    @g = GrandchildModel.new(model_data[:grandchild_model])
-    @g.save
+    GrandchildModel.new(model_data[:grandchild_model]).save
   end
 
   after(:all) do
-    @g.destroy
+    ParentModel.find_by_model(:all).each {|m| m.to_descendant.destroy}
   end
 
   it "should find model by specification of model primary key" do
