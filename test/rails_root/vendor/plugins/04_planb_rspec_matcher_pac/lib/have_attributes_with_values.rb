@@ -10,56 +10,62 @@ module PlanB
           @expt_error = @expected
         end
     
-        def matches?(mod)  
-          if mod.class.eql?(Array) and not @expected.class.eql?(Array)
-            check_models(mod, @expected, false)
-          elsif not mod.class.eql?(Array) and @expected.class.eql?(Array)
+        def matches?(val)  
+          if val.class.eql?(Array) and not @expected.class.eql?(Array)
+            check_vals(val, @expected, false)
+          elsif not val.class.eql?(Array) and @expected.class.eql?(Array)
             @expected.detect do |e| 
               @expt_error = e
-              check_expected(mod,e).eql?(true)
+              check_expected(val, e).eql?(true)
             end.nil? ? false : true              
-          elsif mod.class.eql?(Array) and @expected.class.eql?(Array) 
-            @expected.detect do |e| 
-              @expt_error = e
-              check_models(mod,e, true).eql?(false)
-            end.nil? ? true : false
+          elsif val.class.eql?(Array) and @expected.class.eql?(Array) 
+            if val.length.eql?(@expected.length)
+              @expected.detect do |e| 
+                @expt_error = e
+                check_vals(val, e, true).eql?(false)
+              end.nil? ? true : false
+            else
+              @error_msg = "array length=#{val.length} expected array length=#{@expected.length}\n"
+              false
+            end
           else
             check_expected(mod, @expected)
           end
         end
         
-        def check_models(models, expt, cond)
-          match_model = models.detect {|m| check_expected(m, expt).eql?(cond)}
-          if match_model.nil?
-            !cond
+        def check_vals(vals, expt, cond)
+          match_val = vals.detect {|m| check_expected(m, expt).eql?(cond)}
+          if match_val.nil?
+            not cond
           else
-            models.delete(match_model) if cond
+            vals.delete(match_val) if cond
             cond
           end          
         end
         
-        def check_expected(model, expt)
-          expt.detect {|key, val| not val.eql?(model.attributes[key])}.nil? ? true : false
-        end
-        
-        def message(error_msg)
-          @expt_error.each do |key, val|
-             error_msg << "'#{key}' expecting '#{val}'\n" 
-          end
-          error_msg
-        end
-
         def failure_message
-          message("Could not match attributes\n")
+        p "failure"
+          @error_msg.nil? ? message("Match Failure\n") : @error_msg
         end
   
         def negative_failure_message
-          message("Matched attributes\n")
+          message("Matched\n")
         end
   
         def description
-          "check model attribute values"
+          "match array of values"
         end
+
+        def check_expected(val, expt)
+          expt.detect {|k, v| not val.eql?(val.attributes[k])}.nil? ? true : false
+        end
+        
+        def message(msg)
+          @expt_error.each do |k, v|
+             msg << "'#{k}' expecting '#{v}'\n" 
+          end
+        end
+
   
       end
     
