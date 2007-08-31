@@ -17,6 +17,7 @@ describe "queries that find all models of a specified type when models have no a
     mods = ParentModel.find_by_model(:all)
     mods.length.should eql(3)
     mods.should have_attributes_with_values([model_data[:parent_model_find_1], model_data[:parent_model_find_2], model_data[:parent_model_find_3]])
+    mods.should be_class([ParentModel, ParentModel, ParentModel])
   end
 
 end
