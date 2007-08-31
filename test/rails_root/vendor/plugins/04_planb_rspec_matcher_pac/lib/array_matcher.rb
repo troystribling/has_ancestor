@@ -6,14 +6,15 @@ module PlanB
 
       class ArrayMatcher  #:nodoc:
     
-        attr_reader :expected_error, :expected, :value_error, :msg_error
+        attr_reader :expected_error, :expected, :value_error, :msg_error, :matched_values
         
         def initialize(expected)
           @expected = expected
           @expected_error = @expected
         end
     
-        def matches?(value)  
+        def matches?(value)          
+          @not_matched = Array.new(value.length, true) if value.class.eql?(Array)
           if value.class.eql?(Array) and not @expected.class.eql?(Array)
             check_values(value, @expected, false)
           elsif not value.class.eql?(Array) and @expected.class.eql?(Array)
@@ -38,13 +39,13 @@ module PlanB
         end
         
         def check_values(values, expt, cond)
-          match_val = values.detect {|v| @value_error = v; check_expected(v, expt).eql?(cond)}
-          if match_val.nil?
+          match_index = (0..values.length-1).detect {|i| check_expected(values[i], expt).eql?(cond) and @not_matched[i]}
+          if match_index.nil?
             not cond
           else
-            values.delete(match_val) if cond
+            @not_matched[match_index] = false
             cond
-          end          
+          end
         end
         
         def failure_message
@@ -60,7 +61,8 @@ module PlanB
         end
 
         def message(msg)
-          msg << "Expected:\n  #{@expected_error.inspect}\n" + "Got:\n  #{@value_error.inspect}\n" 
+          msg << "Expected:\n  #{@expected_error.inspect}\n" 
+          msg << "Got:\n  #{@value_error.inspect}\n" unless @value_error.nil? 
         end
 
         def check_expected(val, expt)

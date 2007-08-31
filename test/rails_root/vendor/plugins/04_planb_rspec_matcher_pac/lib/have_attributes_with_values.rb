@@ -10,12 +10,14 @@ module PlanB
         end
 
         def check_expected(val, expt)
-          expt.detect {|k, v| not v.eql?(val.attributes[k])}.nil? ? true : false
+          expt.detect{|k, v| not v.eql?(val.attributes[k])}.nil? ? true : false
         end
           
         def message(msg)
           expected_error.each do |k, v|
-            msg << "For #{k}: expected: #{v}, got: #{value_error[k]}\n" 
+            msg << "For '#{k}' expected: '#{v}'"
+            msg << "got '#{value_error[k]}'" unless value_error.nil?
+            msg << "\n" 
           end
           msg
         end

@@ -10,16 +10,15 @@ module PlanB
         end
 
         def check_expected(val, expt)
-          expt.detect {|e| not e.class.eql?(val.attributes[k])}.nil? ? true : false
+          expt.eql?(val.class)
         end
 
-#        def message(msg)
-#          expected_error.each do |k, v|
-#            msg << "For #{k}: expected: #{v}, got: #{value_error[k]}\n" 
-#          end
-#          msg
-#        end
-          
+        def message(msg)
+          msg << "Expected:\n '#{expected_error}'"
+          msg << "Got:\n '#{value_error[k]}'" unless value_error.nil?
+          msg << "\n"           
+        end
+
       end
     
       def be_class(expected)
