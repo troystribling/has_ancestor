@@ -14,11 +14,12 @@ module PlanB
         end
           
         def message(msg)
-          expected_error.each do |k, v|
-            msg << "For '#{k}' expected: '#{v}'"
-            msg << "got '#{value_error[k]}'" unless value_error.nil?
-            msg << "\n" 
-          end
+          msg << "Expected:\n  #{expected_error.inspect}\n"
+          if @not_matched.nil?
+            expected_error.each {|k, v| msg << "Got:\n  #{value[i][k]}\n"}
+          else
+            (0..@not_matched.length-1).each {|i| msg << "Got:\n  #{@value[i].inspect}\n" if @not_matched[i]}
+          end              
           msg
         end
           

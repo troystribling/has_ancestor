@@ -6,31 +6,31 @@ module PlanB
 
       class ArrayMatcher  #:nodoc:
     
-        attr_reader :expected_error, :expected, :value_error, :msg_error, :matched_values
+        attr_reader :expected_error, :expected, :msg_error, :matched_values, :value
         
         def initialize(expected)
           @expected = expected
           @expected_error = @expected
         end
     
-        def matches?(value)          
-          @not_matched = Array.new(value.length, true) if value.class.eql?(Array)
-          if value.class.eql?(Array) and not @expected.class.eql?(Array)
-            check_values(value, @expected, false)
-          elsif not value.class.eql?(Array) and @expected.class.eql?(Array)
-            @value_error = value
+        def matches?(val)          
+          @value = val
+          @not_matched = Array.new(value.length, true) if @value.class.eql?(Array)
+          if @value.class.eql?(Array) and not @expected.class.eql?(Array)
+            check_values(@expected, false)
+          elsif not @value.class.eql?(Array) and @expected.class.eql?(Array)
             @expected.detect do |e| 
               @expected_error = e
-              check_expected(value, e).eql?(true)
+              check_expected(@value, e).eql?(true)
             end.nil? ? false : true              
-          elsif value.class.eql?(Array) and @expected.class.eql?(Array) 
-            if value.length.eql?(@expected.length)
+          elsif @value.class.eql?(Array) and @expected.class.eql?(Array) 
+            if @value.length.eql?(@expected.length)
               @expected.detect do |e| 
                 @expected_error = e
-                check_values(value, e, true).eql?(false)
+                check_values(e, true).eql?(false)
               end.nil? ? true : false
             else
-              @msg_error = "Expected:\n  array length=#{@expected.length}\n" + "Got:\n  array length=#{value.length}\n"
+              @msg_error = "Expected:\n  array length=#{@expected.length}\n" + "Got:\n  array length=#{@value.length}\n"
               false
             end
           else
@@ -38,8 +38,8 @@ module PlanB
           end
         end
         
-        def check_values(values, expt, cond)
-          match_index = (0..values.length-1).detect {|i| check_expected(values[i], expt).eql?(cond) and @not_matched[i]}
+        def check_values(expt, cond)
+          match_index = (0..@value.length-1).detect {|i| check_expected(@value[i], expt).eql?(cond) and @not_matched[i]}
           if match_index.nil?
             not cond
           else
@@ -61,8 +61,10 @@ module PlanB
         end
 
         def message(msg)
-          msg << "Expected:\n  #{@expected_error.inspect}\n" 
-          msg << "Got:\n  #{@value_error.inspect}\n" unless @value_error.nil? 
+          msg << "Expected:\n  #{@expected_error.inspect}\n"
+          @not_matched.nil? ? msg << "Got:\n  #{@value.inspect}\n" : \
+            (0..@not_matched.length-1).each {|i| msg << "Got:\n  #{@value[i].inspect}\n" if @not_matched[i]}              
+          msg
         end
 
         def check_expected(val, expt)
