@@ -6,7 +6,7 @@ module PlanB
 
       class ArrayMatcher  #:nodoc:
     
-        attr_reader :expected_error, :expected, :msg_error, :matched_values, :value
+        attr_reader :expected_error, :expected, :msg_error, :not_matched, :value
         
         def initialize(expected)
           @expected = expected
@@ -20,13 +20,11 @@ module PlanB
             check_values(@expected, false)
           elsif not @value.class.eql?(Array) and @expected.class.eql?(Array)
             @expected.detect do |e| 
-              @expected_error = e
               check_expected(@value, e).eql?(true)
             end.nil? ? false : true              
           elsif @value.class.eql?(Array) and @expected.class.eql?(Array) 
             if @value.length.eql?(@expected.length)
               @expected.detect do |e| 
-                @expected_error = e
                 check_values(e, true).eql?(false)
               end.nil? ? true : false
             else
@@ -48,6 +46,23 @@ module PlanB
           end
         end
         
+        def message(msg)
+          if @value.class.eql?(Array) and not @expected.class.eql?(Array)
+            @value.each {|v| write_expected(msg, @expected, v)}
+            @value.each {|v| write_value(msg, @expected, v)}
+          elsif not @value.class.eql?(Array) and @expected.class.eql?(Array)
+            @expected.each {|e| write_expected(msg, e, @value)}
+            @expected.each {|e| write_value(msg, e, @value)}
+          elsif @value.class.eql?(Array) and @expected.class.eql?(Array) 
+            (0..@expected.length-1).each {|i| write_expected(msg, @expected[i], @value[i])}
+            (0..@expected.length-1).each {|i| write_value(msg, @expected[i], @value[i])}
+          else
+            write_expected(msg, @expected, @value)
+            write_value(msg, @expected, @value)
+          end
+          msg
+        end
+
         def failure_message
           @msg_error.nil? ? message("Match Failure\n") : @msg_error
         end
@@ -60,17 +75,18 @@ module PlanB
           "match array of scalars"
         end
 
-        def message(msg)
-          msg << "Expected:\n  #{@expected_error.inspect}\n"
-          @not_matched.nil? ? msg << "Got:\n  #{@value.inspect}\n" : \
-            (0..@not_matched.length-1).each {|i| msg << "Got:\n  #{@value[i].inspect}\n" if @not_matched[i]}              
-          msg
-        end
-
         def check_expected(val, expt)
           expt.eql?(val)
         end
-          
+
+        def write_expected(msg, exp, val)
+          msg << "Expected:\n"
+        end
+        
+        def write_value(msg, exp, val)
+          msg << "Got:\n"
+        end
+        
       end
     
       def array_matcher(expected)

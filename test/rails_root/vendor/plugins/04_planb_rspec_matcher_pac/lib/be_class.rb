@@ -13,10 +13,14 @@ module PlanB
           expt.eql?(val.class)
         end
 
-        def message(msg)
-          msg << "Expected:\n '#{expected_error}'"
-          msg << "Got:\n '#{value_error[k]}'" unless value_error.nil?
-          msg << "\n"           
+        def write_expected(msg, exp, val)
+          super
+          msg << " #{exp}\n"
+        end
+        
+        def write_value(msg, exp, val)
+          super
+          msg << " #{val.class}\n"
         end
 
       end

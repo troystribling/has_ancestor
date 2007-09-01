@@ -26,10 +26,39 @@ grandchild_model_find_3:
   parent_model_string: Todd
   child_model_string: Atlanta
   grandchild_model_string: orange
-  grandchild_model_other_string: yellow
   child_model_integer: 6
   parent_model_integer: 16
   grandchild_model_integer: 26
+
+child_grandchild_model_find_1:
+  parent_model_string: Troy
+  child_model_string: Annapolis
+  child_model_integer: 2
+  parent_model_integer: 5
+
+child_grandchild_model_find_2:
+  parent_model_string: Troy
+  child_model_string: Annapolis
+  child_model_integer: 12
+  parent_model_integer: 15
+
+child_grandchild_model_find_3:
+  parent_model_string: Todd
+  child_model_string: Atlanta
+  child_model_integer: 6
+  parent_model_integer: 16
+
+parent_grandchild_model_find_1:
+  parent_model_string: Troy
+  parent_model_integer: 5
+
+parent_grandchild_model_find_2:
+  parent_model_string: Troy
+  parent_model_integer: 15
+
+parent_grandchild_model_find_3:
+  parent_model_string: Todd
+  parent_model_integer: 16
 
 grandchild_model_update:
   parent_model_string: Todd
@@ -69,6 +98,18 @@ child_model_find_3:
   parent_model_string: Charlene
   child_model_string: Hendersonville
   child_model_integer: 12
+  parent_model_integer: 15
+
+parent_child_model_find_1:
+  parent_model_string: Billy
+  parent_model_integer: 5
+
+parent_child_model_find_2:
+  parent_model_string: Billy
+  parent_model_integer: 15
+
+parent_child_model_find_3:
+  parent_model_string: Charlene
   parent_model_integer: 15
 
 child_ancestor_model:
