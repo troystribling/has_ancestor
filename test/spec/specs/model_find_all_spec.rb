@@ -13,7 +13,7 @@ describe "queries that find all models of a specified type when models have no a
     ParentModel.find_by_model(:all).each {|m| m.destroy}
   end
 
-  it "should find all models for queries from model class" do
+  it "should find all models and return model class for queries from model class" do
     mods = ParentModel.find_by_model(:all)
     mods.should have_attributes_with_values([model_data[:parent_model_find_1], model_data[:parent_model_find_2], model_data[:parent_model_find_3]])
     mods.should be_class(ParentModel)
@@ -37,13 +37,13 @@ describe "queries that find all models of a specified type when models have an a
     ParentModel.find_by_model(:all).each {|m| m.to_descendant.destroy}
   end
 
-  it "should find all models and ancestor models for queries from ancestor model and return models of ancestor class" do
+  it "should find all models and ancestor models and return ancestor model class for queries from ancestor model class" do
     mods = ParentModel.find_by_model(:all)
     mods.should have_attributes_with_values([model_data[:parent_model_find_1], model_data[:parent_model_find_2], model_data[:parent_model_find_3], model_data[:parent_child_model_find_1], model_data[:parent_child_model_find_2], model_data[:parent_child_model_find_3]])
     mods.should be_class(ParentModel)
   end
 
-  it "should find all models for queries from model and return models of model class" do
+  it "should find all models and return model class for queries from model class" do
     mods = ChildModel.find_by_model(:all)
     mods.should have_attributes_with_values([model_data[:child_model_find_1], model_data[:child_model_find_2], model_data[:child_model_find_3]])
     mods.should be_class(ChildModel)
@@ -70,19 +70,19 @@ describe "queries that find all models of a specified type when models have an a
     ParentModel.find_by_model(:all).each {|m| m.to_descendant.destroy}
   end
 
-  it "should find all models, ancestor models and ancestor's ancestor models for queries from ancestor's ancestor model and return models of ancestor's ancestor class" do
+  it "should find all models, ancestor models and ancestor's ancestor models and return ancestor's ancestor class for queries from ancestor's ancestor model class" do
     mods = ParentModel.find_by_model(:all)
     mods.should have_attributes_with_values([model_data[:parent_model_find_1], model_data[:parent_model_find_2], model_data[:parent_model_find_3], model_data[:parent_child_model_find_1], model_data[:parent_child_model_find_2], model_data[:parent_child_model_find_3], model_data[:parent_grandchild_model_find_1], model_data[:parent_grandchild_model_find_2], model_data[:parent_grandchild_model_find_3]])
     mods.should be_class(ParentModel)
   end
 
-  it "should find all models and ancestor models for queries from ancestor model and return models of ancestor class" do
+  it "should find all models and ancestor models and return ancestor class for queries from ancestor model class" do
     mods = ChildModel.find_by_model(:all)
     mods.should have_attributes_with_values([model_data[:child_model_find_1], model_data[:child_model_find_2], model_data[:child_model_find_3], model_data[:child_grandchild_model_find_1], model_data[:child_grandchild_model_find_2], model_data[:child_grandchild_model_find_3]])
     mods.should be_class(ChildModel)
   end
 
-  it "should find all models for queries from model and return models of model class" do
+  it "should find all models and return model class for queries from model class" do
     mods = GrandchildModel.find_by_model(:all)
     mods.should have_attributes_with_values([model_data[:grandchild_model_find_1], model_data[:grandchild_model_find_2], model_data[:grandchild_model_find_3]])
     mods.should be_class(GrandchildModel)

@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 #################################################################################################
-describe "queries that find a all models by multible attributes where models have no ancestor" do
+describe "queries that find a all models of a specified type that match multiple specified attribute conditions when models have no ancestor" do
 
   before(:all) do
     ParentModel.new(model_data[:parent_model_find_1]).save
@@ -13,44 +13,134 @@ describe "queries that find a all models by multible attributes where models hav
     ParentModel.find_by_model(:all).each {|m| m.destroy}
   end
 
-  it "should find all models by specification of mutiple model attribute match condition where some attributes belong to model and other belong to ancestor of ancestor" do
+  it "should find all models that match conditions specified on mutiple model attributes and return model class for queries from model class" do
+    mods = ParentModel.find_by_model(:all, :conditions => "parent_models.parent_model_string = '#{model_data[:parent_model_find_1]['parent_model_string']}' and parent_models.parent_model_integer = '#{model_data[:parent_model_find_1]['parent_model_integer']}'")
+    mods.should have_attributes_with_values([model_data[:parent_model_find_1], model_data[:parent_model_find_2]]) 
+    mods.should be_class(ParentModel)
   end
 
 end
 
 #################################################################################################
-describe "queries that find a all models by multible attributes where models have an ancestor" do
+describe "queries that find a all models of a specified type that match multiple specified attribute conditions when models have an ancestor" do
 
   before(:all) do
     ChildModel.new(model_data[:child_model_find_1]).save
     ChildModel.new(model_data[:child_model_find_2]).save
     ChildModel.new(model_data[:child_model_find_3]).save
+    ParentModel.new(model_data[:parent_model_find_1]).save
+    ParentModel.new(model_data[:parent_model_find_2]).save
+    ParentModel.new(model_data[:parent_model_find_3]).save
   end
 
   after(:all) do
-    ChildModel.find_by_model(:all).each {|m| m.destroy}
+    ParentModel.find_by_model(:all).each {|m| m.to_descendat.destroy}
   end
 
-  it "should find all models by specification of mutiple model attribute match condition where some attributes belong to model and other belong to ancestor of ancestor" do
+  it "should find all models that match conditions specified on mutiple ancestor model attributes and return ancestor model class for queries from ancestor model class" do
+    mods = ParentModel.find_by_model(:all, :conditions => "parent_models.parent_model_string = '#{model_data[:child_model_find_1]['parent_model_string']}' and parent_models.parent_model_integer = '#{model_data[:child_model_find_1]['parent_model_integer']}'")
+    mods.should have_attributes_with_values([model_data[:parent_child_model_find_1], model_data[:parent_child_model_find_2]]) 
+    mods.should be_class(ParentModel)
   end
+
+  it "should find all models that match conditions specified on mutiple ancestor model attributes and return model class for queries from model class" do
+    mods = ChildModel.find_by_model(:all, :conditions => "parent_models.parent_model_string = '#{model_data[:child_model_find_1]['parent_model_string']}' and parent_models.parent_model_integer = '#{model_data[:child_model_find_1]['parent_model_integer']}'")
+    mods.should have_attributes_with_values([model_data[:child_model_find_1], model_data[:child_model_find_2]]) 
+    mods.should be_class(ChildModel)
+  end
+
+  it "should find all models that match conditions specified on multiple model attributes and return model class for queries from model class" do
+    mods = ChildModel.find_by_model(:all, :conditions => "child_models.child_model_string = '#{model_data[:child_model_find_1]['child_model_string']}' and child_models.child_model_string = '#{model_data[:child_model_find_1]['child_model_string']}'")
+    mods.should have_attributes_with_values([model_data[:child_model_find_1], model_data[:child_model_find_2]]) 
+    mods.should be_class(ChildModel)
+  end
+
+  it "should find all models that match conditions specified on both ancestor model attributes and model attributes and return model class for queries from model class" do
+    mods = ChildModel.find_by_model(:all, :conditions => "parent_models.parent_model_string = '#{model_data[:child_model_find_1]['parent_model_string']}' and child_models.child_model_string = '#{model_data[:child_model_find_1]['child_model_string']}'")
+    mods.should have_attributes_with_values([model_data[:child_model_find_1], model_data[:child_model_find_2]]) 
+    mods.should be_class(ChildModel)
+  end
+
 
 end
 
 #################################################################################################
-describe "queries that find a all models by multible attributes where models have an ancestor with an ancestor but do not have descendants" do
+describe "queries that find a all models of a specified type that match multiple specified attribute conditions when models have an ancestor with an ancestor" do
 
   before(:all) do
     GrandchildModel.new(model_data[:grandchild_model_find_1]).save
     GrandchildModel.new(model_data[:grandchild_model_find_2]).save
     GrandchildModel.new(model_data[:grandchild_model_find_3]).save
+    ChildModel.new(model_data[:child_model_find_1]).save
+    ChildModel.new(model_data[:child_model_find_2]).save
+    ChildModel.new(model_data[:child_model_find_3]).save
+    ParentModel.new(model_data[:parent_model_find_1]).save
+    ParentModel.new(model_data[:parent_model_find_2]).save
+    ParentModel.new(model_data[:parent_model_find_3]).save
   end
 
   after(:all) do
-    GrandchildModel.find_by_model(:all).each {|m| m.destroy}
+    ParentModel.find_by_model(:all).each {|m| m.to_descendat.destroy}
   end
 
-  it "should find all models by specification of mutiple model attribute match condition where some attributes belong to model and other belong to ancestor of ancestor" do
-    gchk = GrandchildModel.find_by_model(:all, :readonly => false, :conditions => "grandchild_models.grandchild_model_string = '#{model_data[:grandchild_model_find_1]['grandchild_model_string']}' AND parent_models.parent_model_integer = '#{model_data[:grandchild_model_find_1]['parent_model_integer']}'")
+  it "should find all models that match conditions specified on mutiple ancestor's ancestor model attributes and return ancestor's ancestor model class for queries from ancestor's ancestor model class" do
+    mods = ParentModel.find_by_model(:all, :conditions => "parent_models.parent_model_string = '#{model_data[:grandchild_model_find_1]['parent_model_string']}' and parent_models.parent_model_integer = '#{model_data[:grand_model_find_1]['parent_model_integer']}'")
+    mods.should have_attributes_with_values([model_data[:parent_grandchild_model_find_1], model_data[:parent_grandchild_model_find_2]]) 
+    mods.should be_class(ParentModel)
+  end
+
+  it "should find all models that match conditions specified on mutiple ancestor's ancestor model attributes and return ancestor model class for queries from ancestor model class" do
+    mods = ChildModel.find_by_model(:all, :conditions => "parent_models.parent_model_string = '#{model_data[:grandchild_model_find_1]['parent_model_string']}' and parent_models.parent_model_integer = '#{model_data[:grandchild_model_find_1]['parent_model_integer']}'")
+    mods.should have_attributes_with_values([model_data[:child_grandchild_model_find_1], model_data[:child_grandchild_model_find_2]]) 
+    mods.should be_class(ChildModel)
+  end
+
+  it "should find all models that match conditions specified on mutiple ancestor model attributes and return ancestor model class for queries from ancestor model class" do
+    mods = ChildModel.find_by_model(:all, :conditions => "child_models.child_model_string = '#{model_data[:grandchild_model_find_1]['child_model_string']}' and child_models.child_model_string = '#{model_data[:grandchild_model_find_1]['child_model_string']}'")
+    mods.should have_attributes_with_values([model_data[:child_grandchild_model_find_1], model_data[:child_grandchild_model_find_2]]) 
+    mods.should be_class(ChildModel)
+  end
+
+  it "should find all models that match conditions specified on both ancestor's ancestor model attributes and ancestor model attributes and return ancestor model class for queries from ancestor model class" do
+    mods = ChildModel.find_by_model(:all, :conditions => "parent_models.parent_model_string = '#{model_data[:grandchild_model_find_1]['parent_model_string']}' and child_models.child_model_string = '#{model_data[:grandchild_model_find_1]['child_model_string']}'")
+    mods.should have_attributes_with_values([model_data[:child_grandchild_model_find_1], model_data[:child_grandchild_model_find_2]]) 
+    mods.should be_class(ChildModel)
+  end
+
+  it "should find all models that match conditions specified on mutiple ancestor's ancestor model attributes and return model class for queries from model class" do
+    mods = GrandchildModel.find_by_model(:all, :conditions => "parent_models.parent_model_string = '#{model_data[:grandchild_model_find_1]['parent_model_string']}' and parent_models.parent_model_integer = '#{model_data[:grandchild_model_find_1]['parent_model_integer']}'")
+    mods.should have_attributes_with_values([model_data[:grandchild_model_find_1], model_data[:grandchild_model_find_2]]) 
+    mods.should be_class(GrandchildModel)
+  end
+
+  it "should find all models that match conditions specified on mutiple ancestor model attributes and return model class for queries from model class" do
+    mods = GrandchildModel.find_by_model(:all, :conditions => "child_models.child_model_string = '#{model_data[:grandchild_model_find_1]['child_model_string']}' and child_models.child_model_string = '#{model_data[:grandchild_model_find_1]['child_model_string']}'")
+    mods.should have_attributes_with_values([model_data[:grandchild_model_find_1], model_data[:grandchild_model_find_2]]) 
+    mods.should be_class(GrandchildModel)
+  end
+
+  it "should find all models that match conditions specified on multiple model attributes and return model class for queries from model class" do
+    mods = GrandchildModel.find_by_model(:all, :conditions => "grandchild_models.grandchild_model_string = '#{model_data[:grandchild_model_find_1]['grandchild_model_string']}' and grandchild_models.grandchild_model_integer = '#{model_data[:grandchild_model_find_1]['grandchild_model_integer']}'")
+    mods.should have_attributes_with_values([model_data[:grandchild_model_find_1], model_data[:grandchild_model_find_2]]) 
+    mods.should be_class(GrandchildModel)
+  end
+
+  it "should find all models that match conditions specified on both ancestor's ancestor model attributes and ancestor model attributes and return model class for queries from model class" do
+    mods = GrandchildModel.find_by_model(:all, :conditions => "parent_models.parent_model_string = '#{model_data[:grandchild_model_find_1]['parent_model_string']}' and child_models.child_model_string = '#{model_data[:grandchild_model_find_1]['child_model_string']}'")
+    mods.should have_attributes_with_values([model_data[:grandchild_model_find_1], model_data[:grandchild_model_find_2]]) 
+    mods.should be_class(GrandchildModel)
+  end
+
+  it "should find all models that match conditions specified on both ancestor's ancestor model attributes and model attributes and return model class for queries from model class" do
+    mods = GrandchildModel.find_by_model(:all, :conditions => "parent_models.parent_model_string = '#{model_data[:grandchild_model_find_1]['parent_model_string']}' and grandchild_models.grandchild_model_string = '#{model_data[:grandchild_model_find_1]['grandchild_model_string']}'")
+    mods.should have_attributes_with_values([model_data[:grandchild_model_find_1], model_data[:grandchild_model_find_2]]) 
+    mods.should be_class(GrandchildModel)
+  end
+
+  it "should find all models that match conditions specified on both ancestor model attributes and model attributes and return model class for queries from model class" do
+    mods = GrandchildModel.find_by_model(:all, :conditions => "child_models.child_model_string = '#{model_data[:grandchild_model_find_1]['child_model_string']}' and grandchild_models.grandchild_model_string = '#{model_data[:grandchild_model_find_1]['grandchild_model_string']}'")
+    mods.should have_attributes_with_values([model_data[:grandchild_model_find_1], model_data[:grandchild_model_find_2]]) 
+    mods.should be_class(GrandchildModel)
   end
 
 end
