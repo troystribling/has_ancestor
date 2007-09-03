@@ -10,7 +10,7 @@ describe "queries for all models of a specified type that match a specified attr
   end
 
   after(:all) do
-    ParentModel.find_by_model(:all).each {|m| m.destroy}
+    ParentModel.find_by_model(:all).each {|m| m.to_descendant.destroy}
   end
 
   it "should find all models that match specified model attribute and return model class for queries from model class" do

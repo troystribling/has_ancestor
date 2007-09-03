@@ -10,7 +10,7 @@ describe "queries that find all models of a specified type when models have no a
   end
 
   after(:all) do
-    ParentModel.find_by_model(:all).each {|m| m.destroy}
+    ParentModel.find_by_model(:all).each {|m| m.to_descendant.destroy}
   end
 
   it "should find all models and return model class for queries from model class" do
