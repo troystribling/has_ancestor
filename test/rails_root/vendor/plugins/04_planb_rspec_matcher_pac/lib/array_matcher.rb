@@ -32,7 +32,7 @@ module PlanB
               false
             end
           else
-            check_expected(mod, @expected)
+            check_expected(@value, @expected)
           end
         end
         

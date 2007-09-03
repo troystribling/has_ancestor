@@ -11,26 +11,26 @@ class ChildModel < ActiveRecord::Base
    #### test method implementation 
    ###############################################################
    def method_on_descendant_child_model
-     self.child_model_attr
+     self.child_model_string
    end
 
    def method_on_descendant_grandchild_model
-     self.child_model_attr
+     self.child_model_string
    end
 
    def method_on_child_model
-     self.child_model_attr
+     self.child_model_string
    end
 
    def method_on_ancestor_model
-     self.child_model_attr
+     self.child_model_string
    end
 
    ###############################################################
    #### test method delegation to ancestor
    ###############################################################
    def method_delegation_to_ancestor
-     "#{self.child_model_attr}:#{ancestor.method_delegation_to_ancestor}"
+     "#{self.child_model_string}:#{ancestor.method_delegation_to_ancestor}"
    end
    
    ###############################################################

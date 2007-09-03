@@ -51,11 +51,11 @@ end
 ########################################################################################################
 describe "discovery of ancestor class from model class" do
 
-  it "should be possible if model has an ancestor" do
+  it "should be nill if model does not have an ancestor" do
    ParentModel.ancestor.should be_nil
   end
 
-  it "should be nill if model does not have an ancestor" do
+  it "should be possible if model has an ancestor" do
     ChildModel.ancestor.should be_eql(ParentModel)
   end
 
@@ -87,26 +87,34 @@ describe "validation from model instance of model ancestor" do
 end
 
 ########################################################################################################
-describe "discovery from model instance of model inheritance hierarchy" do
+describe "discovery of model inheritance hierarchy from model instance" do
 
   it "should return model if model has no ancestors" do
     ParentModel.new(model_data[:parent_model]).class_hierarchy.should eql(['ParentModel'])
   end
 
-  it "should be able to determine the class of all ancestors for model that has ancestors" do
+  it "should return model and ancestor for model with ancestor" do
+    ChildModel.new(model_data[:child_model]).class_hierarchy.should eql(['ChildModel', 'ParentModel'])
+  end
+
+  it "should return model, ancestor and ancestor's ancestor for model with ancestor that has ancestor" do
     GrandchildModel.new(model_data[:grandchild_model]).class_hierarchy.should eql(['GrandchildModel', 'ChildModel', 'ParentModel'])
   end
 
 end
 
 ########################################################################################################
-describe "discovery from model class of model inheritance hierarchy" do
+describe "discovery model inheritance hierarchy from model class of" do
 
   it "should return model if model has no ancestors" do
     ParentModel.class_hierarchy.should eql(['ParentModel'])
   end
 
-  it "should be able to determine the class of all ancestors for model that has ancestors" do
+  it "should return model and ancestor for model with ancestor" do
+    ChildModel.class_hierarchy.should eql(['ChildModel', 'ParentModel'])
+  end
+
+  it "should return model, ancestor and ancestor's ancestor for model with ancestor that has ancestor" do
     GrandchildModel.class_hierarchy.should eql(['GrandchildModel', 'ChildModel', 'ParentModel'])
   end
 
@@ -116,15 +124,15 @@ end
 describe "discovery from descendant model class of ancestor model class with a specified attribute" do
 
   it "should return name of model class if attribute belongs to model" do
-    ParentModel.ancestor_for_attribute(:parent_model_attr).should eql('ParentModel')
+    ParentModel.ancestor_for_attribute(:parent_model_string).should eql('ParentModel')
   end
 
   it "should return name of ancestor class if attribute belongs to ancestor" do
-    ChildModel.ancestor_for_attribute(:parent_model_attr).should eql('ParentModel')
+    ChildModel.ancestor_for_attribute(:parent_model_string).should eql('ParentModel')
   end
 
   it "should return name of ancestor's ancestor class if attribute belongs to ancestor's ancestor" do
-    GrandchildModel.ancestor_for_attribute(:parent_model_attr).should eql('ParentModel')
+    GrandchildModel.ancestor_for_attribute(:parent_model_string).should eql('ParentModel')
   end
 
   it "should return nil if attribute belongs to no class in inheritance hierarchy" do

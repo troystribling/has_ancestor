@@ -1,5 +1,5 @@
 ############################################################
-# match attributes of model against hash of expected values
+# automatic failure
 module PlanB
   module SpecMatchers    
 
@@ -13,6 +13,10 @@ module PlanB
           'Example not implemented'
         end
   
+        def negative_failure_message
+          'Is implemented'
+        end
+
         def description
           "be implemented"
         end
