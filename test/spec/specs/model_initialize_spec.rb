@@ -17,13 +17,13 @@ describe "descendant initialization" do
   end
 
   it "should accept arguments when model attributes are also specified" do
-    ChildModel.new(:parent_model_attr=>model_data[:child_model]['parent_model_attr'], :descendant_init_called => 'not_default').descendant_init_called.should 
+    ChildModel.new(:parent_model_string=>model_data[:child_model][':parent_model_string'], :descendant_init_called => 'not_default').descendant_init_called.should 
       be_eql('not_default')
   end
 
   it "should not prohibit initialization of model attributes" do
-    ChildModel.new(:parent_model_attr => model_data[:child_model]['parent_model_attr'], :descendant_init_called => 'not_default').parent_model_attr.should 
-      be_eql(model_data[:child_model]['parent_model_attr'])
+    ChildModel.new(:parent_model_string => model_data[:child_model][':parent_model_string'], :descendant_init_called => 'not_default').parent_model_string.should 
+      be_eql(model_data[:child_model][':parent_model_string'])
   end
 
 end
