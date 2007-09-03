@@ -61,7 +61,6 @@ describe "queries that find a all models of a specified type that match multiple
     mods.should be_class(ChildModel)
   end
 
-
 end
 
 #################################################################################################
