@@ -3,30 +3,27 @@
 module PlanB
   module SpecMatchers    
 
-      class BeClass < PlanB::SpecMatchers::ArrayMatcher #:nodoc:
+      class ExistInDatabase < PlanB::SpecMatchers::ArrayMatcher #:nodoc:
       
         def description
           "match array of classes"
         end
 
         def check_expected(val, expt)
-          expt.eql?(val.class)
+          val.class.exists?(val.id)
         end
 
         def write_expected(msg, exp, val)
-          super
-          msg << " #{exp}\n"
         end
         
         def write_value(msg, exp, val)
-          super
-          msg << " #{val.class}\n"
+          msg << "#{val.class.name}.exists? is '#{val.class.exists?(val.id)}' should be '#{not val.class.exists?(val.id)}'\n"
         end
 
       end
     
-      def be_class(expected)
-        BeClass.new(expected)
+      def exist_in_database
+        ExistInDatabase.new(nil)
       end
    
   end
