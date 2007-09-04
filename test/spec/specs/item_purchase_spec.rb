@@ -4,23 +4,23 @@ require File.dirname(__FILE__) + '/../spec_helper'
 describe "item_purchase inherited attributes", :shared=> true do
 
   it "should have attribute indicating purchase is closed" do
-    @item.should respond_to(:closed)
+    @item.should have_attribute(:closed)
   end
 
   it "should have attribute describing item" do
-    @item.should respond_to(:item)
+    @item.should have_attribute(:item)
   end
 
   it "should have attribute specifying item unit cost" do
-    @item.should respond_to(:unit_cost)
+    @item.should have_attribute(:unit_cost)
   end
 
   it "should have attribute specifying item unit count" do
-    @item.should respond_to(:unit_count)
+    @item.should have_attribute(:unit_count)
   end
 
   it "should have attribute specifying item cost" do
-    @item.should respond_to(:cost)
+    @item.should have_attribute(:cost)
   end
 
 end
@@ -33,23 +33,23 @@ describe "item_purchase attributes" do
   end
 
   it "should have attribute indicating purchase is closed" do
-    @item.should respond_to(:closed)
+    @item.should have_attribute(:closed)
   end
 
   it "should have attribute describing item" do
-    @item.should respond_to(:item)
+    @item.should have_attribute(:item)
   end
 
   it "should have attribute specifying item unit cost" do
-    @item.should respond_to(:unit_cost)
+    @item.should have_attribute(:unit_cost)
   end
 
   it "should have attribute specifying item unit count" do
-    @item.should respond_to(:unit_count)
+    @item.should have_attribute(:unit_count)
   end
 
   it "should have attribute specifying item cost" do
-    @item.should respond_to(:cost)
+    @item.should have_attribute(:cost)
   end
 
 end
@@ -78,7 +78,7 @@ describe "contract_item_purchase attributes" do
   it_should_behave_like "item_purchase inherited attributes"
 
   it "should have attribute specifying contract length" do
-    @contract_item.should respond_to(:length)
+    @contract_item.should have_attribute(:length)
   end
 
 end
@@ -94,7 +94,7 @@ describe "stock_item_purchase attributes" do
   it_should_behave_like "item_purchase inherited attributes"
 
   it "should have attribute specifying if item is in inventory" do
-    @stock_item.should respond_to(:in_inventory)
+    @stock_item.should have_attribute(:in_inventory)
   end
   
 end
@@ -134,7 +134,7 @@ describe "closing item purchases from an ancestor model" do
     
     update_item = ItemPurchase.find_by_item(model_data[:stock_item_purchase]['item']).to_descendant
     update_item.close_item_purchase
-    update_item.to_descendant.save
+    update_item.save
 
     test_item = ItemPurchase.find_by_item(model_data[:stock_item_purchase]['item'])
     test_item.cost.should

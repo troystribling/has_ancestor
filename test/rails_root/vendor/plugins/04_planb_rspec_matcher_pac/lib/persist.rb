@@ -3,10 +3,10 @@
 module PlanB
   module SpecMatchers    
 
-      class ExistInDatabase < PlanB::SpecMatchers::ArrayMatcher #:nodoc:
+      class Persist < PlanB::SpecMatchers::ArrayMatcher #:nodoc:
       
         def description
-          "match array of classes"
+          "determine if object persists"
         end
 
         def check_expected(val, expt)
@@ -22,8 +22,8 @@ module PlanB
 
       end
     
-      def exist_in_database
-        ExistInDatabase.new(nil)
+      def persist
+        Persist.new(nil)
       end
    
   end

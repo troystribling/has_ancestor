@@ -3,11 +3,11 @@ require File.dirname(__FILE__) + '/../spec_helper'
 #########################################################################################################
 describe "descendant_method_missing implementaion for descendant models" do
 
-  it "should be called from a descendant model instance" do
+  it "should be called from a descendant model instance when an instance method is not implemented" do
     ChildModel.new.print_this.should eql('print_this_from_instance')
   end
 
-  it "should be called from a descendant model class" do
+  it "should be called from a descendant model class when an class method is not implemented" do
     ChildModel.print_this.should eql('print_this_from_class')
   end
 

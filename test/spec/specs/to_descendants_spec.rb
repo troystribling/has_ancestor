@@ -4,7 +4,7 @@ require File.dirname(__FILE__) + '/../spec_helper'
 describe "retrieval of descendant model from ancestor model instance when descendent is leaf in inheritance hierarchy" do
 
   before(:all) do
-    @c = ChildModel.new(model_data[:child_model])
+    @c = ChildModel.new(model_data[:child_model_1])
     @c.save
     @p = ParentModel.find(@c.parent_model_id)
   end
@@ -14,11 +14,11 @@ describe "retrieval of descendant model from ancestor model instance when descen
   end
 
   it "should return descendant model when request has no target model specified" do
-    @p.to_descendant.should be_eql(@c)
+    @p.to_descendant.should eql(@c)
   end
 
   it "should return descendant model when request has descendant specified as traget model" do
-    @p.to_descendant(:child_model).should be_eql(@c)
+    @p.to_descendant(:child_model).should eql(@c)
   end
 
 end
@@ -27,7 +27,7 @@ end
 describe "retrieval of descendant model from its own instance when model has no descendants or ancestors" do
 
   before(:all) do
-    @p = ParentModel.new(model_data[:parent_model])
+    @p = ParentModel.new(model_data[:parent_model_1])
     @p.save
   end
 
@@ -36,11 +36,11 @@ describe "retrieval of descendant model from its own instance when model has no 
   end
 
   it "should return itself when request has no target model specified" do
-    @p.to_descendant.should be_eql(@p)
+    @p.to_descendant.should eql(@p)
   end
 
   it "should return itself when request has model specified as target model" do
-    @p.to_descendant(:parent_model).should be_eql(@p)
+    @p.to_descendant(:parent_model).should eql(@p)
   end
 
 end
@@ -50,7 +50,7 @@ end
 describe "retrieval of descendant model from own instance  when descendant is leaf in inheritance hierarchy" do
 
   before(:all) do
-    @c = ChildModel.new(model_data[:child_model])
+    @c = ChildModel.new(model_data[:child_model_1])
     @c.save
   end
 
@@ -72,7 +72,7 @@ end
 describe "retrieval of descendant model from own instance when descendant is not leaf in inheritance hierarchy" do
 
   before(:all) do
-    @g = GrandchildModel.new(model_data[:grandchild_model])
+    @g = GrandchildModel.new(model_data[:grandchild_model_1])
     @g.save
     @c = ChildModel.find(@g.child_model_id)
   end
@@ -92,7 +92,7 @@ end
 describe "retrieval of descendant model from ancestor's ancestor model instance when descendant is leaf in inheritance hierarchy" do
 
   before(:all) do
-    @g = GrandchildModel.new(model_data[:grandchild_model])
+    @g = GrandchildModel.new(model_data[:grandchild_model_1])
     @g.save
     @c = ChildModel.find(@g.child_model_id)
     @p = ParentModel.find(@c.parent_model_id)
@@ -120,7 +120,7 @@ end
 describe "error conditions resulting from retrieval of descendant model from ancestor model instance" do
 
   before(:all) do
-    @g = GrandchildModel.new(model_data[:grandchild_model])
+    @g = GrandchildModel.new(model_data[:grandchild_model_1])
     @g.save
     @c = ChildModel.find(@g.child_model_id)
     @p = ParentModel.find(@c.parent_model_id)

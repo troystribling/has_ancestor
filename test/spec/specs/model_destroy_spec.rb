@@ -13,9 +13,9 @@ describe "destroying model with no ancestor" do
   end
 
   it "should delete model from database when destroy is called from model" do
-    @p.should exist_in_database
+    @p.should persist
     @p.destroy
-    @p.should_not exist_in_database
+    @p.should_not persist
   end
 
 end
@@ -33,19 +33,19 @@ describe "destroying model that has an ancestor" do
   end
 
   it "should delete model and ancestor model from database when destroy is called from model" do
-    @c.should exist_in_database
-    @c.ancestor.should exist_in_database
+    @c.should persist
+    @c.ancestor.should persist
     @c.destroy
-    @c.should_not exist_in_database
-    @c.ancestor.should_not exist_in_database
+    @c.should_not persist
+    @c.ancestor.should_not persist
   end
 
   it "should delete ancestor model but not model from database when destroy is called from ancestor model" do
-    @c.should exist_in_database
-    @c.ancestor.should exist_in_database
+    @c.should persist
+    @c.ancestor.should persist
     @c.ancestor.destroy
-    @c.should exist_in_database
-    @c.ancestor.should_not exist_in_database
+    @c.should persist
+    @c.ancestor.should_not persist
   end
 
 end
@@ -62,33 +62,33 @@ describe "destroying model that has an ancestor with an ancestor" do
   end
 
   it "should delete model, ancestor model and ancestor's ancestor model from database when destroy is called from model" do
-    @g.should exist_in_database
-    @g.ancestor.should exist_in_database
-    @g.ancestor.ancestor.should exist_in_database
+    @g.should persist
+    @g.ancestor.should persist
+    @g.ancestor.ancestor.should persist
     @g.destroy
-    @g.should_not exist_in_database
-    @g.ancestor.should_not exist_in_database
-    @g.ancestor.ancestor.should_not exist_in_database
+    @g.should_not persist
+    @g.ancestor.should_not persist
+    @g.ancestor.ancestor.should_not persist
   end
 
   it "should delete ancestor model and ancestor's ancestor model but not model from database when destroy is called from ancestor model" do
-    @g.should exist_in_database
-    @g.ancestor.should exist_in_database
-    @g.ancestor.ancestor.should exist_in_database
+    @g.should persist
+    @g.ancestor.should persist
+    @g.ancestor.ancestor.should persist
     @g.ancestor.destroy
-    @g.should exist_in_database
-    @g.ancestor.should_not exist_in_database
-    @g.ancestor.ancestor.should_not exist_in_database
+    @g.should persist
+    @g.ancestor.should_not persist
+    @g.ancestor.ancestor.should_not persist
   end
 
   it "should delete ancestor's ancestor model but not model and ancestor model from database when destroy is called from ancestor's ancestor model" do
-    @g.should exist_in_database
-    @g.ancestor.should exist_in_database
-    @g.ancestor.ancestor.should exist_in_database
+    @g.should persist
+    @g.ancestor.should persist
+    @g.ancestor.ancestor.should persist
     @g.ancestor.ancestor.destroy
-    @g.should exist_in_database
-    @g.ancestor.should exist_in_database
-    @g.ancestor.ancestor.should_not exist_in_database
+    @g.should persist
+    @g.ancestor.should persist
+    @g.ancestor.ancestor.should_not persist
   end
 
 end
