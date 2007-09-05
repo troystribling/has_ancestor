@@ -1,162 +1,138 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 ########################################################################################################
-describe "specification of attributes for a model that has descendants" do
+describe "specification of attributes for a model that has no ancestor or descendants" do
 
-  it "should be able to specify model attributes on creation" do
-    ParentModel.new(model_data[:parent_model]).parent_model_string.should eql(model_data[:parent_model]['parent_model_string'])
+  it "should be possible for model attributes on model creation" do
+    ParentModel.new(model_data[:parent_model_1]).parent_model_string.should eql(model_data[:parent_model_1]['parent_model_string'])
   end
 
-  it "should be able to specify model attributes after creation" do
+  it "should be possible for model attributes after model creation" do
     p = ParentModel.new
-    p.parent_model_string = model_data[:parent_model]['parent_model_string']
-    p.parent_model_string.should eql(model_data[:parent_model]['parent_model_string'])
+    p.parent_model_string = model_data[:parent_model_1]['parent_model_string']
+    p.parent_model_string.should eql(model_data[:parent_model_1]['parent_model_string'])
   end
 
 end
 
 ########################################################################################################
-describe "specification of attributes for a model that has descendants and has an ancestor" do
+describe "specification of attributes for a model that has an ancestor" do
 
-  it "should be able to specify model attributes on creation" do
-    ChildModel.new(model_data[:child_model]).child_model_string.should eql(model_data[:child_model]['child_model_string'])
+  it "should be possible for model attributes on creation" do
+    ChildModel.new(model_data[:child_model_1]).child_model_string.should eql(model_data[:child_model_1]['child_model_string'])
   end
 
-  it "should be able to specify ancestor model attributes on creation" do
-    ChildModel.new(model_data[:child_model]).parent_model_string.should eql(model_data[:child_model]['parent_model_string'])
+  it "should be  possible for ancestor model attributes on creation" do
+    ChildModel.new(model_data[:child_model_1]).parent_model_string.should eql(model_data[:child_model_1]['parent_model_string'])
   end
 
-  it "should be able to specify model attributes after creation" do
+  it "should be possible for model attributes after creation" do
     c = ChildModel.new
-    c.child_model_string = model_data[:child_model]['child_model_string']
-    c.child_model_string.should eql(model_data[:child_model]['child_model_string'])
+    c.child_model_string = model_data[:child_model_1]['child_model_string']
+    c.child_model_string.should eql(model_data[:child_model_1]['child_model_string'])
   end
 
-  it "should be able to specify ancestor attributes after creation" do
+  it "should be possible for ancestor attributes after creation" do
     c = ChildModel.new
-    c.parent_model_string = model_data[:child_model]['parent_model_string']
-    c.parent_model_string.should eql(model_data[:child_model]['parent_model_string'])
+    c.parent_model_string = model_data[:child_model_1]['parent_model_string']
+    c.parent_model_string.should eql(model_data[:child_model_1]['parent_model_string'])
   end
 
 end
 
 ########################################################################################################
-describe "specification of attributes for a model that has an ancestor and is a descendant of a model that has an ancestor" do
+describe "specification of attributes for a model that has an ancestor with an ancestor" do
 
-  it "should be able to specify attributes on creation" do
-    GrandchildModel.new(model_data[:grandchild_model]).grandchild_model_string.should eql(model_data[:grandchild_model]['grandchild_model_string'])
+  it "should be possible for model attributes on creation" do
+    GrandchildModel.new(model_data[:grandchild_model_1]).grandchild_model_string.should eql(model_data[:grandchild_model_1]['grandchild_model_string'])
   end
 
-  it "should be able to specify ancestor attributes on creation" do
-    GrandchildModel.new(model_data[:grandchild_model]).child_model_string.should eql(model_data[:grandchild_model]['child_model_string'])
+  it "should be possible for ancestor model attributes on creation" do
+    GrandchildModel.new(model_data[:grandchild_model_1]).child_model_string.should eql(model_data[:grandchild_model_1]['child_model_string'])
   end
 
-  it "should be able to specify ancestor's ancestor attributes on creation" do
-    GrandchildModel.new(model_data[:grandchild_model]).parent_model_string.should eql(model_data[:grandchild_model]['parent_model_string'])
+  it "should  be possible for ancestor's ancestor model attributes on creation" do
+    GrandchildModel.new(model_data[:grandchild_model_1]).parent_model_string.should eql(model_data[:grandchild_model_1]['parent_model_string'])
   end
 
-  it "should be able to specify attributes after creation" do
+  it "should be possible for model attributes after creation" do
     g = GrandchildModel.new
-    g.grandchild_model_string = model_data[:grandchild_model]['grandchild_model_string']
-    g.grandchild_model_string.should eql(model_data[:grandchild_model]['grandchild_model_string'])
+    g.grandchild_model_string = model_data[:grandchild_model_1]['grandchild_model_string']
+    g.grandchild_model_string.should eql(model_data[:grandchild_model_1]['grandchild_model_string'])
   end
 
-  it "should be able to specify ancestor attributes after creation" do
+  it "should be possible for ancestor model attributes after creation" do
     g = GrandchildModel.new
-    g.child_model_string = model_data[:grandchild_model]['child_model_string']
-    g.child_model_string.should eql(model_data[:grandchild_model]['child_model_string'])
+    g.child_model_string = model_data[:grandchild_model_1]['child_model_string']
+    g.child_model_string.should eql(model_data[:grandchild_model_1]['child_model_string'])
   end
 
-  it "should be able to specify ancestor's ancestor attributes after creation" do
+  it "should be possible for ancestor's ancestor attributes after creation" do
     g = GrandchildModel.new
-    g.parent_model_string = model_data[:grandchild_model]['parent_model_string']
-    g.parent_model_string.should eql(model_data[:grandchild_model]['parent_model_string'])
+    g.parent_model_string = model_data[:grandchild_model_1]['parent_model_string']
+    g.parent_model_string.should eql(model_data[:grandchild_model_1]['parent_model_string'])
   end
 
 end
 
 ########################################################################################################
-describe "retrieval of all attributes for a model that has descendants" do
+describe "retrieval of all attributes for a model that has no ancestor" do
 
   before(:all) do
-    @c = ChildModel.new(model_data[:child_model])
-    @c.save
-    @p = ParentModel.find(@c.parent_model_id)
+    @p = ParentModel.new(model_data[:parent_model_1])
   end
 
-  after(:all) do
-    @c.destroy
+  it "should be able possible for model attributes from model instance" do
+    @p.should have_attributes_with_values(model_data[:parent_model_1])
   end
 
-  it "should be able to retrive attributes from model instance" do
-    @p.attributes.should eql_attributes(model_data[:child_ancestor_model])
+end
+
+
+########################################################################################################
+describe "retrieval of all attributes for a model that has an ancestor" do
+
+  before(:all) do
+    @c = ChildModel.new(model_data[:child_model_1])
   end
 
-  it "should be able to retrive model attributes and descendant attributes from model instance" do
-    @p.to_descendant.attributes.should eql_attributes(model_data[:child_model])
+  it "should be able possible for model and ancestor model attributes from model instance" do
+    @c.should have_attributes_with_values(model_data[:child_model_1])
+  end
+
+  it "should be able possible for ancestor model attributes from ancestor model instance" do
+    @c.ancestor.should have_attributes_with_values(model_data[:parent_child_model_1])
   end
 
 end
 
 ########################################################################################################
-describe "retrieval of all attributes for a model that has descendants and has an ancestor" do
+describe "retrieval of all attributes for a model that has an ancestor with an ancestor" do
 
   before(:all) do
-    @g = GrandchildModel.new(model_data[:grandchild_model])
-    @g.save
-    @c = ChildModel.find(@g.child_model_id)
+    @g = GrandchildModel.new(model_data[:grandchild_model_1])
   end
 
-  after(:all) do
-    @g.destroy
+  it "should be able possible for model ancestor model and ancestor's ancestor model attributes from model instance" do
+    @g.should have_attributes_with_values(model_data[:grandchild_model_1])
   end
 
-  it "should be able to retrive model attributes and ancestor attributes from model instance" do
-    @c.attributes.should eql_attributes(model_data[:grandchild_ancestor_model])
+  it "should be able possible for ancestor and ancestor's ancestor model attributes from ancestor model instance" do
+    @g.ancestor.should have_attributes_with_values(model_data[:child_grandchild_model_1])
   end
 
-  it "should be able to retrive model attributes, ancestor attributes and descendant from model instance" do
-    @c.to_descendant.attributes.should eql_attributes(model_data[:grandchild_model])
+  it "should be able possible for ancestor's ancestor model attributes from ancestor's ancestor model instance" do
+    @g.ancestor.ancestor.should have_attributes_with_values(model_data[:parent_grandchild_model_1])
   end
 
 end
 
 ########################################################################################################
-describe "retrieval of all attributes for a model that has an ancestor and is a descendant of a model that has an ancestor" do
+describe "persistance of ancestor attribute class on retrieval (addresses a 'feature' found in ActiveRecord)" do
 
   before(:all) do
-    @g = GrandchildModel.new(model_data[:grandchild_model])
-    @g.save
-    @c = ChildModel.find(@g.child_model_id)
-    @p = ParentModel.find(@g.parent_model_id)
-  end
-
-  after(:all) do
-    @g.destroy
-  end
-
-
-  it "should be able to retrive model attributes, ancestor attributes and ancestor's ancestor attributes from model instance" do
-    @g.attributes.should eql_attributes(model_data[:grandchild_model])
-  end
-
-  it "should be able to retrive model attributes, ancestor attributes and ancestor's ancestor attributes from ancestor model instance" do
-    @c.to_descendant.attributes.should eql_attributes(model_data[:grandchild_model])
-  end
-
-  it "should be able to retrive model attributes, ancestor attributes and ancestor's ancestor attributes from ancestor's ancestor model instance" do
-    @p.to_descendant.attributes.should eql_attributes(model_data[:grandchild_model])
-  end
-
-end
-
-########################################################################################################
-describe "persistance of ancestor attribute class on retrieval" do
-
-  before(:all) do
-    tmp = GrandchildModel.new(model_data[:grandchild_model])
-    tmp.save
-    @g = GrandchildModel.find_by_model(:first, :conditions => "grandchild_models.grandchild_model_string = '#{model_data[:grandchild_model]['grandchild_model_string']}'")
+    GrandchildModel.new(model_data[:grandchild_model_1]).save
+    @g = GrandchildModel.find_by_model(:first, :conditions => "grandchild_models.grandchild_model_string = '#{model_data[:grandchild_model_1]['grandchild_model_string']}'")
   end
 
   after(:all) do
@@ -261,8 +237,4 @@ describe "persistance of ancestor attribute class on retrieval" do
     @g.parent_model_boolean.class.should eql(TrueClass)
   end
   
-  it "should raise NoMethodError exception for attributes not supported by any class in inheritance hierarchy" do
-    lambda{@g.this_will_fail}.should raise_error(NoMethodError)
-  end
-
 end
