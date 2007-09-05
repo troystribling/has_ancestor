@@ -28,11 +28,6 @@ describe "retrieval of descendant model from its own instance when model has no 
 
   before(:all) do
     @p = ParentModel.new(model_data[:parent_model_1])
-    @p.save
-  end
-
-  after(:all) do
-    @p.destroy
   end
 
   it "should return itself when request has no target model specified" do
@@ -47,15 +42,10 @@ end
 
 
 #########################################################################################################
-describe "retrieval of descendant model from own instance  when descendant is leaf in inheritance hierarchy" do
+describe "retrieval of descendant model from own instance when descendant is leaf in inheritance hierarchy" do
 
   before(:all) do
     @c = ChildModel.new(model_data[:child_model_1])
-    @c.save
-  end
-
-  after(:all) do
-    @c.destroy
   end
 
   it "should return itself when request has no target model specified" do
@@ -119,19 +109,8 @@ end
 #########################################################################################################
 describe "error conditions resulting from retrieval of descendant model from ancestor model instance" do
 
-  before(:all) do
-    @g = GrandchildModel.new(model_data[:grandchild_model_1])
-    @g.save
-    @c = ChildModel.find(@g.child_model_id)
-    @p = ParentModel.find(@c.parent_model_id)
-  end
-
-  after(:all) do
-    @g.destroy
-  end
-
-  it "should raise an exception when target model is not in the inheritance hierarchy with ancestor as root" do
-    lambda {@p.to_descendant(:this_will_fail)}.should raise_error(PlanB::InvalidType)
+  it "should raise an exception when target model is not in the inheritance hierarchy" do
+    lambda {ParentModel.new(model_data[:parent_model_1]).to_descendant(:this_will_fail)}.should raise_error(PlanB::InvalidType)
   end
 
 end

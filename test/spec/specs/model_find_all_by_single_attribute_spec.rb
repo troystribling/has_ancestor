@@ -51,7 +51,7 @@ describe "queries for all models of a specified type that match a specified attr
 
   it "should find all models that match specified model attribute and return model class for queries from model class" do
     mods = ChildModel.find_by_model(:all, :conditions => "child_models.child_model_string = '#{model_data[:child_model_1]['child_model_string']}'")
-    mods.should have_attributes_with_values([model_data[:child_model_1], model_data[:child_model_find_2]]) 
+    mods.should have_attributes_with_values([model_data[:child_model_1], model_data[:child_model_2]]) 
     mods.should be_class(ChildModel)
   end
 

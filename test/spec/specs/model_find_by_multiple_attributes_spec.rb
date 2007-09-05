@@ -98,13 +98,13 @@ describe "queries that find a model of a specified type that matches multiple sp
   end
 
   it "should find first model that matches conditions specified on mutiple ancestor model attributes and return model class for queries from model class" do
-    mod = GrandchildModel.find_by_model(:first, :conditions => "child_models.child_model_string = '#{model_data[:grandchild_model_find_1]['child_model_string']}' and child_models.child_model_string = '#{model_data[:grandchild_find_1]['child_model_string']}'")
+    mod = GrandchildModel.find_by_model(:first, :conditions => "child_models.child_model_string = '#{model_data[:grandchild_model_1]['child_model_string']}' and child_models.child_model_string = '#{model_data[:grandchild_model_1]['child_model_string']}'")
     mod.should have_attributes_with_values(model_data[:grandchild_model_1]) 
     mod.should be_class(GrandchildModel)
   end
 
   it "should find first model that matches conditions specified on multiple model attributes and return model class for queries from model class" do
-    mod = GrandchildModel.find_by_model(:first, :conditions => "grandchild_models.grandchild_model_string = '#{model_data[:grandchild_model_find_1]['grandchild_model_string']}' and grandchild_models.grandchild_model_integer = '#{model_data[:grandchild_model_find_1]['grandchild_model_integer']}'")
+    mod = GrandchildModel.find_by_model(:first, :conditions => "grandchild_models.grandchild_model_string = '#{model_data[:grandchild_model_1]['grandchild_model_string']}' and grandchild_models.grandchild_model_integer = '#{model_data[:grandchild_model_1]['grandchild_model_integer']}'")
     mod.should have_attributes_with_values(model_data[:grandchild_model_1]) 
     mod.should be_class(GrandchildModel)
   end
