@@ -4,7 +4,7 @@ require File.dirname(__FILE__) + '/../spec_helper'
 describe "discovery of descendant model from model instance" do
 
   before(:all) do
-    @c = ChildModel.new(model_data[:child_model])
+    @c = ChildModel.new(model_data[:child_model_1])
     @c.save
   end
 
@@ -21,7 +21,7 @@ describe "discovery of descendant model from model instance" do
   end
 
   it "should be nil if model does not have descendants" do
-    ParentModel.new(model_data[:parent_model]).descendant.should be_nil
+    ParentModel.new(model_data[:parent_model_1]).descendant.should be_nil
   end
 
 end
@@ -30,7 +30,7 @@ end
 describe "discovery of ancestor model from model instance" do
 
   before(:all) do
-    @c = ChildModel.new(model_data[:child_model])
+    @c = ChildModel.new(model_data[:child_model_1])
     @c.save
   end
 
