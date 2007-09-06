@@ -63,17 +63,45 @@ module PlanB
               end
     
               def self.method_missing(meth, *args, &blk)
-                begin
-                  super
-                rescue NoMethodError
-                  if self.respond_to?(:descendant_method_missing)
-                    self.descendant_method_missing(meth, *args, &blk)
-                  else
-                    #{parent.to_s.classify}.send(meth, *args, &blk)
+                if finder = /^find_(all_by|by)_([_a-zA-Z]*)$/.match(meth.to_s)
+                  self.build_finder(finder, *args)
+                else
+                  begin
+                    super
+                  rescue NoMethodError
+                    if self.respond_to?(:descendant_method_missing)
+                      self.descendant_method_missing(meth, *args, &blk)
+                    else
+                      #{parent.to_s.classify}.send(meth, *args, &blk)
+                    end
                   end
-                 end
+                end
               end
-    
+
+              def self.build_finder(finder, *args)
+                finder_type = finder.captures.first == 'all_by' ? :all : :first
+                finder_attr = finder.captures.last.split('_and_')
+                attr_count = finder_attr.length
+                finder_cond = " "
+                (0..attr_count-1).each do |i|
+                  finder_cond << self.ancestor_for_attribute(finder_attr[i].to_sym).tableize + "." +
+                  finder_attr[i] + " = " + self.add_attribute(args[i])
+                  i.eql?(finder_attr.length-1) ? finder_cond << " " : finder_cond << " and " 
+                end
+                if args[attr_count].nil?
+                  args[attr_count] = {:conditions => conditions, :joins => joins}
+                else
+                  args[attr_count].include?(:conditions) ? args[attr_count][:conditions] << ' and ' + finder_cond : args[attr_count][:conditions] = finder_cond
+                end
+              end
+                          
+              def self.add_attribute(attr)
+                case
+                  when attr.class.eql?(String) : "'" + attr + "'"
+                  else attr.to_s
+                end
+              end
+                  
             do_eval
     
           end           
