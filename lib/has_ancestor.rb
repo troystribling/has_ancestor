@@ -26,6 +26,7 @@ module PlanB
           # Declare a model has descendants.
           def has_descendants
 
+            #### declare AR association
             self.primary_key = "#{self.name.tableize.singularize}_id"
             eval("belongs_to :#{self.name.tableize.singularize}_descendant, :polymorphic => true")
 
@@ -45,6 +46,7 @@ module PlanB
           # Declare a model ancestor.
           def has_ancestor(args = {}) 
            
+            #### declare AR association
             args.assert_valid_keys(:named)
             self.primary_key = "#{self.name.tableize.singularize}_id"
             eval("has_one args[:named], :as => :#{args[:named]}_descendant, :dependent => :destroy")
