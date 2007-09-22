@@ -16,25 +16,29 @@ module PlanB
     
           def self.add_methods(target, parent)
 
-            target.class_eval <<-do_eval
-   
-              def initialize(*args)
-                super(*args)
-                get_#{parent}.#{parent}_descendant = self
-                descendant_initialize(*args) if respond_to?(:descendant_initialize)
-              end
-        
-              def get_#{parent}
-                build_#{parent} if #{parent}.nil?      
-                #{parent}
-              end
-
-              def get_ancestor
-                get_#{parent}      
-              end
-           
-            do_eval
+            unless target.method_defined?("get_#{parent}".to_sym)
+            
+              target.class_eval <<-do_eval
+     
+                def initialize(*args)
+                  super(*args)
+                  get_#{parent}.#{parent}_descendant = self
+                  descendant_initialize(*args) if respond_to?(:descendant_initialize)
+                end
+          
+                def get_#{parent}
+                  build_#{parent} if #{parent}.nil?      
+                  #{parent}
+                end
+  
+                def get_ancestor
+                  get_#{parent}      
+                end
+             
+              do_eval
     
+            end
+            
           end           
     
         end

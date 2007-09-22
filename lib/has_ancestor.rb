@@ -29,38 +29,38 @@ module PlanB
             self.primary_key = "#{self.name.tableize.singularize}_id"
             eval("belongs_to :#{self.name.tableize.singularize}_descendant, :polymorphic => true")
 
-            #### add methods used by both ancestors and descendants
-            PlanB::Has::Ancestor::DynamicMethods::AncestorAndDescendant.add_methods(self, '')
-            include(PlanB::Has::Ancestor::InstanceMethods::AncestorAndDescendant)
-            extend(PlanB::Has::Ancestor::ClassMethods::AncestorAndDescendant)
-
             #### add methods used by only ancestors
             PlanB::Has::Ancestor::DynamicMethods::Ancestor.add_methods(self)
             include(PlanB::Has::Ancestor::InstanceMethods::Ancestor)
             extend(PlanB::Has::Ancestor::ClassMethods::Ancestor)
+
+            #### add methods used by both ancestors and descendants
+            PlanB::Has::Ancestor::DynamicMethods::AncestorAndDescendant.add_methods(self, '')
+            include(PlanB::Has::Ancestor::InstanceMethods::AncestorAndDescendant)
+            extend(PlanB::Has::Ancestor::ClassMethods::AncestorAndDescendant)
 
           end
           
           ##################################################
           # Declare a model ancestor.
           def has_ancestor(args = {}) 
-
+           
             args.assert_valid_keys(:named)
             self.primary_key = "#{self.name.tableize.singularize}_id"
             eval("has_one args[:named], :as => :#{args[:named]}_descendant, :dependent => :destroy")
-
-            #### add methods used by both ancestors and descendants
-            PlanB::Has::Ancestor::DynamicMethods::AncestorAndDescendant.add_methods(self, args[:named])
-            include(PlanB::Has::Ancestor::InstanceMethods::AncestorAndDescendant)
-            extend(PlanB::Has::Ancestor::ClassMethods::AncestorAndDescendant)
 
             #### add methods used by only desecndants
             PlanB::Has::Ancestor::DynamicMethods::Descendant.add_methods(self, args[:named])
             include(PlanB::Has::Ancestor::InstanceMethods::Descendant)
             extend(PlanB::Has::Ancestor::ClassMethods::Descendant)
+              
+            #### add methods used by both ancestors and descendants
+            PlanB::Has::Ancestor::DynamicMethods::AncestorAndDescendant.add_methods(self, args[:named])
+            include(PlanB::Has::Ancestor::InstanceMethods::AncestorAndDescendant)
+            extend(PlanB::Has::Ancestor::ClassMethods::AncestorAndDescendant)
 
           end    
-          
+ 
         end
                                 
       end

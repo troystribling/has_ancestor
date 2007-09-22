@@ -16,16 +16,20 @@ module PlanB
 
           def self.add_methods(target, parent)
     
-             target.class_eval <<-do_eval
-                            
-               "#{parent}" != "" ? @@ancestor_class = eval("#{parent}".classify) : @@ancestor_class = nil
+            p parent
+            p target.name
 
-               def self.ancestor
-                 @@ancestor_class
-               end          
-
-             do_eval
-
+                target.class_eval <<-do_eval
+                                
+                  "#{parent}" != "" ? @@ancestor = eval("#{parent}".classify) : @@ancestor = nil
+    
+                  def self.ancestor
+                    @@ancestor
+                  end          
+    
+                do_eval
+               
+            
           end
           
         end

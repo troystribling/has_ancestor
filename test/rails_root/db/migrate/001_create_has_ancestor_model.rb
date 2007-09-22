@@ -52,6 +52,16 @@ class CreateHasAncestorModel < ActiveRecord::Migration
       t.column :cost, :integer      
     end
    
+    create_table :reverse_declarations, :force => true, :primary_key => :reverse_declaration_id  do |t|
+      t.column :reverse_declaration_descendant_id, :integer
+      t.column :reverse_declaration_descendant_type, :string
+    end
+
+    create_table :multiple_declarations, :force => true, :primary_key => :multiple_declaration_id  do |t|
+      t.column :multipl_declaration_descendant_id, :integer
+      t.column :multipl_declaration_descendant_type, :string
+    end
+
     create_table :stock_item_purchases, :force => true, :primary_key => :stock_item_purchase_id  do |t|
       t.column :in_inventory, :integer, :default => 0
     end
