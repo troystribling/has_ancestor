@@ -6,39 +6,40 @@ module PlanB
       class DeclareDescendantAssociation  #:nodoc:
     
         def matches?(mod)
-          @mod = mod
-          mod_name = @mod.class.name.tableize.singularize
+          mod.class.eql?(Class) ? @mod_name = mod.name.tableize.singularize : @mod_name = mod.class.name.tableize.singularize
           result = true
           @err_msg = ""
-          unless (@mod.respond_to?(:get_descendant))
-            @err_msg << "has_descendants not called\n"
-            result = false
+          add_error = lambda {|msg| @err_msg << msg + "\n"; result = false}
+          unless (mod.have_descendants?)
+            add_error["has_descendants not called"]            
           end
-          unless (@mod.respond_to?("#{mod_name}_descendant_id".to_sym))
-            @err_msg << "#{mod_name}_descendant_id not specified\n"
-            result = false
+          descendant_id = "#{@mod_name}_descendant_id"
+          unless (mod.columns_hash_hierarchy.include?(descendant_id))
+            add_error["#{descendant_id} not specified"]            
           else
-            unless (eval("@mod.column_for_attribute('#{mod_name}_descendant_id').type").eql?(:integer))
-              @err_msg << "#{mod_name}_descendant_id not not type :integer\n"
-              result = false
+            unless (mod.columns_hash_hierarchy[descendant_id].type.eql?(:integer))
+              add_error["#{descendant_id} not type :integer"]
             end
           end
-          unless (@mod.respond_to?("#{mod_name}_descendant_type".to_sym))
-            @err_msg << "#{mod_name}_descendant_type not specified\n"
-            result = false
+          descendant_type = "#{@mod_name}_descendant_type"
+          unless (mod.columns_hash_hierarchy.include?(descendant_type))
+            add_error["#{descendant_type} not specified"]
           else
-            unless (eval("@mod.column_for_attribute('#{mod_name}_descendant_type').type").eql?(:string))
-              @err_msg << "#{mod_name}_descendant_type not type :string\n"
-              result = false
+            unless (mod.columns_hash_hierarchy[descendant_type].type.eql?(:string))
+              add_error["#{descendant_type} not type :string"]
             end
           end
           result
         end
         
         def failure_message
-          "#{@mod.class.name} is unable to support descendant relationships\n#{@err_msg}"
+          "#{@mod_name} does not support descendant relationships\n#{@err_msg}"
         end
   
+        def negative_failure_message
+          "#{@mod_name} supports descendant relationships\n#{@err_msg}"
+        end
+
         def description
           "verify descendant association associations are declared by model"
         end

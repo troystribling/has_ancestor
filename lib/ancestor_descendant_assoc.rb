@@ -76,12 +76,12 @@ module PlanB
           end
   
           def descendant_of?(ancestor_model)
-            unless ancestor.nil?
-              ancestor.class.name.eql?(ancestor_model.to_s.classify) ? \
-                true : ancestor.descendant_of?(ancestor_model)
-             else
-               false
-             end           
+            if ancestor_model.nil?
+              class_hierarchy.eql?([self.class.name])
+            else
+              ancestor_model.class.eql?(Class) ? ancestor_name = ancestor_model.name : ancestor_name = ancestor_model.class.name
+              class_hierarchy.include?(ancestor_name)
+            end
           end
          
         end
@@ -103,6 +103,15 @@ module PlanB
             ancestor.nil? ? columns_hash : columns_hash.merge(ancestor.columns_hash_hierarchy)
           end
           
+          def descendant_of?(ancestor_model)
+            if ancestor_model.nil?
+              class_hierarchy.eql?([name])
+            else
+              ancestor_model.class.eql?(Class) ? ancestor_name = ancestor_model.name : ancestor_name = ancestor_model.class.name
+              class_hierarchy.include?(ancestor_name)
+            end
+          end
+
           def ancestor_for_attribute(attr)
             class_hierarchy.detect {|c| eval(c).column_names.include?(attr.to_s)}
           end

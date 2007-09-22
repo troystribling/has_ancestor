@@ -62,26 +62,79 @@ describe "discovery of ancestor class from model class" do
 end
 
 ########################################################################################################
-describe "validation from model instance of model ancestor" do
+describe "validation from model instance of inheritance hierarchy" do
 
   before(:all) do
-    @g = GrandchildModel.new(model_data[:grandchild_model])
+    @g = GrandchildModel.new(model_data[:grandchild_model_1])
+    @c = ChildModel.new(model_data[:child_model_1])
+    @p = ParentModel.new(model_data[:parent_model_1])
   end
 
-  it "should be able to determine if immediate ancestor is of a specified class" do
-    @g.should be_descendant_of(:child_model)
+  it "should be possible for ancestor model by specifying ancestor class" do
+    @g.should be_descendant_of(ChildModel)
   end
 
-  it "should be able to determine if immediate ancestor's ancestor is of a specified class" do
-    @g.should be_descendant_of(:parent_model)
+  it "should be possible for ancestor's ancestor model by specifying ancestor's ancestor class" do
+    @g.should be_descendant_of(ParentModel)
   end
 
-  it "should be able to determine if model specified is not an ancestor" do
-    @g.should_not be_descendant_of(:this_will_fail)
+  it "should fail if model class specified is not an ancestor" do
+    @c.should_not be_descendant_of(GrandchildModel)
   end
   
+  it "should be possible for ancestor model by specifying ancestor instance" do
+    @g.should be_descendant_of(@c)
+  end
+
+  it "should be possible for ancestor's ancestor model by specifying ancestor's ancestor instance" do
+    @g.should be_descendant_of(@p)
+  end
+
+  it "should fail if model class specified is not an ancestor" do
+    @c.should_not be_descendant_of(@g)
+  end
+
   it "should be able to determine if model has no ancestor" do
-    ParentModel.new(model_data[:parent_model]).should_not be_descendant_of(:this_will_fail)
+    @p.should be_descendant_of(nil)
+  end
+  
+end
+
+########################################################################################################
+describe "validation from model class of inheritance hierarchy" do
+
+  before(:all) do
+    @g = GrandchildModel.new(model_data[:grandchild_model_1])
+    @c = ChildModel.new(model_data[:child_model_1])
+    @p = ParentModel.new(model_data[:parent_model_1])
+  end
+
+  it "should be possible for ancestor model by specifying ancestor class" do
+    GrandchildModel.should be_descendant_of(ChildModel)
+  end
+
+  it "should be possible for ancestor's ancestor model by specifying ancestor's ancestor class" do
+    GrandchildModel.should be_descendant_of(ParentModel)
+  end
+
+  it "should fail if model class specified is not an ancestor" do
+    ChildModel.should_not be_descendant_of(GrandchildModel)
+  end
+  
+  it "should be possible for ancestor model by specifying ancestor instance" do
+    GrandchildModel.should be_descendant_of(@c)
+  end
+
+  it "should be possible for ancestor's ancestor model by specifying ancestor's ancestor instance" do
+    GrandchildModel.should be_descendant_of(@p)
+  end
+
+  it "should fail if model class specified is not an ancestor" do
+    ChildModel.should_not be_descendant_of(@g)
+  end
+
+  it "should be able to determine if model has no ancestor" do
+    ParentModel.should be_descendant_of(nil)
   end
   
 end
@@ -137,6 +190,27 @@ describe "discovery from descendant model class of ancestor model class with a s
 
   it "should return nil if attribute belongs to no class in inheritance hierarchy" do
     GrandchildModel.ancestor_for_attribute(:this_should_fail).should be_nil
+  end
+
+end
+
+########################################################################################################
+describe "indication of has_descendants declaration" do
+
+  it "should return true when called from model instance when model has descendants" do
+    ParentModel.new.should have_descendants
+  end
+
+  it "should return true when called from model class when model has descendants" do
+    ParentModel.should have_descendants
+  end
+
+  it "should return false when called from model instance when model has no descendants" do
+    GrandchildModel.new.should_not have_descendants
+  end
+
+  it "should return false when called from model class when model has no descendants" do
+    GrandchildModel.should_not have_descendants
   end
 
 end
