@@ -2,7 +2,7 @@
 module PlanB 
   
   ####################################################
-  # invalid attribute class specified
+  # invalid class specified
   class InvalidClass < ArgumentError; end  
 
   ####################################################
