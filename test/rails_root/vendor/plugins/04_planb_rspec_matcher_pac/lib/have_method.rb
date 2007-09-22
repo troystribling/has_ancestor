@@ -6,12 +6,12 @@ module PlanB
       class HaveMethod  #:nodoc:
 
         def initialize(meth)
-          @mehod = meth
+          @method = meth
         end
 
         def matches?(mod)
           @mod = mod
-          @mod.respond_to?(@mehod)
+          @mod.respond_to?(@method)
         end
         
         def failure_message

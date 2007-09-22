@@ -4,23 +4,23 @@ require File.dirname(__FILE__) + '/../spec_helper'
 describe "item_purchase inherited attributes", :shared=> true do
 
   it "should have attribute indicating purchase is closed" do
-    @item.should have_attribute(:closed)
+    @item.should have_attribute(:closed, :integer)
   end
 
   it "should have attribute describing item" do
-    @item.should have_attribute(:item)
+    @item.should have_attribute(:item, :string)
   end
 
   it "should have attribute specifying item unit cost" do
-    @item.should have_attribute(:unit_cost)
+    @item.should have_attribute(:unit_cost, :integer)
   end
 
   it "should have attribute specifying item unit count" do
-    @item.should have_attribute(:unit_count)
+    @item.should have_attribute(:unit_count, :integer)
   end
 
   it "should have attribute specifying item cost" do
-    @item.should have_attribute(:cost)
+    @item.should have_attribute(:cost, :integer)
   end
 
 end
@@ -33,23 +33,23 @@ describe "item_purchase attributes" do
   end
 
   it "should have attribute indicating purchase is closed" do
-    @item.should have_attribute(:closed)
+    @item.should have_attribute(:closed, :integer)
   end
 
   it "should have attribute describing item" do
-    @item.should have_attribute(:item)
+    @item.should have_attribute(:item, :string)
   end
 
   it "should have attribute specifying item unit cost" do
-    @item.should have_attribute(:unit_cost)
+    @item.should have_attribute(:unit_cost, :integer)
   end
 
   it "should have attribute specifying item unit count" do
-    @item.should have_attribute(:unit_count)
+    @item.should have_attribute(:unit_count, :integer)
   end
 
   it "should have attribute specifying item cost" do
-    @item.should have_attribute(:cost)
+    @item.should have_attribute(:cost, :integer)
   end
 
 end
@@ -78,7 +78,7 @@ describe "contract_item_purchase attributes" do
   it_should_behave_like "item_purchase inherited attributes"
 
   it "should have attribute specifying contract length" do
-    @contract_item.should have_attribute(:length)
+    @contract_item.should have_attribute(:length, :integer)
   end
 
 end
@@ -94,7 +94,7 @@ describe "stock_item_purchase attributes" do
   it_should_behave_like "item_purchase inherited attributes"
 
   it "should have attribute specifying if item is in inventory" do
-    @stock_item.should have_attribute(:in_inventory)
+    @stock_item.should have_attribute(:in_inventory, :integer)
   end
   
 end

@@ -8,11 +8,11 @@ class CreateHasAncestorModel < ActiveRecord::Migration
       t.column :parent_model_string, :string, :default => 'aString'
       t.column :parent_model_integer, :integer, :default => 0
       t.column :parent_model_float, :float, :default => 1.0
-      t.column :parent_model_decimal, :decimal, :default => 1.0
-      t.column :parent_model_date, :date, :default => Date.today
-      t.column :parent_model_time, :time, :default => Time.now
-      t.column :parent_model_datetime, :datetime, :default => Time.now
-      t.column :parent_model_timestamp, :timestamp, :default => Time.now
+      t.column :parent_model_decimal, :decimal, :default => 2.0
+      t.column :parent_model_date, :date, :default => Date.new(2007, 9, 8)
+      t.column :parent_model_time, :time, :default => Time.utc(2007, "sep", 15, 15, 55, 55)
+      t.column :parent_model_datetime, :datetime, :default => Time.utc(2007, "aug", 15, 15, 55, 55)
+      t.column :parent_model_timestamp, :timestamp, :default => Time.utc(2007, "jul", 15, 15, 55, 55)
       t.column :parent_model_boolean, :boolean, :default => true
     end
    
@@ -22,11 +22,11 @@ class CreateHasAncestorModel < ActiveRecord::Migration
       t.column :child_model_string, :string, :default => 'aString'
       t.column :child_model_integer, :integer, :default => 0
       t.column :child_model_float, :float, :default => 1.0
-      t.column :child_model_decimal, :decimal, :default => 1.0
-      t.column :child_model_date, :date, :default => Date.today
-      t.column :child_model_time, :time, :default => Time.now
-      t.column :child_model_datetime, :datetime, :default => Time.now
-      t.column :child_model_timestamp, :timestamp, :default => Time.now
+      t.column :child_model_decimal, :decimal, :default => 2.0
+      t.column :child_model_date, :date, :default => Date.new(2007, 9, 8)
+      t.column :child_model_time, :time, :default => Time.utc(2007, "sep", 15, 15, 55, 55)
+      t.column :child_model_datetime, :datetime, :default => Time.utc(2007, "aug", 15, 15, 55, 55)
+      t.column :child_model_timestamp, :timestamp, :default => Time.utc(2007, "jul", 15, 15, 55, 55)
       t.column :child_model_boolean, :boolean, :default => true
     end
   
@@ -34,11 +34,11 @@ class CreateHasAncestorModel < ActiveRecord::Migration
       t.column :grandchild_model_string, :string, :default => 'aString'
       t.column :grandchild_model_integer, :integer, :default => 0
       t.column :grandchild_model_float, :float, :default => 1.0
-      t.column :grandchild_model_decimal, :decimal, :default => 1.0
-      t.column :grandchild_model_date, :date, :default => Date.today
-      t.column :grandchild_model_time, :time, :default => Time.now
-      t.column :grandchild_model_datetime, :datetime, :default => Time.now
-      t.column :grandchild_model_timestamp, :timestamp, :default => Time.now
+      t.column :grandchild_model_decimal, :decimal, :default => 2.0
+      t.column :grandchild_model_date, :date, :default => Date.new(2007, 9, 8)
+      t.column :grandchild_model_time, :time, :default => Time.utc(2007, "sep", 15, 15, 55, 55)
+      t.column :grandchild_model_datetime, :datetime, :default => Time.utc(2007, "aug", 15, 15, 55, 55)
+      t.column :grandchild_model_timestamp, :timestamp, :default => Time.utc(2007, "jul", 15, 15, 55, 55)
       t.column :grandchild_model_boolean, :boolean, :default => true
     end
     

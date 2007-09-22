@@ -22,6 +22,14 @@ grandchild_model_3:
   grandchild_model_string: orange
   grandchild_model_integer: 26
 
+grandchild_model_4:
+  parent_model_string: Trey
+  parent_model_integer: 16
+  child_model_string: Nowhere
+  child_model_integer: 6
+  grandchild_model_string: green
+  grandchild_model_integer: 26
+
 child_grandchild_model_1:
   parent_model_string: Troy
   parent_model_integer: 5
@@ -40,6 +48,12 @@ child_grandchild_model_3:
   child_model_string: Atlanta
   child_model_integer: 6
 
+child_grandchild_model_4:
+  parent_model_string: Trey
+  parent_model_integer: 16
+  child_model_string: Nowhere
+  child_model_integer: 6
+
 parent_grandchild_model_1:
   parent_model_string: Troy
   parent_model_integer: 5
@@ -50,6 +64,10 @@ parent_grandchild_model_2:
 
 parent_grandchild_model_3:
   parent_model_string: Todd
+  parent_model_integer: 16
+
+parent_grandchild_model_4:
+  parent_model_string: Trey
   parent_model_integer: 16
 
 child_model_1:
@@ -70,6 +88,12 @@ child_model_3:
   child_model_string: Hendersonville
   child_model_integer: 12
 
+child_model_4:
+  parent_model_string: Vanessa
+  parent_model_integer: 15
+  child_model_string: Rockville
+  child_model_integer: 12
+
 parent_child_model_1:
   parent_model_string: Billy
   parent_model_integer: 5
@@ -80,6 +104,10 @@ parent_child_model_2:
 
 parent_child_model_3:
   parent_model_string: Charlene
+  parent_model_integer: 15
+
+parent_child_model_4:
+  parent_model_string: Vanessa
   parent_model_integer: 15
 
 parent_model_1:
@@ -93,6 +121,86 @@ parent_model_2:
 parent_model_3:
   parent_model_string: Winfred
   parent_model_integer: 15
+
+parent_model_4:
+  parent_model_string: Sybil
+  parent_model_integer: 15
+
+parent_model_columns:
+  - parent_model_id
+  - parent_model_descendant_id
+  - parent_model_descendant_type
+  - parent_model_string
+  - parent_model_integer
+  - parent_model_float
+  - parent_model_decimal
+  - parent_model_date
+  - parent_model_time
+  - parent_model_datetime
+  - parent_model_timestamp
+  - parent_model_boolean
+
+child_model_columns:
+  - parent_model_id
+  - parent_model_descendant_id
+  - parent_model_descendant_type
+  - parent_model_string
+  - parent_model_integer
+  - parent_model_float
+  - parent_model_decimal
+  - parent_model_date
+  - parent_model_time
+  - parent_model_datetime
+  - parent_model_timestamp
+  - parent_model_boolean
+  - child_model_id
+  - child_model_descendant_id
+  - child_model_descendant_type
+  - child_model_string
+  - child_model_integer
+  - child_model_float
+  - child_model_decimal
+  - child_model_date
+  - child_model_time
+  - child_model_datetime
+  - child_model_timestamp
+  - child_model_boolean
+
+grandchild_model_columns:
+  - parent_model_id
+  - parent_model_descendant_id
+  - parent_model_descendant_type
+  - parent_model_string
+  - parent_model_integer
+  - parent_model_float
+  - parent_model_decimal
+  - parent_model_date
+  - parent_model_time
+  - parent_model_datetime
+  - parent_model_timestamp
+  - parent_model_boolean
+  - child_model_id
+  - child_model_descendant_id
+  - child_model_descendant_type
+  - child_model_string
+  - child_model_integer
+  - child_model_float
+  - child_model_decimal
+  - child_model_date
+  - child_model_time
+  - child_model_datetime
+  - child_model_timestamp
+  - child_model_boolean
+  - grandchild_model_id
+  - grandchild_model_string
+  - grandchild_model_integer
+  - grandchild_model_float
+  - grandchild_model_decimal
+  - grandchild_model_date
+  - grandchild_model_time
+  - grandchild_model_datetime
+  - grandchild_model_timestamp
+  - grandchild_model_boolean
 
 item_purchase:
   item: keyboard

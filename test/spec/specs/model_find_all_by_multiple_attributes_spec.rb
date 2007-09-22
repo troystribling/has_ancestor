@@ -7,6 +7,7 @@ describe "queries that find a all models of a specified type that match multiple
     ParentModel.new(model_data[:parent_model_1]).save
     ParentModel.new(model_data[:parent_model_2]).save
     ParentModel.new(model_data[:parent_model_3]).save
+    ParentModel.new(model_data[:parent_model_4]).save
   end
 
   after(:all) do
@@ -28,9 +29,11 @@ describe "queries that find a all models of a specified type that match multiple
     ChildModel.new(model_data[:child_model_1]).save
     ChildModel.new(model_data[:child_model_2]).save
     ChildModel.new(model_data[:child_model_3]).save
+    ChildModel.new(model_data[:child_model_4]).save
     ParentModel.new(model_data[:parent_model_1]).save
     ParentModel.new(model_data[:parent_model_2]).save
     ParentModel.new(model_data[:parent_model_3]).save
+    ParentModel.new(model_data[:parent_model_4]).save
   end
 
   after(:all) do
@@ -70,12 +73,15 @@ describe "queries that find a all models of a specified type that match multiple
     GrandchildModel.new(model_data[:grandchild_model_1]).save
     GrandchildModel.new(model_data[:grandchild_model_2]).save
     GrandchildModel.new(model_data[:grandchild_model_3]).save
+    GrandchildModel.new(model_data[:grandchild_model_4]).save
     ChildModel.new(model_data[:child_model_1]).save
     ChildModel.new(model_data[:child_model_2]).save
     ChildModel.new(model_data[:child_model_3]).save
+    ChildModel.new(model_data[:child_model_4]).save
     ParentModel.new(model_data[:parent_model_1]).save
     ParentModel.new(model_data[:parent_model_2]).save
     ParentModel.new(model_data[:parent_model_3]).save
+    ParentModel.new(model_data[:parent_model_4]).save
   end
 
   after(:all) do

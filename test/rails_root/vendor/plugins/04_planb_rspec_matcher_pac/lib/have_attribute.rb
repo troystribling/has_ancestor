@@ -5,21 +5,27 @@ module PlanB
 
       class HaveAttribute  #:nodoc:
 
-        def initialize(attr)
-          @attr = attr
+        def initialize(*attr)
+          @attr = attr.first.to_s
+          @type = attr.last
         end
 
         def matches?(mod)
           @mod = mod
-          @mod.respond_to?(@attr)
+          @mod.class.eql?(Class) ? @mod_name = @mod.name : @mod_name = @mod.class.name
+          if @mod.columns_hash_hierarchy.include?(@attr)
+            @mod.columns_hash_hierarchy[@attr].type.eql?(@type) ? true : false
+          else
+            false
+          end            
         end
         
         def failure_message
-          "#{@mod.class.name} does not support '#{@attr.to_s}'\n"
+          "'#{@mod_name}' does not support attribute '#{@attr}' of type '#{@type}'\n"
         end
 
         def negative_failure_message
-          "#{@mod.class.name} supports '#{@attr.to_s}'\n"
+          "'#{@mod_name}' does support attribute '#{@attr}' of type '#{@type}'\n"
         end
 
         def description
@@ -28,8 +34,8 @@ module PlanB
   
       end
     
-      def have_attribute(attr)
-        HaveAttribute.new(attr)
+      def have_attribute(*attr)
+        HaveAttribute.new(*attr)
       end
    
   end

@@ -7,7 +7,7 @@ describe "descendant_method_missing implementaion for descendant models" do
     ChildModel.new.print_this.should eql('print_this_from_instance')
   end
 
-  it "should be called from a descendant model class when an class method is not implemented" do
+  it "should be called from a descendant model class when a class method is not implemented" do
     ChildModel.print_this.should eql('print_this_from_class')
   end
 

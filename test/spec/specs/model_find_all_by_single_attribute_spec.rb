@@ -7,6 +7,7 @@ describe "queries for all models of a specified type that match a specified attr
     ParentModel.new(model_data[:parent_model_1]).save
     ParentModel.new(model_data[:parent_model_2]).save
     ParentModel.new(model_data[:parent_model_3]).save
+    ParentModel.new(model_data[:parent_model_4]).save
   end
 
   after(:all) do
@@ -28,9 +29,11 @@ describe "queries for all models of a specified type that match a specified attr
     ChildModel.new(model_data[:child_model_1]).save
     ChildModel.new(model_data[:child_model_2]).save
     ChildModel.new(model_data[:child_model_3]).save
+    ChildModel.new(model_data[:child_model_4]).save
     ParentModel.new(model_data[:parent_model_1]).save
     ParentModel.new(model_data[:parent_model_2]).save
     ParentModel.new(model_data[:parent_model_3]).save
+    ParentModel.new(model_data[:parent_model_4]).save
   end
 
   after(:all) do
@@ -61,15 +64,18 @@ end
 describe "queries for all models of a specified type that match a specified attribute attribute when models have an ancestor with an ancestor" do
 
   before(:all) do
-    ChildModel.new(model_data[:child_model_1]).save
-    ChildModel.new(model_data[:child_model_2]).save
-    ChildModel.new(model_data[:child_model_3]).save
-    ParentModel.new(model_data[:parent_model_1]).save
-    ParentModel.new(model_data[:parent_model_2]).save
-    ParentModel.new(model_data[:parent_model_3]).save
     GrandchildModel.new(model_data[:grandchild_model_1]).save
     GrandchildModel.new(model_data[:grandchild_model_2]).save
     GrandchildModel.new(model_data[:grandchild_model_3]).save
+    GrandchildModel.new(model_data[:grandchild_model_4]).save
+    ChildModel.new(model_data[:child_model_1]).save
+    ChildModel.new(model_data[:child_model_2]).save
+    ChildModel.new(model_data[:child_model_3]).save
+    ChildModel.new(model_data[:child_model_4]).save
+    ParentModel.new(model_data[:parent_model_1]).save
+    ParentModel.new(model_data[:parent_model_2]).save
+    ParentModel.new(model_data[:parent_model_3]).save
+    ParentModel.new(model_data[:parent_model_4]).save
   end
 
   after(:all) do

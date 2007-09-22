@@ -110,7 +110,7 @@ end
 describe "error conditions resulting from retrieval of descendant model from ancestor model instance" do
 
   it "should raise an exception when target model is not in the inheritance hierarchy" do
-    lambda {ParentModel.new(model_data[:parent_model_1]).to_descendant(:this_will_fail)}.should raise_error(PlanB::InvalidType)
+    lambda {ParentModel.new(model_data[:parent_model_1]).to_descendant(:this_will_fail)}.should raise_error(PlanB::InvalidClass)
   end
 
 end

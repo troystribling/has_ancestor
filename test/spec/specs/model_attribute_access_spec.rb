@@ -128,6 +128,33 @@ describe "retrieval of all attributes for a model that has an ancestor with an a
 end
 
 ########################################################################################################
+describe "retrieval of attribute column information for a model that has no ancestor" do
+
+  it "should be able possible from model class" do
+    ParentModel.columns_hash_hierarchy.keys.should have_values(model_data[:parent_model_columns])
+  end
+
+end
+
+#########################################################################################################
+describe "retrieval of attribute column information for a model that has an ancestor" do
+
+  it "should be able possible from model class" do
+    ChildModel.columns_hash_hierarchy.keys.should have_values(model_data[:child_model_columns])
+  end
+
+end
+
+#########################################################################################################
+describe "retrieval of attribute column information for a model that has an ancestor with an ancestor" do
+
+  it "should be able possible from model class" do
+    GrandchildModel.columns_hash_hierarchy.keys.should have_values(model_data[:grandchild_model_columns])
+  end
+
+end
+
+########################################################################################################
 describe "persistance of ancestor attribute class on retrieval (addresses a 'feature' found in ActiveRecord)" do
 
   before(:all) do

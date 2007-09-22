@@ -1,6 +1,7 @@
 ##############################################################
 # match attributes of model against hash of expected values
 module PlanB
+  
   module SpecMatchers    
 
       class HaveAttributesWithValues < PlanB::SpecMatchers::ArrayMatcher #:nodoc:
