@@ -16,7 +16,7 @@ module PlanB
     
           def self.add_methods(target, parent)
 
-            unless target.method_defined?("get_#{parent}".to_sym)
+            unless target.has_ancestor?
             
               target.class_eval <<-do_eval
      
@@ -159,7 +159,7 @@ module PlanB
               else attr.to_s
             end
           end
-                  
+              
         end
         
       end

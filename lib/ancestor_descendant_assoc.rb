@@ -16,19 +16,24 @@ module PlanB
 
           def self.add_methods(target, parent)
     
-            p parent
-            p target.name
+            add_methods = true
+            if target.respond_to?(:ancestor)
+              add_methods = false unless target.ancestor.eql?(nil)
+            end
 
-                target.class_eval <<-do_eval
-                                
-                  "#{parent}" != "" ? @@ancestor = eval("#{parent}".classify) : @@ancestor = nil
-    
-                  def self.ancestor
-                    @@ancestor
-                  end          
-    
-                do_eval
+            if add_methods
+
+              target.class_eval <<-do_eval
+                              
+                "#{parent}" != "" ? @@ancestor = eval("#{parent}".classify) : @@ancestor = nil
+  
+                def self.ancestor
+                  @@ancestor
+                end          
+  
+              do_eval
                
+            end
             
           end
           
@@ -79,6 +84,14 @@ module PlanB
             respond_to?(:get_ancestor) ? get_ancestor : nil
           end
   
+          def has_ancestor?
+            self.class.has_ancestor?
+          end
+          
+          def has_descendants?
+            self.class.has_descendants?
+          end
+
           def descendant_of?(ancestor_model)
             if ancestor_model.nil?
               class_hierarchy.eql?([self.class.name])
@@ -114,6 +127,14 @@ module PlanB
               ancestor_model.class.eql?(Class) ? ancestor_name = ancestor_model.name : ancestor_name = ancestor_model.class.name
               class_hierarchy.include?(ancestor_name)
             end
+          end
+
+          def has_ancestor?
+            method_defined?(:get_ancestor)
+          end
+          
+          def has_descendants?
+            method_defined?(:get_descendant)
           end
 
           def ancestor_for_attribute(attr)

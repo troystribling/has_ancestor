@@ -198,19 +198,19 @@ end
 describe "indication of has_descendants declaration" do
 
   it "should return true when called from model instance when model has descendants" do
-    ParentModel.new.should have_descendants
+    ParentModel.new.has_descendants?.should be_true 
   end
 
   it "should return true when called from model class when model has descendants" do
-    ParentModel.should have_descendants
+    ParentModel.has_descendants?.should be_true
   end
 
   it "should return false when called from model instance when model has no descendants" do
-    GrandchildModel.new.should_not have_descendants
+    GrandchildModel.new.has_descendants?.should be_false
   end
 
   it "should return false when called from model class when model has no descendants" do
-    GrandchildModel.should_not have_descendants
+    GrandchildModel.has_descendants?.should be_false
   end
 
 end
