@@ -15,20 +15,28 @@ module PlanB
         module Ancestor
     
           def self.add_methods(target)
+
+            unless target.respond_to?(:ancestor)
     
-            target.class_eval <<-do_eval
+              target.class_eval <<-do_eval
+  
+                @@ancestor = nil
+  
+                def self.ancestor
+                  @@ancestor
+                end          
+  
+              do_eval
 
-              @@ancestor = nil
-
-              def self.ancestor
-                @@ancestor
-              end          
-
-              def get_descendant
-                #{target.to_s.tableize.singularize}_descendant      
-              end
-                  
-            do_eval
+              target.class_eval <<-do_eval
+  
+                def get_descendant
+                  #{target.to_s.tableize.singularize}_descendant      
+                end
+                    
+              do_eval
+            
+            end
     
           end           
     
