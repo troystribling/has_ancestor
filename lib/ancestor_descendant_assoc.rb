@@ -94,10 +94,10 @@ module PlanB
 
           def descendant_of?(ancestor_model)
             if ancestor_model.nil?
-              class_hierarchy.eql?([self.class.name])
+              class_hierarchy.eql?([self.class])
             else
-              ancestor_model.class.eql?(Class) ? ancestor_name = ancestor_model.name : ancestor_name = ancestor_model.class.name
-              class_hierarchy.include?(ancestor_name)
+              ancestor_model = ancestor_model.class unless ancestor_model.class.eql?(Class)  
+              class_hierarchy.include?(ancestor_model)
             end
           end
          
@@ -113,7 +113,7 @@ module PlanB
         module AncestorAndDescendant
 
           def class_hierarchy
-            ancestor == nil ? [name] : [name] + ancestor.class_hierarchy
+            ancestor == nil ? [self] : [self] + ancestor.class_hierarchy
           end
           
           def columns_hash_hierarchy
@@ -122,10 +122,10 @@ module PlanB
           
           def descendant_of?(ancestor_model)
             if ancestor_model.nil?
-              class_hierarchy.eql?([name])
+              class_hierarchy.eql?([self])
             else
-              ancestor_model.class.eql?(Class) ? ancestor_name = ancestor_model.name : ancestor_name = ancestor_model.class.name
-              class_hierarchy.include?(ancestor_name)
+              ancestor_model = ancestor_model.class unless ancestor_model.class.eql?(Class)  
+              class_hierarchy.include?(ancestor_model)
             end
           end
 
@@ -138,19 +138,19 @@ module PlanB
           end
 
           def ancestor_for_attribute(attr)
-            class_hierarchy.detect {|c| eval(c).column_names.include?(attr.to_s)}
+            class_hierarchy.detect {|c| c.column_names.include?(attr.to_s)}
           end
           
           def find_by_model(*args)
             if args.first.eql?(:first) || args.first.eql?(:all)
-              ch = class_hierarchy
+              ch = class_hierarchy.collect{|c| c.name.tableize}
               joins = ""
               conditions = ""
               if ch.length > 1
                 (0..ch.length-2).each do |i|
-                  joins << "LEFT JOIN " + ch[i+1].tableize + " ON " + ch[i+1].tableize + "." + ch[i+1].tableize.singularize +
-                           "_descendant_id = " + ch[i].tableize + "." + ch[i].tableize.singularize + "_id "
-                  conditions << ch[i+1].tableize + "." + ch[i+1].tableize.singularize + "_descendant_type = '" + ch[i] + "'"
+                  joins << "LEFT JOIN " + ch[i+1] + " ON " + ch[i+1] + "." + ch[i+1].singularize +
+                           "_descendant_id = " + ch[i] + "." + ch[i].singularize + "_id "
+                  conditions << ch[i+1] + "." + ch[i+1].singularize + "_descendant_type = '" + ch[i] + "'"
                   conditions << " and " if i < ch.length-2
                 end
                 if args[1].nil?

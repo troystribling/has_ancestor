@@ -63,7 +63,7 @@ module PlanB
 
           def method_missing(meth, *args, &blk)
             meth_class = self.class.ancestor_for_attribute(meth) 
-            if meth_class.nil? || meth_class == self.class.name
+            if meth_class.nil? or meth_class.eql?(self.class)
               begin
                 super
               rescue NoMethodError
@@ -74,7 +74,7 @@ module PlanB
                 end
               end
             else
-             if respond_to?(meth_class.tableize.singularize.to_sym)
+             if respond_to?(meth_class.name.tableize.singularize.to_sym)
                get_ancestor.send(meth, *args, &blk)
              else
                descendant_method_missing(meth, *args, &blk)

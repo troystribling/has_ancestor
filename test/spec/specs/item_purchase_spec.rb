@@ -58,11 +58,11 @@ end
 describe "item_purchase model relations" do
 
   it "it should have stock_item_purchase as a descendant" do
-    StockItemPurchase.new().should be_descendant_of(:item_purchase)
+    StockItemPurchase.new().should be_descendant_of(ItemPurchase)
   end
 
   it "it should have contract_item_purchase as a descendant" do
-    ContractItemPurchase.new().should be_descendant_of(:item_purchase)
+    ContractItemPurchase.new().should be_descendant_of(ItemPurchase)
   end
 
 end
