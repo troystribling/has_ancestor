@@ -150,7 +150,7 @@ module PlanB
                 (0..ch.length-2).each do |i|
                   joins << "LEFT JOIN " + ch[i+1] + " ON " + ch[i+1] + "." + ch[i+1].singularize +
                            "_descendant_id = " + ch[i] + "." + ch[i].singularize + "_id "
-                  conditions << ch[i+1] + "." + ch[i+1].singularize + "_descendant_type = '" + ch[i] + "'"
+                  conditions << ch[i+1] + "." + ch[i+1].singularize + "_descendant_type = '" + ch[i].classify + "'"
                   conditions << " and " if i < ch.length-2
                 end
                 if args[1].nil?

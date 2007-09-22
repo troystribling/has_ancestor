@@ -74,11 +74,7 @@ module PlanB
                 end
               end
             else
-             if respond_to?(meth_class.name.tableize.singularize.to_sym)
-               get_ancestor.send(meth, *args, &blk)
-             else
-               descendant_method_missing(meth, *args, &blk)
-             end
+              get_ancestor.send(meth, *args, &blk)
             end
           end
               
@@ -128,7 +124,7 @@ module PlanB
             finder_options = args[attr_count]
             finder_cond = " "
             (0..attr_count-1).each do |i|
-              finder_cond << ancestor_for_attribute(finder_attr[i].to_sym).tableize + "." +
+              finder_cond << ancestor_for_attribute(finder_attr[i].to_sym).name.tableize + "." +
               finder_attr[i] + " = " + add_attribute(column_info[finder_attr[i]].type, args[i])
               i.eql?(finder_attr.length-1) ? finder_cond << " " : finder_cond << " and " 
             end
