@@ -13,30 +13,6 @@ module PlanB
 
         ##################################################
         module AncestorAndDescendant
-
-          def self.add_methods(target, parent)
-    
-            add_methods = true
-            if target.respond_to?(:ancestor)
-              add_methods = false unless target.ancestor.eql?(nil)
-            end
-
-            if add_methods
-
-              target.class_eval <<-do_eval
-                              
-                "#{parent}" != "" ? @@ancestor = eval("#{parent}".classify) : @@ancestor = nil
-  
-                def self.ancestor
-                  @@ancestor
-                end          
-  
-              do_eval
-               
-            end
-            
-          end
-          
         end
 
       end

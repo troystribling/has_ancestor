@@ -18,6 +18,12 @@ module PlanB
     
             target.class_eval <<-do_eval
 
+              @@ancestor = nil
+
+              def self.ancestor
+                @@ancestor
+              end          
+
               def get_descendant
                 #{target.to_s.tableize.singularize}_descendant      
               end

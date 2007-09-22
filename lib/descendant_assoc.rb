@@ -19,7 +19,13 @@ module PlanB
             unless target.has_ancestor?
             
               target.class_eval <<-do_eval
-     
+
+                @@ancestor = eval("#{parent}".classify)
+  
+                def self.ancestor
+                  @@ancestor
+                end          
+  
                 def initialize(*args)
                   super(*args)
                   get_#{parent}.#{parent}_descendant = self
@@ -88,11 +94,6 @@ module PlanB
 
         ##################################################
         module Descendant
-
-          @@finder_data = {}
-          def finder_data
-            @@finder_data
-          end
           
           def method_missing(meth, *args, &blk)
             finder = /^find_(all_by|by)_([_a-zA-Z]*)$/.match(meth.to_s)
@@ -115,7 +116,8 @@ module PlanB
             finder_type = finder.captures.first == 'all_by' ? :all : :first
             finder_attr = finder.captures.last.split('_and_')
             column_info = columns_hash_hierarchy
-            add_finder(meth, finder_type, finder_attr, column_info)
+            curry_finder = lambda{|t, a, c| lambda {|*args| find_by_attribute_condition(t, a, c, *args)}}
+            define_meta_class_method(meth, &curry_finder[finder_type, finder_attr, column_info])
             find_by_attribute_condition(finder_type, finder_attr, column_info, *args)
           end
                       
@@ -135,17 +137,7 @@ module PlanB
             end
             find_by_model(finder_type, finder_options)
           end
-         
-          def add_finder(finder_method, finder_type, finder_attr, column_info)
-            @@finder_data[finder_method] = {:finder_type => finder_type, :finder_attr => finder_attr, :column_info => column_info}
-            class_eval <<-do_eval
-              def self.#{finder_method} (*args)
-                finder_params = finder_data["#{finder_method}".to_sym]
-                find_by_attribute_condition(finder_params[:finder_type], finder_params[:finder_attr], finder_params[:column_info], *args)
-              end
-            do_eval
-          end
-          
+                             
           def add_attribute(attr_type, attr)
             case
               when attr_type.eql?(:string) : "'" + attr + "'"
