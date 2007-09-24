@@ -133,7 +133,15 @@ module PlanB
                   args[1] = {:conditions => conditions, :joins => joins}
                 else
                   args[1].include?(:joins) ?  args[1][:joins] << ' ' + joins : args[1][:joins] = joins
-                  args[1].include?(:conditions) ? args[1][:conditions] << ' and ' + conditions : args[1][:conditions] = conditions
+                  if args[1].include?(:conditions) 
+                    if args[1][:conditions].class.eql?(Array)
+                      args[1][:conditions].first << ' and ' + conditions
+                    else
+                      args[1][:conditions] << ' and ' + conditions
+                    end 
+                  else
+                    args[1][:conditions] = conditions
+                  end
                 end
               end  
             end

@@ -126,28 +126,26 @@ module PlanB
             finder_options = args[attr_count]
             finder_cond = " "
             (0..attr_count-1).each do |i|
-              finder_cond << ancestor_for_attribute(finder_attr[i].to_sym).name.tableize + "." +
-              finder_attr[i] + " = " + add_attribute(column_info[finder_attr[i]].type, args[i])
+              finder_cond << ancestor_for_attribute(finder_attr[i].to_sym).name.tableize + "." + finder_attr[i] + " = ? "
               i.eql?(finder_attr.length-1) ? finder_cond << " " : finder_cond << " and " 
             end
             if finder_options.nil?
-              finder_options = {:conditions => finder_cond}
+              finder_options = {:conditions => [finder_cond] + args[0..attr_count-1]}
             else
-              finder_options.include?(:conditions) ? finder_options[:conditions] << ' and ' + finder_cond : finder_options[:conditions] = finder_cond
+              if finder_options.include?(:conditions)
+                if finder_options[:conditions].class.eql?(Array)
+                  finder_options[:conditions].first << ' and ' + finder_cond
+                  finder_options[:conditions] += args[0..attr_count-1]
+                else
+                  finder_options[:conditions] = [finder_options[:conditions] << ' and ' + finder_cond] + args[0..attr_count-1]
+                end
+              else
+                finder_options[:conditions] = finder_cond
+              end
             end
             find_by_model(finder_type, finder_options)
           end
                              
-          def add_attribute(attr_type, attr)
-            case
-              when attr_type.eql?(:string) : "'" + attr + "'"
-              when attr_type.eql?(:date):  "'" + attr.to_s + "'"
-              when attr_type.eql?(:datetime):  "'" + attr.strftime("%y-%m-%d %H:%M:%S") + "'"
-              when attr_type.eql?(:time):  "'" + attr.strftime("%H:%M:%S") + "'"
-              else attr.to_s
-            end
-          end
-              
         end
         
       end

@@ -149,3 +149,33 @@ describe "generated finders that find a model with an ancestor that has an ances
   end
 
 end
+
+#################################################################################################
+describe "specification of generated finder :conditions options" do
+
+  before(:all) do
+    ChildModel.new(model_data[:child_model_1]).save
+    ChildModel.new(model_data[:child_model_2]).save
+    ChildModel.new(model_data[:child_model_3]).save
+    ParentModel.new(model_data[:parent_model_1]).save
+    ParentModel.new(model_data[:parent_model_2]).save
+    ParentModel.new(model_data[:parent_model_3]).save
+  end
+
+  after(:all) do
+    ParentModel.find_by_model(:all).each {|m| m.to_descendant.destroy}
+  end
+
+  it "should be possible to specify :conditions option as String" do
+    mod = ChildModel.find_by_parent_model_string(model_data[:child_model_1]['parent_model_string'], :conditions => "child_models.child_model_string = '#{model_data[:child_model_1]['child_model_string']}'")
+    mod.should have_attributes_with_values(model_data[:child_model_1])
+    mod.should be_class(ChildModel)
+  end
+
+  it "should be possible to specify :conditions option as Array" do
+    mod = ChildModel.find_by_parent_model_string(model_data[:child_model_1]['parent_model_string'], :conditions => ["child_models.child_model_string = ?" , model_data[:child_model_1]['child_model_string']])
+    mod.should have_attributes_with_values(model_data[:child_model_1])
+    mod.should be_class(ChildModel)
+  end
+
+end
