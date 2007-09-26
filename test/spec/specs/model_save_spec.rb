@@ -35,7 +35,7 @@ describe "saving model that has an ancestor" do
     @c = ChildModel.new(model_data[:child_model_1])
   end
 
-  after(:all) do
+  after(:each) do
    @c.destroy
   end
 
