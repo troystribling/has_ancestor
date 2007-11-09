@@ -214,19 +214,3 @@ describe "indication of has_descendants declaration" do
   end
 
 end
-
-########################################################################################################
-describe "discovery of decendant models from ancestor model class" do
-
-  it "should return empty array if model has no descendants" do
-    p GrandchildModel.decendants 
-    p ChildModel.decendants 
-    p ParentModel.decendants 
-#    GrandchildModel.decendants.should be_empty 
-  end
-
-  it "should return empty array if model has no no descendants" do
-    ParentModel.decendants.should eql([ChildModel]) 
-  end
-
-end

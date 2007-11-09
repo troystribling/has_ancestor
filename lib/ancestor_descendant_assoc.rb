@@ -87,12 +87,6 @@ module PlanB
 
         ##################################################
         module AncestorAndDescendant
-
-          @@decendants = [] 
-          
-          def decendants
-            @@decendants
-          end
           
           def class_hierarchy
             ancestor == nil ? [self] : [self] + ancestor.class_hierarchy
