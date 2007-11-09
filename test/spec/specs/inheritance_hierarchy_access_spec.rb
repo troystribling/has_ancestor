@@ -157,7 +157,7 @@ describe "discovery of model inheritance hierarchy from model instance" do
 end
 
 ########################################################################################################
-describe "discovery model inheritance hierarchy from model class of" do
+describe "discovery of model inheritance hierarchy from model class" do
 
   it "should return model if model has no ancestors" do
     ParentModel.class_hierarchy.should eql([ParentModel])
@@ -174,7 +174,7 @@ describe "discovery model inheritance hierarchy from model class of" do
 end
 
 ########################################################################################################
-describe "discovery from descendant model class of ancestor model class with a specified attribute" do
+describe "discovery of from descendant model class of ancestor model class with a specified attribute" do
 
   it "should return name of model class if attribute belongs to model" do
     ParentModel.ancestor_for_attribute(:parent_model_string).should eql(ParentModel)
@@ -211,6 +211,22 @@ describe "indication of has_descendants declaration" do
 
   it "should return false when called from model class when model has no descendants" do
     GrandchildModel.has_descendants?.should be_false
+  end
+
+end
+
+########################################################################################################
+describe "discovery of decendant models from ancestor model class" do
+
+  it "should return empty array if model has no descendants" do
+    p GrandchildModel.decendants 
+    p ChildModel.decendants 
+    p ParentModel.decendants 
+#    GrandchildModel.decendants.should be_empty 
+  end
+
+  it "should return empty array if model has no no descendants" do
+    ParentModel.decendants.should eql([ChildModel]) 
   end
 
 end

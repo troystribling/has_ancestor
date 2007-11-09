@@ -59,6 +59,8 @@ module PlanB
             include(PlanB::Has::Ancestor::InstanceMethods::Descendant)
             extend(PlanB::Has::Ancestor::ClassMethods::Descendant)
               
+            ### add model to ancestor decendant list
+            eval("#{args[:named].to_s.classify}.decendants << self")
           end    
  
         end
