@@ -1,1 +1,4 @@
-RELEASE 0.2.0
+RELEASE 0.1.5
+
+migrated to Rails 2.0 and RSpec 1.1
+
