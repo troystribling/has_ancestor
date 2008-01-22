@@ -1,4 +1,10 @@
 RELEASE 0.1.5
 
-migration to Rails 2.0 and RSpec 1.1
+* migration to Rails 2.0 and RSpec 1.1
+
+RELEASE 0.1.6
+
+* fixed bug in processing of options passed to generated finders.
+
+* added descendants method which returns all descendant classes of a specified class which have been instantiated 
 
