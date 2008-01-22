@@ -174,7 +174,29 @@ describe "discovery of model inheritance hierarchy from model class" do
 end
 
 ########################################################################################################
-describe "discovery of from descendant model class of ancestor model class with a specified attribute" do
+describe "discovery of descendant model classes from ancestor model class" do
+
+  before(:all) do
+    @g = GrandchildModel.new(model_data[:child_model_1])
+    @g.save
+  end
+
+  after(:all) do
+    @g.destroy
+  end
+
+  it "should return empty list if model has no descendants" do
+    GrandchildModel.descendants.should be_empty
+  end
+
+  it "should return all model descendant classes if model has descendants" do
+    ParentModel.descendants.should eql([ChildModel])
+  end
+
+end
+
+########################################################################################################
+describe "discovery from descendant model class of ancestor model class with a specified attribute" do
 
   it "should return name of model class if attribute belongs to model" do
     ParentModel.ancestor_for_attribute(:parent_model_string).should eql(ParentModel)
