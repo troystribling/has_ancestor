@@ -8,3 +8,5 @@ RELEASE 0.1.6
 
 * added descendants method which returns all descendant classes of a specified class which have been instantiated 
 
+* fixed error in find_by_model SQL generation for empty string or array :conditions.
+
