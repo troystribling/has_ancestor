@@ -83,3 +83,35 @@ describe "determination of persistent model count when model has an ancestor wit
   end
 
 end
+
+#########################################################################################################
+describe "determination of persistent model count with different argument combinations" do
+
+  before(:all) do
+    GrandchildModel.new(model_data[:grandchild_model_1]).save
+    GrandchildModel.new(model_data[:grandchild_model_2]).save
+    GrandchildModel.new(model_data[:grandchild_model_3]).save
+    GrandchildModel.new(model_data[:grandchild_model_4]).save
+  end
+
+  after(:all) do
+    GrandchildModel.find_by_model(:all).each {|m| m.destroy}
+  end
+
+  it "should be possible for all persistent models" do
+    GrandchildModel.count.should eql(4)
+  end
+
+  it "should return count if only options hash is specified" do
+    GrandchildModel.count(:conditions => "parent_models.parent_model_string = '#{model_data[:grandchild_model_1]['parent_model_string']}'").should eql(2)
+  end
+
+  it "should return count if options hash and :all are specified" do
+    GrandchildModel.count(:all, :conditions => "parent_models.parent_model_string = '#{model_data[:grandchild_model_1]['parent_model_string']}'").should eql(2)
+  end
+
+  it "should return count if no options are specified" do
+    GrandchildModel.count.should eql(4)
+  end
+
+end
