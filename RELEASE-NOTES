@@ -12,3 +12,5 @@ RELEASE 0.1.6
 
 * added support for count
 
+* added column_names_hierarchy
+

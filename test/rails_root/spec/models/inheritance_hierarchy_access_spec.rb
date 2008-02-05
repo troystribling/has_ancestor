@@ -236,3 +236,20 @@ describe "indication of has_descendants declaration" do
   end
 
 end
+
+########################################################################################################
+describe "array containing column names of entire hierarchy" do
+
+  it "should return model column names when model has no ancestors" do
+    ParentModel.column_names_hierarchy.should eql(%w(parent_model_id parent_model_descendant_id parent_model_descendant_type parent_model_string parent_model_integer parent_model_float parent_model_decimal parent_model_date parent_model_time parent_model_datetime parent_model_timestamp parent_model_boolean)) 
+  end
+
+  it "should return model columns and ancestor column names when model has an ancestor" do
+    ChildModel.column_names_hierarchy.should eql(%w(child_model_id child_model_descendant_id child_model_descendant_type child_model_string child_model_integer child_model_float child_model_decimal child_model_date child_model_time child_model_datetime child_model_timestamp child_model_boolean parent_model_id parent_model_descendant_id parent_model_descendant_type parent_model_string parent_model_integer parent_model_float parent_model_decimal parent_model_date parent_model_time parent_model_datetime parent_model_timestamp parent_model_boolean)) 
+  end
+
+  it "should return model columns, ancestor column names and ancestor's ancestor column names and when model's ancestor has an ancestor" do
+    GrandchildModel.column_names_hierarchy.should eql(%w(grandchild_model_id grandchild_model_string grandchild_model_integer grandchild_model_float grandchild_model_decimal grandchild_model_date grandchild_model_time grandchild_model_datetime grandchild_model_timestamp grandchild_model_boolean child_model_id child_model_descendant_id child_model_descendant_type child_model_string child_model_integer child_model_float child_model_decimal child_model_date child_model_time child_model_datetime child_model_timestamp child_model_boolean parent_model_id parent_model_descendant_id parent_model_descendant_type parent_model_string parent_model_integer parent_model_float parent_model_decimal parent_model_date parent_model_time parent_model_datetime parent_model_timestamp parent_model_boolean)) 
+  end
+
+end
