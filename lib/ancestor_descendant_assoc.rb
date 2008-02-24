@@ -157,7 +157,7 @@ module PlanB
                opts[:joins] = joins
               end
               if opts.include?(:conditions) and not opts[:conditions].empty?
-                opts[:conditions].class.eql?(Array) ? opts[:conditions].first << ' and ' + conditions : opts[:conditions] << ' and ' + conditions
+                opts[:conditions].class.eql?(Array) ? opts[:conditions].first << ' AND ' + conditions : opts[:conditions] << ' AND ' + conditions
               else
                 opts[:conditions] = conditions
               end
