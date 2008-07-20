@@ -24,7 +24,7 @@ module PlanB
   
           #################################################
           # descendant declaration
-          def has_descendants
+          def has_descendants(args = {}) 
 
             #### declare active record association
             self.primary_key = "#{self.name.underscore}_id"
