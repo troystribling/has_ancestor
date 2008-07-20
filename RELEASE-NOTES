@@ -14,3 +14,5 @@ RELEASE 0.1.6
 
 * added column_names_hierarchy
 
+* added support for table_names not following pluralization convention
+
