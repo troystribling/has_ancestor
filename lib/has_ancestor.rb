@@ -23,7 +23,7 @@ module PlanB
         module ActiveRecordBase
   
           #################################################
-          # descendant declaration.
+          # descendant declaration
           def has_descendants
 
             #### declare active record association
@@ -43,7 +43,7 @@ module PlanB
           end
           
           ##################################################
-          # ancestor declaration.
+          # ancestor declaration
           def has_ancestor(args = {}) 
            
             #### declare active record association
